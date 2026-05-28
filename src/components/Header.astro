@@ -1,0 +1,42 @@
+---
+const { currentPath = '/' } = Astro.props;
+---
+
+<header class="navbar" id="navbar">
+  <div class="container">
+    <a href="/" class="logo">
+      <img src="/logo.png" alt="JSM LIFT" width="160" height="48" />
+    </a>
+
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+      ☰
+    </button>
+
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="/" class:list={['active', currentPath === '/']}>Home</a></li>
+        <li><a href="/products" class:list={['active', currentPath === '/products']}>Products</a></li>
+        <li><a href="/about" class:list={['active', currentPath === '/about']}>About Us</a></li>
+        <li><a href="/contact" class:list={['active', currentPath === '/contact']}>Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobileMenuBtn');
+  const nav = document.getElementById('navLinks');
+  btn?.addEventListener('click', () => {
+    nav?.classList.toggle('open');
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (window.scrollY > 10) {
+      navbar?.classList.add('scrolled');
+    } else {
+      navbar?.classList.remove('scrolled');
+    }
+  });
+</script>

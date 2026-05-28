@@ -1,0 +1,188 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { categories } from '../data/products';
+---
+
+<BaseLayout>
+  <Header currentPath="/" />
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container" style="position:relative;z-index:1;">
+      <h1>
+        Hangcha & Heli <span>Forklift Parts</span><br />Professional Supplier
+      </h1>
+      <p>
+        JSM LIFT specializes in Hangcha and Heli forklift parts supply.
+        Engine, transmission, hydraulic, electrical, chassis & undercarriage — full range coverage, worldwide shipping.
+      </p>
+      <div class="hero-btns">
+        <a href="/products" class="btn btn-white">Browse Products</a>
+        <a href="/contact" class="btn btn-outline" style="border-color:white;color:white;">Get a Quote</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="number">200+</span>
+          <span class="label">Parts SKUs</span>
+        </div>
+        <div class="hero-stat">
+          <span class="number">8</span>
+          <span class="label">Categories</span>
+        </div>
+        <div class="hero-stat">
+          <span class="number">10+</span>
+          <span class="label">Years Exp.</span>
+        </div>
+        <div class="hero-stat">
+          <span class="number">30+</span>
+          <span class="label">Countries</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Product Categories</h2>
+      <p class="section-subtitle">Full range of Hangcha & Heli forklift parts — one-stop procurement</p>
+      <div class="categories-grid">
+        {categories.map(cat => (
+          <a href={`/products#${cat.id}`} class="category-card">
+            <div class="category-icon">{cat.icon}</div>
+            <div class="category-info">
+              <h3>{cat.name}</h3>
+              <p>{cat.nameEn}</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="section" style="background:var(--color-bg-alt);">
+    <div class="container">
+      <h2 class="section-title">Popular Parts</h2>
+      <p class="section-subtitle">Most frequently purchased forklift parts</p>
+      <div class="products-grid">
+        <!-- Engine featured -->
+        <div class="product-card">
+          <div class="product-image">
+            <img src="/images/placeholder.svg" alt="Diesel Engine Assembly" />
+            <span class="product-badge both">Hangcha/Heli Compatible</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Diesel Engine Assembly</h3>
+            <p class="product-name-en">Diesel Engine Assembly</p>
+            <p class="product-desc">Fits 1-10 ton IC forklifts. OEM-quality diesel engine assembly with powerful output and low fuel consumption.</p>
+            <ul class="product-specs">
+              <li>Displacement: 2.5L-4.5L</li>
+              <li>Power: 35-75kW</li>
+              <li>Euro V / China IV</li>
+            </ul>
+            <a href="/contact" class="btn btn-outline" style="width:100%;justify-content:center;">Inquire Now</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="/images/placeholder.svg" alt="Hydraulic Gear Pump" />
+            <span class="product-badge both">Hangcha/Heli Compatible</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Hydraulic Gear Pump</h3>
+            <p class="product-name-en">Hydraulic Gear Pump</p>
+            <p class="product-desc">High-pressure gear pump for forklift hydraulic systems. Stable flow, reliable pressure.</p>
+            <ul class="product-specs">
+              <li>Displacement: 16-40ml/r</li>
+              <li>Rated pressure: 20MPa</li>
+            </ul>
+            <a href="/contact" class="btn btn-outline" style="width:100%;justify-content:center;">Inquire Now</a>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <div class="product-image">
+            <img src="/images/placeholder.svg" alt="Lithium Battery Pack" />
+            <span class="product-badge both">Hangcha/Heli Compatible</span>
+          </div>
+          <div class="product-body">
+            <h3 class="product-name">Lithium Battery Pack</h3>
+            <p class="product-name-en">Lithium Battery Pack</p>
+            <p class="product-desc">LiFePO4 battery pack for electric forklifts. Long lifespan, fast charging, maintenance-free.</p>
+            <ul class="product-specs">
+              <li>Voltage: 48V/80V</li>
+              <li>Capacity: 200-600Ah</li>
+              <li>Cycle life: ≥4000 cycles</li>
+            </ul>
+            <a href="/contact" class="btn btn-outline" style="width:100%;justify-content:center;">Inquire Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:40px;">
+        <a href="/products" class="btn btn-primary">View All Products →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us -->
+  <section class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <div>
+            <div class="brand-name">JSM LIFT</div>
+            <div class="brand-sub">Forklift Parts Specialist</div>
+          </div>
+        </div>
+        <div class="about-content">
+          <h2>Why Choose Us?</h2>
+          <p>
+            With over a decade of experience in the forklift parts industry, JSM LIFT is dedicated to supplying
+            high-quality parts for Hangcha and Heli forklifts worldwide. We have established long-term partnerships
+            with OEM-approved suppliers to ensure reliable quality and competitive pricing.
+          </p>
+          <div class="about-features">
+            <div class="about-feature">
+              <span class="check">✓</span> OEM-Quality Parts
+            </div>
+            <div class="about-feature">
+              <span class="check">✓</span> Full Range Coverage
+            </div>
+            <div class="about-feature">
+              <span class="check">✓</span> Global Shipping
+            </div>
+            <div class="about-feature">
+              <span class="check">✓</span> Technical Support
+            </div>
+            <div class="about-feature">
+              <span class="check">✓</span> Competitive Pricing
+            </div>
+            <div class="about-feature">
+              <span class="check">✓</span> Fast Quotation
+            </div>
+          </div>
+          <div style="margin-top:24px;">
+            <a href="/about" class="btn btn-primary">Learn More →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Need Forklift Parts Quotation?</h2>
+      <p>Tell us your requirements — we'll provide an accurate quote within 24 hours.</p>
+      <a href="/contact" class="btn btn-white">Get a Quote Now</a>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>

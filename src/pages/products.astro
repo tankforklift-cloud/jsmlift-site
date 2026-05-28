@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { categories, products } from '../data/products';
+
+// Group products by category
+const productsByCategory = categories.map(cat => ({
+  ...cat,
+  items: products.filter(p => p.category === cat.id),
+}));
+---
+
+<BaseLayout>
+  <Header currentPath="/products" />
+
+  <section class="hero" style="padding:120px 0 60px;">
+    <div class="container" style="position:relative;z-index:1;">
+      <h1 style="font-size:2rem;">Products</h1>
+      <p>Full range of Hangcha & Heli forklift parts — 200+ SKUs available</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:20px;">
+    <div class="container">
+      <!-- Category filter -->
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;justify-content:center;">
+        <a href="#all" class="btn btn-primary" style="font-size:0.85rem;padding:8px 20px;">All</a>
+        {categories.map(cat => (
+          <a href={`#${cat.id}`} class="btn btn-outline" style="font-size:0.85rem;padding:8px 20px;">
+            {cat.icon} {cat.name}
+          </a>
+        ))}
+      </div>
+
+      <!-- All Products -->
+      <a id="all"></a>
+      <h2 class="section-title" style="font-size:1.5rem;text-align:left;">All Products</h2>
+      <div class="products-grid" style="margin-bottom:60px;">
+        {products.map(p => <ProductCard product={p} />)}
+      </div>
+
+      <!-- Products by Category -->
+      {productsByCategory.filter(c => c.items.length > 0).map(cat => (
+        <div style="margin-bottom:60px;">
+          <a id={cat.id}></a>
+          <h2 class="section-title" style="font-size:1.5rem;text-align:left;display:flex;align-items:center;gap:10px;">
+            <span>{cat.icon}</span> {cat.name}
+          </h2>
+          <div class="products-grid">
+            {cat.items.map(p => <ProductCard product={p} />)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Can't Find What You Need?</h2>
+      <p>Contact us with your specific requirements — we'll help you find the right parts.</p>
+      <a href="/contact" class="btn btn-white">Contact Us</a>
+    </div>
+  </section>
+
+  <Footer />
+</BaseLayout>
