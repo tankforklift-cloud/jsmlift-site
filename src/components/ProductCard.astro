@@ -14,12 +14,8 @@ const { product } = Astro.props;
   </div>
   <div class="product-body">
     <h3 class="product-name">{product.name}</h3>
-    <p class="product-desc">{product.description}</p>
-    <ul class="product-specs">
-      {product.specs.map(spec => <li>{spec}</li>)}
-    </ul>
-    <a href="/contact" class="btn btn-outline" style="width:100%;justify-content:center;">
-      Inquire Now
-    </a>
+    <div class="product-code">ML#: {product.id}</div>
+    <div class="product-spec-line">{product.specs.slice(0, 2).join(' | ')}</div>
+    <a href="/contact" class="product-link">Inquire Now →</a>
   </div>
 </div>

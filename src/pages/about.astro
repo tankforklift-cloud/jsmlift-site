@@ -7,15 +7,20 @@ import Footer from '../components/Footer.astro';
 <BaseLayout>
   <Header currentPath="/about" />
 
-  <section class="hero" style="padding:120px 0 60px;">
-    <div class="container" style="position:relative;z-index:1;">
-      <h1 style="font-size:2rem;">About Us</h1>
-      <p>Professional Hangcha & Heli forklift parts supplier — Based in China, Serving the World</p>
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="separator">›</span>
+        <span>About Us</span>
+      </div>
+      <h1>About Us</h1>
+      <p>Professional forklift parts supplier — Based in China, Serving the World</p>
     </div>
   </section>
 
   <!-- About Content -->
-  <section class="section" style="padding-top:0;">
+  <section class="section" style="padding-top:20px;">
     <div class="container">
       <div class="about-grid">
         <div class="about-image" style="height:auto;min-height:350px;">
@@ -27,8 +32,8 @@ import Footer from '../components/Footer.astro';
         <div class="about-content">
           <h2>MLIFT — Your Trusted Forklift Parts Partner</h2>
           <p>
-            MLIFT is a specialized trading company focused on supplying forklift parts for Hangcha
-            and Heli brands. With over a decade of experience in the forklift parts industry, we have
+            MLIFT (JSM LIFT) is a specialized trading company focused on supplying forklift parts for
+            major brands worldwide. With over a decade of experience in the forklift parts industry, we have
             accumulated extensive product knowledge and supply chain resources.
           </p>
           <p>
@@ -46,68 +51,32 @@ import Footer from '../components/Footer.astro';
     </div>
   </section>
 
-  <!-- Brand Section -->
-  <section class="section" style="background:var(--color-bg-alt);">
-    <div class="container">
-      <h2 class="section-title">Our Brands</h2>
-      <p class="section-subtitle">Focused on two leading forklift brands — ample stock, reliable quality</p>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:30px;max-width:800px;margin:0 auto;">
-        <div style="background:white;padding:40px 30px;border-radius:var(--radius-md);text-align:center;border:1px solid var(--color-border);">
-          <div style="font-size:2rem;font-weight:900;color:#e65100;margin-bottom:8px;">HANGCHA</div>
-          <p style="font-size:0.9rem;color:var(--color-text-light);">
-            One of China's largest forklift manufacturers<br/>
-            Top 10 global forklift sales<br/>
-            Product line: 1-48 ton full range
-          </p>
-        </div>
-
-        <div style="background:white;padding:40px 30px;border-radius:var(--radius-md);text-align:center;border:1px solid var(--color-border);">
-          <div style="font-size:2rem;font-weight:900;color:#1565c0;margin-bottom:8px;">HELI</div>
-          <p style="font-size:0.9rem;color:var(--color-text-light);">
-            China's forklift industry leader<br/>
-            #1 domestic sales for 30 consecutive years<br/>
-            Exported to 150+ countries
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- Service -->
-  <section class="section">
+  <section class="section" style="background:var(--color-bg-alt);">
     <div class="container">
       <h2 class="section-title">Our Services</h2>
       <p class="section-subtitle">More than just parts — we're your supply chain partner</p>
 
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:40px;">
-        <div style="padding:28px;border:1px solid var(--color-border);border-radius:var(--radius-md);text-align:center;">
-          <div style="font-size:2.5rem;margin-bottom:12px;">🔍</div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Accurate Matching</h3>
-          <p style="font-size:0.9rem;color:var(--color-text-light);">
-            Provide a part number or photo — we'll find the exact matching part for you
-          </p>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🔍</div>
+          <h3>Accurate Matching</h3>
+          <p>Provide a part number or photo — we'll find the exact matching part for you</p>
         </div>
-        <div style="padding:28px;border:1px solid var(--color-border);border-radius:var(--radius-md);text-align:center;">
-          <div style="font-size:2.5rem;margin-bottom:12px;">📦</div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Global Logistics</h3>
-          <p style="font-size:0.9rem;color:var(--color-text-light);">
-            Sea, air & express shipping options with door-to-door delivery
-          </p>
+        <div class="service-card">
+          <div class="service-icon">📦</div>
+          <h3>Global Logistics</h3>
+          <p>Sea, air & express shipping options with door-to-door delivery worldwide</p>
         </div>
-        <div style="padding:28px;border:1px solid var(--color-border);border-radius:var(--radius-md);text-align:center;">
-          <div style="font-size:2.5rem;margin-bottom:12px;">💰</div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Competitive Pricing</h3>
-          <p style="font-size:0.9rem;color:var(--color-text-light);">
-            Direct from the source — cutting out middlemen to save you money
-          </p>
+        <div class="service-card">
+          <div class="service-icon">💰</div>
+          <h3>Competitive Pricing</h3>
+          <p>Direct from the source — cutting out middlemen to save you money</p>
         </div>
-        <div style="padding:28px;border:1px solid var(--color-border);border-radius:var(--radius-md);text-align:center;">
-          <div style="font-size:2.5rem;margin-bottom:12px;">🛡️</div>
-          <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:8px;">Quality Guarantee</h3>
-          <p style="font-size:0.9rem;color:var(--color-text-light);">
-            Rigorous pre-shipment inspection with up to 12-month warranty
-          </p>
+        <div class="service-card">
+          <div class="service-icon">🛡️</div>
+          <h3>Quality Guarantee</h3>
+          <p>Rigorous pre-shipment inspection with up to 12-month warranty</p>
         </div>
       </div>
     </div>

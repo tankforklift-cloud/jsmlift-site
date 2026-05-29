@@ -8,20 +8,25 @@ import ContactForm from '../components/ContactForm.astro';
 <BaseLayout>
   <Header currentPath="/contact" />
 
-  <section class="hero" style="padding:120px 0 60px;">
-    <div class="container" style="position:relative;z-index:1;">
-      <h1 style="font-size:2rem;">Contact Us</h1>
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="separator">›</span>
+        <span>Contact Us</span>
+      </div>
+      <h1>Contact Us</h1>
       <p>Tell us your requirements — we'll reply within 24 hours</p>
     </div>
   </section>
 
-  <section class="section" style="padding-top:0;">
+  <section class="section" style="padding-top:20px;">
     <div class="container">
       <div class="contact-grid">
         <div class="contact-info">
           <h3>Contact Information</h3>
           <p>
-            Welcome to inquire about Hangcha & Heli forklift parts. Reach us via the channels below,
+            Welcome to inquire about our forklift parts. Reach us via the channels below,
             or fill out the form to send a direct inquiry.
           </p>
 

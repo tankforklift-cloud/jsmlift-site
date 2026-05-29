@@ -5,8 +5,9 @@ import Footer from '../components/Footer.astro';
 import { categories, products } from '../data/products';
 
 const featuredProducts = products.filter(p =>
-  ['air-filter', 'oil-filter-2', 'fuel-filter', 'hydraulic-pump', 'lift-cylinder', 'multi-valve',
-   'brake-master', 'brake-drum', 'steering-unit', 'engine-assembly', 'torque-converter', 'fork-arm']
+  ['filter-air', 'filter-oil', 'filter-diesel', 'filter-transmission',
+   'brake-master-cylinder', 'brake-drum', 'elec-dashboard', 'engine-assembly',
+   'torque-converter', 'hydraulic-gear-pump', 'mast-roller', 'fork-arm']
 );
 ---
 
@@ -15,45 +16,45 @@ const featuredProducts = products.filter(p =>
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="container" style="position:relative;z-index:1;">
-      <h1>
-        Forklift Parts <span>Expert Supplier</span><br />Hangcha & Heli Specialized
-      </h1>
-      <p>
-        MLIFT — Your trusted source for Hangcha and Heli forklift parts.
-        13 product categories, 70+ parts, global shipping with technical support.
-      </p>
-      <div class="hero-btns">
-        <a href="/products" class="btn btn-white">Browse Products</a>
-        <a href="/contact" class="btn btn-outline" style="border-color:white;color:white;">Get a Quote</a>
-      </div>
+    <div class="container">
+      <div class="hero-content">
+        <h1>Quality Forklift Parts<br><span>Ready to Ship Worldwide</span></h1>
+        <p>
+          MLIFT — your reliable forklift parts partner. 13 categories, 70+ products
+          covering engine, transmission, hydraulic, electrical and more. Competitive pricing with fast global delivery.
+        </p>
+        <div class="hero-btns">
+          <a href="/products" class="btn btn-primary">Browse Products</a>
+          <a href="/contact" class="btn btn-outline" style="border-color:white;color:white;">Get a Quote</a>
+        </div>
 
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <span class="number">70+</span>
-          <span class="label">Parts SKUs</span>
-        </div>
-        <div class="hero-stat">
-          <span class="number">13</span>
-          <span class="label">Categories</span>
-        </div>
-        <div class="hero-stat">
-          <span class="number">10+</span>
-          <span class="label">Years Exp.</span>
-        </div>
-        <div class="hero-stat">
-          <span class="number">30+</span>
-          <span class="label">Countries</span>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="number">70+</span>
+            <span class="label">Parts SKUs</span>
+          </div>
+          <div class="hero-stat">
+            <span class="number">13</span>
+            <span class="label">Categories</span>
+          </div>
+          <div class="hero-stat">
+            <span class="number">10+</span>
+            <span class="label">Years Exp.</span>
+          </div>
+          <div class="hero-stat">
+            <span class="number">30+</span>
+            <span class="label">Countries</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Categories -->
-  <section class="section">
+  <section class="section" style="background:var(--color-bg);">
     <div class="container">
       <h2 class="section-title">Product Categories</h2>
-      <p class="section-subtitle">Full range of Hangcha & Heli forklift parts — one-stop procurement</p>
+      <p class="section-subtitle">Comprehensive range of forklift parts — one-stop procurement solution</p>
       <div class="categories-grid">
         {categories.map(cat => (
           <a href={`/products#${cat.id}`} class="category-card">
@@ -72,7 +73,7 @@ const featuredProducts = products.filter(p =>
   <section class="section" style="background:var(--color-bg-alt);">
     <div class="container">
       <h2 class="section-title">Popular Parts</h2>
-      <p class="section-subtitle">Most frequently purchased forklift parts</p>
+      <p class="section-subtitle">Most frequently purchased forklift components</p>
       <div class="products-grid">
         {featuredProducts.map(p => (
           <div class="product-card">
@@ -81,11 +82,9 @@ const featuredProducts = products.filter(p =>
             </div>
             <div class="product-body">
               <h3 class="product-name">{p.name}</h3>
-              <p class="product-desc">{p.description}</p>
-              <ul class="product-specs">
-                {p.specs.slice(0, 2).map(spec => <li>{spec}</li>)}
-              </ul>
-              <a href="/contact" class="btn btn-outline" style="width:100%;justify-content:center;">Inquire Now</a>
+              <div class="product-code">ML#: {p.id}</div>
+              <div class="product-spec-line">{p.specs.slice(0, 2).join(' | ')}</div>
+              <a href="/contact" class="product-link">Inquire Now →</a>
             </div>
           </div>
         ))}
@@ -104,15 +103,14 @@ const featuredProducts = products.filter(p =>
         <div class="about-image">
           <div>
             <div class="brand-name">MLIFT</div>
-            <div class="brand-sub">Forklift Parts Specialist</div>
+            <div class="brand-sub">Forklift Parts Supplier</div>
           </div>
         </div>
         <div class="about-content">
           <h2>Why Choose MLIFT?</h2>
           <p>
-            With over a decade of experience in the forklift parts industry, MLIFT is dedicated to supplying
-            high-quality parts for Hangcha and Heli forklifts worldwide. We source directly from OEM-approved
-            manufacturers to ensure reliable quality and competitive pricing.
+            MLIFT is dedicated to supplying high-quality forklift parts to customers worldwide. We source directly from
+            OEM-approved manufacturers, ensuring reliable quality and competitive pricing for every order.
           </p>
           <div class="about-features">
             <div class="about-feature">

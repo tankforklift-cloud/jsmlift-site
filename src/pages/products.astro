@@ -5,7 +5,6 @@ import Footer from '../components/Footer.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { categories, products } from '../data/products';
 
-// Group products by category
 const productsByCategory = categories.map(cat => ({
   ...cat,
   items: products.filter(p => p.category === cat.id),
@@ -15,44 +14,94 @@ const productsByCategory = categories.map(cat => ({
 <BaseLayout>
   <Header currentPath="/products" />
 
-  <section class="hero" style="padding:120px 0 60px;">
-    <div class="container" style="position:relative;z-index:1;">
-      <h1 style="font-size:2rem;">Products</h1>
-      <p>Full range of Hangcha & Heli forklift parts — 70+ products across 13 categories</p>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="separator">›</span>
+        <span>Products</span>
+      </div>
+      <h1>Products</h1>
+      <p>Full range of forklift parts — 70+ products across 13 categories</p>
     </div>
   </section>
 
+  <!-- Main Content: Sidebar + Product Grid -->
   <section class="section" style="padding-top:20px;">
     <div class="container">
-      <!-- Category filter -->
-      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:40px;justify-content:center;">
-        <a href="#all" class="btn btn-primary" style="font-size:0.85rem;padding:8px 20px;">All</a>
-        {categories.map(cat => (
-          <a href={`#${cat.id}`} class="btn btn-outline" style="font-size:0.85rem;padding:8px 20px;">
-            {cat.icon} {cat.name}
-          </a>
-        ))}
-      </div>
+      <div class="products-layout">
 
-      <!-- All Products -->
-      <a id="all"></a>
-      <h2 class="section-title" style="font-size:1.5rem;text-align:left;">All Products</h2>
-      <div class="products-grid" style="margin-bottom:60px;">
-        {products.map(p => <ProductCard product={p} />)}
-      </div>
-
-      <!-- Products by Category -->
-      {productsByCategory.filter(c => c.items.length > 0).map(cat => (
-        <div style="margin-bottom:60px;">
-          <a id={cat.id}></a>
-          <h2 class="section-title" style="font-size:1.5rem;text-align:left;display:flex;align-items:center;gap:10px;">
-            <span>{cat.icon}</span> {cat.name}
-          </h2>
-          <div class="products-grid">
-            {cat.items.map(p => <ProductCard product={p} />)}
+        <!-- Sidebar -->
+        <aside class="products-sidebar">
+          <!-- Category Tree -->
+          <div class="sidebar-block">
+            <h4 class="sidebar-title">CATEGORIES</h4>
+            <ul class="category-tree">
+              <li><a href="#all" class="cat-all active">All Products</a></li>
+              {categories.map(cat => (
+                <li>
+                  <a href={`#${cat.id}`} class="cat-item">
+                    <span class="cat-icon">{cat.icon}</span>
+                    {cat.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-      ))}
+
+          <!-- Brand Filter (decorative, links to categories) -->
+          <div class="sidebar-block">
+            <h4 class="sidebar-title">APPLICABLE BRANDS</h4>
+            <div class="brand-tags">
+              <a href="#heli-hangcha" class="brand-tag active">ALL</a>
+              <a href="#engine" class="brand-tag">Hangcha</a>
+              <a href="#engine" class="brand-tag">Heli</a>
+              <a href="#transmission" class="brand-tag">Toyota</a>
+              <a href="#hydraulic" class="brand-tag">Komatsu</a>
+              <a href="#electrical" class="brand-tag">TCM</a>
+              <a href="#brake" class="brand-tag">Doosan</a>
+              <a href="#mast" class="brand-tag">Clark</a>
+              <a href="#wheel-tire" class="brand-tag">Nissan</a>
+              <a href="#hydraulic" class="brand-tag">Mitsubishi</a>
+              <a href="#other" class="brand-tag">Hyundai</a>
+              <a href="#other" class="brand-tag">Linde</a>
+              <a href="#other" class="brand-tag">Hyster</a>
+            </div>
+          </div>
+
+          <!-- Quick Contact -->
+          <div class="sidebar-block sidebar-contact">
+            <h4 class="sidebar-title">NEED HELP?</h4>
+            <p>Can't find the part you need? Send us an inquiry with your requirements.</p>
+            <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:12px;">Contact Us</a>
+          </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="products-main">
+          <!-- All Products -->
+          <a id="all"></a>
+          <h2 class="section-title" style="font-size:1.5rem;text-align:left;">All Products</h2>
+          <div class="products-grid">
+            {products.map(p => <ProductCard product={p} />)}
+          </div>
+
+          <!-- Products by Category -->
+          {productsByCategory.filter(c => c.items.length > 0).map(cat => (
+            <div style="margin-top:50px;">
+              <a id={cat.id}></a>
+              <h2 class="section-title" style="font-size:1.5rem;text-align:left;display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:2px solid var(--color-primary);margin-bottom:24px;">
+                <span>{cat.icon}</span> {cat.name}
+              </h2>
+              <div class="products-grid">
+                {cat.items.map(p => <ProductCard product={p} />)}
+              </div>
+            </div>
+          ))}
+        </main>
+
+      </div>
     </div>
   </section>
 
@@ -60,7 +109,7 @@ const productsByCategory = categories.map(cat => ({
   <section class="cta-section">
     <div class="container">
       <h2>Can't Find What You Need?</h2>
-      <p>Contact us with your specific requirements — we'll help you find the right parts.</p>
+      <p>Contact us with your specific part numbers or requirements — we'll help you find the right parts.</p>
       <a href="/contact" class="btn btn-white">Contact Us</a>
     </div>
   </section>
