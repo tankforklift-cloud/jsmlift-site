@@ -11,13 +11,9 @@ const { product } = Astro.props;
 <div class="product-card">
   <div class="product-image">
     <img src={product.image} alt={product.name} loading="lazy" />
-    <span class="product-badge {product.brand.toLowerCase()}">
-      {product.brand === 'Both' ? 'Hangcha/Heli Compatible' : product.brand === 'Hangcha' ? 'Hangcha' : 'Heli'}
-    </span>
   </div>
   <div class="product-body">
     <h3 class="product-name">{product.name}</h3>
-    <p class="product-name-en">{product.nameEn}</p>
     <p class="product-desc">{product.description}</p>
     <ul class="product-specs">
       {product.specs.map(spec => <li>{spec}</li>)}
