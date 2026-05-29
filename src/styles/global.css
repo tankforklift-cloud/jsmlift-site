@@ -356,15 +356,16 @@ img {
 }
 
 .category-icon {
-  font-size: 1.8rem;
   flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  background: #F0F3FA;
+  width: 80px;
+  height: 64px;
   border-radius: var(--radius-sm);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
+}
+.category-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .category-info h3 {
@@ -439,7 +440,17 @@ img {
   margin-bottom: 4px;
 }
 .cat-icon {
-  font-size: 0.9rem;
+  width: 28px;
+  height: 28px;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.cat-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .brand-tags {

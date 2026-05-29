@@ -11,23 +11,24 @@ export interface Category {
   id: string;
   name: string;
   icon: string;
+  image: string;
   description: string;
 }
 
 export const categories: Category[] = [
-  { id: 'maintenance', name: 'Maintenance Parts', icon: '🔧', description: 'Air filters, oil filters, fuel filters, water separators — all standard engine & hydraulic filtration' },
-  { id: 'brake', name: 'Brake System', icon: '🛑', description: 'Master cylinders, brake drums, shoes, boosters & complete brake assemblies' },
-  { id: 'steering-axle', name: 'Steering & Drive Axle', icon: '🔄', description: 'Steering knuckles, king pins, tie rods, half shafts & axle housings' },
-  { id: 'electrical', name: 'Electrical & Electronic', icon: '⚡', description: 'Dashboards, switches, controllers, sensors, alternators & wiring harnesses' },
-  { id: 'engine', name: 'Engine & Power', icon: '🏭', description: 'Engine assemblies, cylinder kits, crankshafts, pumps & fuel injectors' },
-  { id: 'transmission', name: 'Transmission', icon: '⚙️', description: 'Torque converters, clutch packs, gears, differentials & transmission assemblies' },
-  { id: 'hydraulic', name: 'Hydraulic System', icon: '💧', description: 'Gear pumps, control valves, lift/tilt/steering cylinders & hydraulic seal kits' },
-  { id: 'wheel-tire', name: 'Wheels & Tires', icon: '🛞', description: 'Pneumatic tires, solid tires, wheel rims & hub assemblies' },
-  { id: 'mast', name: 'Mast & Lifting', icon: '⬆️', description: 'Mast rollers, fork arms, lift chains & mast bearings' },
-  { id: 'seat', name: 'Seat & Cabin', icon: '🪑', description: 'Seat assemblies, safety belts, mirrors, joysticks & pedals' },
-  { id: 'attachment', name: 'Attachments', icon: '🔩', description: 'Side shifters, fork positioners & rotators' },
-  { id: 'heli-hangcha', name: 'Heli / Hangcha OEM', icon: '🏗️', description: 'Genuine OEM parts for Heli & Hangcha forklifts' },
-  { id: 'other', name: 'Other Parts', icon: '📦', description: 'Bearings, fasteners, hydraulic hoses, seals & bushings' },
+  { id: 'maintenance', name: 'Maintenance Parts', icon: '🔧', image: '/images/categories/maintenance.jpg', description: 'Air filters, oil filters, fuel filters, water separators — all standard engine & hydraulic filtration' },
+  { id: 'brake', name: 'Brake System', icon: '🛑', image: '/images/categories/brake.jpg', description: 'Master cylinders, brake drums, shoes, boosters & complete brake assemblies' },
+  { id: 'steering-axle', name: 'Steering & Drive Axle', icon: '🔄', image: '/images/categories/steering-axle.jpg', description: 'Steering knuckles, king pins, tie rods, half shafts & axle housings' },
+  { id: 'electrical', name: 'Electrical & Electronic', icon: '⚡', image: '/images/categories/electrical.jpg', description: 'Dashboards, switches, controllers, sensors, alternators & wiring harnesses' },
+  { id: 'engine', name: 'Engine & Power', icon: '🏭', image: '/images/categories/engine.jpg', description: 'Engine assemblies, cylinder kits, crankshafts, pumps & fuel injectors' },
+  { id: 'transmission', name: 'Transmission', icon: '⚙️', image: '/images/categories/transmission.jpg', description: 'Torque converters, clutch packs, gears, differentials & transmission assemblies' },
+  { id: 'hydraulic', name: 'Hydraulic System', icon: '💧', image: '/images/categories/hydraulic.jpg', description: 'Gear pumps, control valves, lift/tilt/steering cylinders & hydraulic seal kits' },
+  { id: 'wheel-tire', name: 'Wheels & Tires', icon: '🛞', image: '/images/categories/wheel-tire.jpg', description: 'Pneumatic tires, solid tires, wheel rims & hub assemblies' },
+  { id: 'mast', name: 'Mast & Lifting', icon: '⬆️', image: '/images/categories/mast.jpg', description: 'Mast rollers, fork arms, lift chains & mast bearings' },
+  { id: 'seat', name: 'Seat & Cabin', icon: '🪑', image: '/images/categories/seat.jpg', description: 'Seat assemblies, safety belts, mirrors, joysticks & pedals' },
+  { id: 'attachment', name: 'Attachments', icon: '🔩', image: '/images/categories/attachment.jpg', description: 'Side shifters, fork positioners & rotators' },
+  { id: 'heli-hangcha', name: 'Heli / Hangcha OEM', icon: '🏗️', image: '/images/categories/heli-hangcha.jpg', description: 'Genuine OEM parts for Heli & Hangcha forklifts' },
+  { id: 'other', name: 'Other Parts', icon: '📦', image: '/images/categories/other.jpg', description: 'Bearings, fasteners, hydraulic hoses, seals & bushings' },
 ];
 
 export const products: Product[] = [

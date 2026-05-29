@@ -42,7 +42,9 @@ const productsByCategory = categories.map(cat => ({
               {categories.map(cat => (
                 <li>
                   <a href={`#${cat.id}`} class="cat-item">
-                    <span class="cat-icon">{cat.icon}</span>
+                    <span class="cat-icon">
+                      <img src={cat.image} alt={cat.name} width="28" height="28" loading="lazy" />
+                    </span>
                     {cat.name}
                   </a>
                 </li>
@@ -92,7 +94,7 @@ const productsByCategory = categories.map(cat => ({
             <div style="margin-top:50px;">
               <a id={cat.id}></a>
               <h2 class="section-title" style="font-size:1.5rem;text-align:left;display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:2px solid var(--color-primary);margin-bottom:24px;">
-                <span>{cat.icon}</span> {cat.name}
+                <img src={cat.image} alt={cat.name} width="36" height="36" style="border-radius:4px;object-fit:cover;" loading="lazy" /> {cat.name}
               </h2>
               <div class="products-grid">
                 {cat.items.map(p => <ProductCard product={p} />)}
