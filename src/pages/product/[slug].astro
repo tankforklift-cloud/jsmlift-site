@@ -49,14 +49,9 @@ if (!ex) {
           <!-- Specs Table -->
           <table class="specs-table">
             <tbody>
-              <tr><th>Operating Weight</th><td>{ex.weight}</td></tr>
-              <tr><th>Engine</th><td>{ex.engine}</td></tr>
-              <tr><th>Power</th><td>{ex.power}</td></tr>
-              <tr><th>Bucket Capacity</th><td>{ex.bucket}</td></tr>
-              <tr><th>Max Dig Depth</th><td>{ex.maxDigDepth}</td></tr>
-              <tr><th>Hydraulic System</th><td>{ex.hydraulicSystem}</td></tr>
-              <tr><th>Travel Speed</th><td>{ex.travelSpeed}</td></tr>
-              <tr><th>Dimension (L&times;W&times;H)</th><td>{ex.dimension}</td></tr>
+              {Object.entries(ex.specs).map(([key, val]) => (
+                <tr><th>{key}</th><td>{val}</td></tr>
+              ))}
             </tbody>
           </table>
 
