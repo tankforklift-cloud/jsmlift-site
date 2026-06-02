@@ -14,25 +14,33 @@ import { excavators } from '../data/excavators';
   <section class="section">
     <div class="container">
       {excavators.map(ex => (
-        <article class="excavator-card">
-          <a href={`/product/${ex.slug}`} class="ec-image">
+        <article class="ex-row">
+          <a href={`/product/${ex.slug}`} class="ex-row-img">
             <img src={ex.images[0]} alt={ex.name} loading="lazy" />
           </a>
-          <div class="ec-body">
-            {ex.badge && <span class={`ec-badge ${ex.badge.toLowerCase()}`}>{ex.badge}</span>}
+          <div class="ex-row-body">
+            {ex.badge && <span class="badge badge-yellow">{ex.badge}</span>}
             <h3>{ex.name}</h3>
-            <p class="ec-model">Model: {ex.model}</p>
-            <p class="ec-desc">{ex.description.slice(0, 180)}...</p>
-            <div class="ec-specs">
-              <span><i class="fas fa-weight-hanging"></i> {ex.weight}</span>
-              <span><i class="fas fa-cog"></i> {ex.engine}</span>
-              <span><i class="fas fa-bolt"></i> {ex.power}</span>
-              <span><i class="fas fa-cube"></i> {ex.bucket}</span>
+            <p class="model">Model: {ex.model}</p>
+            <p class="desc">{ex.description.slice(0, 200)}&hellip;</p>
+            <div class="ex-tags">
+              <span>{ex.weight}</span>
+              <span>{ex.engine}</span>
+              <span>{ex.power}</span>
+              <span>{ex.bucket}</span>
             </div>
-            <a href={`/product/${ex.slug}`} class="btn-yellow-sm">View Details <i class="fas fa-arrow-right"></i></a>
+            <a href={`/product/${ex.slug}`} class="btn btn-yellow">View Details &rarr;</a>
           </div>
         </article>
       ))}
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Find Your Excavator</h2>
+      <p>Not sure which model fits your needs? Contact us for a personalized recommendation.</p>
+      <a href="/contact" class="btn btn-yellow btn-lg">Contact Us &rarr;</a>
     </div>
   </section>
 </BaseLayout>

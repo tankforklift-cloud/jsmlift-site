@@ -1,23 +1,20 @@
----
-import { excavators } from '../data/excavators';
----
-
 <footer class="site-footer">
   <div class="footer-grid">
-    <div class="footer-col">
+    <div>
       <h4>MLIFT Machinery</h4>
-      <p>Professional manufacturer of mini excavators and supplier of OEM forklift parts. Quality products, competitive pricing, worldwide shipping.</p>
+      <p>Professional mini excavator manufacturer and OEM forklift parts supplier. Quality products, competitive pricing, worldwide shipping from China.</p>
     </div>
-    <div class="footer-col">
+    <div>
       <h4>Products</h4>
       <ul>
-        {excavators.map(e => (
-          <li><a href={`/product/${e.slug}`}>{e.model} Mini Excavator</a></li>
-        ))}
+        <li><a href="/product/hs12-6-hydraulic-excavator">HS12-6 Mini Excavator</a></li>
+        <li><a href="/product/hs18-hydraulic-excavator">HS18 Mini Excavator</a></li>
+        <li><a href="/product/hs20a-hydraulic-excavator">HS20A Mini Excavator</a></li>
+        <li><a href="/product/hs45-hydraulic-excavator">HS45 Mini Excavator</a></li>
         <li><a href="/forklift-parts">Forklift Parts</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div>
       <h4>Quick Links</h4>
       <ul>
         <li><a href="/">Home</a></li>
@@ -27,17 +24,16 @@ import { excavators } from '../data/excavators';
         <li><a href="/contact">Contact Us</a></li>
       </ul>
     </div>
-    <div class="footer-col">
+    <div>
       <h4>Contact</h4>
       <p>
-        <i class="fas fa-phone"></i> +86-159-9605-5825<br/>
-        <i class="fas fa-envelope"></i> tan@jsmlift.com<br/>
-        <i class="fab fa-whatsapp"></i> +86-159-9605-5825<br/>
-        <i class="fab fa-weixin"></i> tanklift
+        Phone: +86-15275237612<br/>
+        Email: tan@jsmlift.com<br/>
+        WhatsApp: +86-15295237612
       </p>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>&copy; {new Date().getFullYear()} MLIFT. All Rights Reserved. | <a href="/contact">Contact</a></p>
+    <p>&copy; {new Date().getFullYear()} MLIFT. All rights reserved.</p>
   </div>
 </footer>

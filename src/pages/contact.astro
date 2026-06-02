@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Contact Us" description="Contact MLIFT for mini excavator inquiries and forklift parts orders. Phone, WhatsApp, WeChat, email. Fast response guaranteed.">
+<BaseLayout title="Contact Us" description="Contact MLIFT for mini excavator inquiries and forklift parts orders. Phone, WhatsApp, email. Fast response guaranteed.">
   <div class="page-header">
     <div class="container">
       <p class="breadcrumb"><a href="/">Home</a> &rsaquo; Contact Us</p>
@@ -10,81 +10,87 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
   </div>
 
-  <section>
+  <section class="section">
     <div class="container">
-      <div class="contact-layout">
+      <div class="contact-grid">
         <div class="contact-info">
           <h2>Get In Touch</h2>
-          <p style="color: var(--color-text-light); margin-bottom: 32px; line-height: 1.7;">
-            Have a question about our mini excavators or need a quote on forklift parts? 
-            Reach out — we'll get back to you within 24 hours.
-          </p>
-          <div class="info-item">
-            <div class="info-icon"><i class="fas fa-phone"></i></div>
+          <p class="ci-intro">Have a question about our mini excavators or need a quote on forklift parts? Reach out &mdash; we'll get back to you within 24 hours.</p>
+
+          <div class="ci-item">
+            <div class="ci-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
             <div>
-              <strong>Phone</strong>
-              <span>+86-159-9605-5825</span>
+              <div class="ci-label">Phone</div>
+              <div class="ci-value">+86-15275237612</div>
             </div>
           </div>
-          <div class="info-item">
-            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+
+          <div class="ci-item">
+            <div class="ci-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
             <div>
-              <strong>Email</strong>
-              <span>tan@jsmlift.com</span>
+              <div class="ci-label">Email</div>
+              <div class="ci-value">tan@jsmlift.com</div>
             </div>
           </div>
-          <div class="info-item">
-            <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+
+          <div class="ci-item">
+            <div class="ci-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            </div>
             <div>
-              <strong>WhatsApp</strong>
-              <span>+86-159-9605-5825</span>
+              <div class="ci-label">WhatsApp</div>
+              <div class="ci-value">+86-15295237612</div>
             </div>
           </div>
-          <div class="info-item">
-            <div class="info-icon"><i class="fab fa-weixin"></i></div>
-            <div>
-              <strong>WeChat</strong>
-              <span>tanklift</span>
+
+          <div class="ci-item">
+            <div class="ci-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
-          </div>
-          <div class="info-item">
-            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
             <div>
-              <strong>Address</strong>
-              <span>Jingjiang, Jiangsu, China</span>
+              <div class="ci-label">Address</div>
+              <div class="ci-value">Jingjiang, Jiangsu, China</div>
             </div>
           </div>
         </div>
 
-        <div class="contact-form-wrap">
+        <div class="form-wrap">
           <h3>Send Us a Message</h3>
           <form action="https://formspree.io/f/FORM_ID" method="POST">
-            <div class="form-group">
-              <label for="name">Your Name *</label>
-              <input type="text" id="name" name="name" required placeholder="Full name" />
+            <div class="form-row">
+              <div class="form-g">
+                <label for="name">Your Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Full name" />
+              </div>
+              <div class="form-g">
+                <label for="email">Your Email *</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com" />
+              </div>
             </div>
-            <div class="form-group">
-              <label for="email">Your Email *</label>
-              <input type="email" id="email" name="email" required placeholder="your@email.com" />
+            <div class="form-row">
+              <div class="form-g">
+                <label for="company">Company</label>
+                <input type="text" id="company" name="company" placeholder="Your company name" />
+              </div>
+              <div class="form-g">
+                <label for="interest">I'm interested in</label>
+                <select id="interest" name="interest">
+                  <option value="">-- Please Select --</option>
+                  <option value="excavator">Mini Excavator</option>
+                  <option value="forklift-parts">Forklift Parts</option>
+                  <option value="other">Other Inquiry</option>
+                </select>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="company">Company</label>
-              <input type="text" id="company" name="company" placeholder="Your company name" />
-            </div>
-            <div class="form-group">
-              <label for="interest">I'm interested in</label>
-              <select id="interest" name="interest">
-                <option value="">-- Please Select --</option>
-                <option value="excavator">Mini Excavator</option>
-                <option value="forklift-parts">Forklift Parts</option>
-                <option value="other">Other Inquiry</option>
-              </select>
-            </div>
-            <div class="form-group">
+            <div class="form-g">
               <label for="message">Your Message *</label>
-              <textarea id="message" name="message" required placeholder="Tell us what you need — product model, quantity, destination..."></textarea>
+              <textarea id="message" name="message" required placeholder="Tell us what you need &mdash; product model, quantity, destination&hellip;"></textarea>
             </div>
-            <button type="submit" class="btn-submit">Send Message <i class="fas fa-paper-plane"></i></button>
+            <button type="submit" class="btn btn-yellow">Send Message &rarr;</button>
           </form>
         </div>
       </div>

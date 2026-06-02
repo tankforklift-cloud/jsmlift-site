@@ -4,9 +4,9 @@ import { excavators } from '../data/excavators';
 import { categories } from '../data/products';
 
 const heroSlides = [
-  { img: '/images/hero/hs-excavator-work.jpg', tag: 'Mini Excavators', title: 'Compact Power for Your Jobsite', desc: 'MLIFT mini excavators — engineered for reliability, shipped worldwide.' },
-  { img: '/images/hero/hs-excavator-line.jpg', tag: 'Forklift Parts', title: 'OEM Quality Forklift Parts', desc: '13 categories, 70+ products. Hangcha & Heli compatible parts, ready to ship.' },
-  { img: '/images/hero/hs-factory.jpg', tag: 'MLIFT', title: 'Your Trusted Machinery Partner', desc: 'Direct from our China factory. Competitive pricing, fast delivery.' },
+  { img: '/images/hero/hs-excavator-work.jpg', tag: 'Mini Excavators', title: 'Compact Power for Every Jobsite', desc: 'MLIFT mini excavators &mdash; engineered for reliability, built to perform. 1.2 to 4.2 ton range, worldwide shipping.', cta: 'View Excavators', link: '/excavators' },
+  { img: '/images/hero/hs-excavator-line.jpg', tag: 'Forklift Parts', title: 'OEM Quality Replacement Parts', desc: '13 categories, 70+ products. Air filters, hydraulics, brakes, engine parts &mdash; ready to ship.', cta: 'Browse Parts', link: '/forklift-parts' },
+  { img: '/images/hero/hs-factory.jpg', tag: 'MLIFT', title: 'Your Trusted Machinery Partner', desc: 'Direct from our China factory. Competitive pricing, fast delivery. Let&rsquo;s work together.', cta: 'Contact Us', link: '/contact' },
 ];
 ---
 
@@ -18,87 +18,87 @@ const heroSlides = [
         <img src={slide.img} alt={slide.tag} />
         <div class="hero-content">
           <span class="hero-tag">{slide.tag}</span>
-          <h1>{slide.title}</h1>
-          <p>{slide.desc}</p>
-          <a href={i === 0 ? '/excavators' : i === 1 ? '/forklift-parts' : '/contact'} class="hero-cta">
-            {i === 0 ? 'View Excavators' : i === 1 ? 'Browse Parts' : 'Contact Us'} <i class="fas fa-arrow-right"></i>
-          </a>
+          <h1 set:html={slide.title} />
+          <p set:html={slide.desc} />
+          <a href={slide.link} class="hero-cta">{slide.cta} &rarr;</a>
         </div>
       </div>
     ))}
-    <button class="hero-arrow prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
-    <button class="hero-arrow next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
-    <div class="hero-controls" id="heroDots">
+    <button class="hero-arrow prev" id="heroPrev">&#10094;</button>
+    <button class="hero-arrow next" id="heroNext">&#10095;</button>
+    <div class="hero-dots" id="heroDots">
       {heroSlides.map((_, i) => (
         <button class={`hero-dot${i === 0 ? ' active' : ''}`} data-dot={i}></button>
       ))}
     </div>
   </section>
 
-  <!-- Mini Excavators Product Line -->
-  <section class="product-lines-section">
+  <!-- Mini Excavators -->
+  <section class="section">
     <div class="container">
-      <div class="section-header">
+      <div class="sec-hdr">
         <h2>Mini Excavators</h2>
-        <p>Compact, powerful, and built to last. Our mini excavators are engineered for performance in tight spaces.</p>
+        <p>Compact, powerful, and built to last. Our mini excavators deliver exceptional performance in tight spaces &mdash; from landscaping to construction.</p>
       </div>
-      <div class="product-line-grid">
+      <div class="card-grid">
         {excavators.slice(0, 4).map(ex => (
-          <a href={`/product/${ex.slug}`} class="product-line-card">
-            <div class="card-image">
+          <a href={`/product/${ex.slug}`} class="card">
+            <div class="card-img">
               <img src={ex.images[0]} alt={ex.name} loading="lazy" />
             </div>
             <div class="card-body">
-              {ex.badge && <span class="card-badge">{ex.badge}</span>}
+              {ex.badge && <span class="card-badge yellow">{ex.badge}</span>}
               <h3>{ex.name}</h3>
-              <p>{ex.description.slice(0, 100)}...</p>
-              <span class="card-link">View Details</span>
+              <p>{ex.description.slice(0, 90)}&hellip;</p>
+              <span class="card-link">Learn more</span>
             </div>
           </a>
         ))}
       </div>
+      <div style="text-align:center; margin-top:var(--space-4);">
+        <a href="/excavators" class="btn btn-yellow">View All Excavators &rarr;</a>
+      </div>
     </div>
   </section>
 
-  <!-- Forklift Parts Section -->
-  <section class="section" style="background: var(--color-white);">
+  <!-- Forklift Parts -->
+  <section class="section section-gray">
     <div class="container">
-      <div class="section-header">
+      <div class="sec-hdr">
         <h2>Forklift Parts</h2>
-        <p>OEM-quality replacement parts for Hangcha & Heli forklifts. 13 categories covering all major systems.</p>
+        <p>OEM-quality replacement parts across 13 categories. Engine, hydraulic, brake, electrical &mdash; everything your forklift needs.</p>
       </div>
-      <div class="product-line-grid">
+      <div class="card-grid">
         {categories.slice(0, 6).map(cat => (
-          <a href="/forklift-parts" class="product-line-card">
-            <div class="card-image">
+          <a href="/forklift-parts" class="card">
+            <div class="card-img">
               <img src={cat.image} alt={cat.name} loading="lazy" />
             </div>
             <div class="card-body">
               <h3>{cat.name}</h3>
               <p>{cat.description}</p>
-              <span class="card-link">Browse {cat.name}</span>
+              <span class="card-link">Browse</span>
             </div>
           </a>
         ))}
       </div>
-      <div style="text-align:center; margin-top:32px;">
-        <a href="/forklift-parts" class="hero-cta">View All Forklift Parts <i class="fas fa-arrow-right"></i></a>
+      <div style="text-align:center; margin-top:var(--space-4);">
+        <a href="/forklift-parts" class="btn btn-outline">All Forklift Parts &rarr;</a>
       </div>
     </div>
   </section>
 
-  <!-- Dark CTA -->
-  <section class="cta-dark">
+  <!-- CTA -->
+  <section class="cta-section">
     <div class="container">
       <h2>Need a Quote?</h2>
       <p>Whether you're looking for a mini excavator or forklift replacement parts, we're here to help with competitive pricing and fast response.</p>
-      <a href="/contact" class="btn-yellow">Get In Touch <i class="fas fa-envelope"></i></a>
+      <a href="/contact" class="btn btn-yellow btn-lg">Get In Touch &rarr;</a>
     </div>
   </section>
 </BaseLayout>
 
 <script>
-  // Hero Slider
   const slides = document.querySelectorAll('.hero-slide');
   const dots = document.querySelectorAll('.hero-dot');
   let currentSlide = 0;
@@ -123,11 +123,5 @@ const heroSlides = [
       showSlide(parseInt(dot.dataset.dot || '0'));
     });
   });
-
-  function startAutoPlay() {
-    autoPlay = setInterval(() => {
-      showSlide((currentSlide + 1) % slides.length);
-    }, 5000);
-  }
-  startAutoPlay();
+  autoPlay = setInterval(() => showSlide((currentSlide + 1) % slides.length), 5000);
 </script>

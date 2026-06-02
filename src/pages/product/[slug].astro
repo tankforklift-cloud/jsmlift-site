@@ -3,73 +3,70 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { excavators } from '../../data/excavators';
 
 export function getStaticPaths() {
-  return excavators.map(e => ({ params: { slug: e.slug } }));
+  return excavators.map(ex => ({ params: { slug: ex.slug } }));
 }
 
 const { slug } = Astro.params;
-const excavator = excavators.find(e => e.slug === slug);
+const ex = excavators.find(e => e.slug === slug);
 
-if (!excavator) {
+if (!ex) {
   return Astro.redirect('/excavators');
 }
 ---
 
-<BaseLayout title={excavator.name} description={excavator.description.slice(0, 160)}>
+<BaseLayout title={ex.name} description={ex.description}>
   <div class="page-header">
     <div class="container">
-      <p class="breadcrumb">
-        <a href="/">Home</a> &rsaquo; <a href="/excavators">Mini Excavators</a> &rsaquo; {excavator.name}
-      </p>
-      <h1>{excavator.name}</h1>
+      <p class="breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/excavators">Mini Excavators</a> &rsaquo; {ex.model}</p>
+      <h1>{ex.name}</h1>
     </div>
   </div>
 
-  <section class="product-detail">
+  <section class="section">
     <div class="container">
-      <!-- Gallery + Info -->
-      <div class="product-detail-layout">
-        <div class="product-gallery">
-          <div class="main-image">
-            <img id="mainImage" src={excavator.images[0]} alt={excavator.name} />
+      <div class="detail-grid">
+        <!-- Gallery -->
+        <div>
+          <div class="gallery-main" id="galleryMain">
+            <img src={ex.images[0]} alt={ex.name} id="mainImage" />
           </div>
-          {excavator.images.length > 1 && (
-            <div class="thumb-strip">
-              {excavator.images.map((img, i) => (
-                <button class={i === 0 ? 'active' : ''} onclick={`document.getElementById('mainImage').src='${img}'`}>
-                  <img src={img} alt={`${excavator.name} view ${i + 1}`} loading="lazy" />
-                </button>
-              ))}
-            </div>
-          )}
+          <div class="gallery-thumbs" id="galleryThumbs">
+            {ex.images.map((img, i) => (
+              <button class:list={[{ active: i === 0 }]} data-img={img}>
+                <img src={img} alt={`${ex.name} ${i + 1}`} loading="lazy" />
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div class="product-info">
-          {excavator.badge && <span class={`prod-badge ec-badge ${excavator.badge.toLowerCase()}`}>{excavator.badge}</span>}
-          <h1>{excavator.name}</h1>
-          <p class="prod-model">Model: {excavator.model}</p>
-          <p class="prod-desc">{excavator.description}</p>
+        <!-- Info -->
+        <div class="detail-info">
+          {ex.badge && <span class="d-badge">{ex.badge}</span>}
+          <h1>{ex.name}</h1>
+          <p class="d-model">Model: {ex.model}</p>
+          <p class="d-desc">{ex.description}</p>
 
+          <!-- Specs Table -->
           <table class="specs-table">
             <tbody>
-              {Object.entries(excavator.specs).map(([key, val]) => (
-                <tr>
-                  <th>{key}</th>
-                  <td>{val}</td>
-                </tr>
-              ))}
+              <tr><th>Operating Weight</th><td>{ex.weight}</td></tr>
+              <tr><th>Engine</th><td>{ex.engine}</td></tr>
+              <tr><th>Power</th><td>{ex.power}</td></tr>
+              <tr><th>Bucket Capacity</th><td>{ex.bucket}</td></tr>
+              <tr><th>Max Dig Depth</th><td>{ex.maxDigDepth}</td></tr>
+              <tr><th>Hydraulic System</th><td>{ex.hydraulicSystem}</td></tr>
+              <tr><th>Travel Speed</th><td>{ex.travelSpeed}</td></tr>
+              <tr><th>Dimension (L&times;W&times;H)</th><td>{ex.dimension}</td></tr>
             </tbody>
           </table>
 
-          <div class="features-list">
-            <h3>Key Features</h3>
-            <ul>
-              {excavator.features.map(f => <li>{f}</li>)}
-            </ul>
-          </div>
+          <!-- Features -->
+          <h3 class="feat-title">Key Features</h3>
+          <ul class="feat-grid">
+            {ex.features.map(f => <li>{f}</li>)}
+          </ul>
 
-          <a href="/contact" class="hero-cta" style="display:inline-flex;">
-            Send Inquiry <i class="fas fa-envelope"></i>
-          </a>
+          <a href={`/contact?interest=excavator&model=${ex.model}`} class="btn btn-yellow btn-lg">Send Inquiry &rarr;</a>
         </div>
       </div>
     </div>
@@ -77,11 +74,12 @@ if (!excavator) {
 </BaseLayout>
 
 <script>
-  // Gallery thumbnail switching
-  document.querySelectorAll('.thumb-strip button').forEach(btn => {
-    btn.addEventListener('click', function() {
-      document.querySelectorAll('.thumb-strip button').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
+  document.querySelectorAll('.gallery-thumbs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.gallery-thumbs button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const mainImage = document.getElementById('mainImage') as HTMLImageElement;
+      if (mainImage) mainImage.src = btn.dataset.img || '';
     });
   });
 </script>
