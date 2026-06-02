@@ -1,86 +1,43 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
 ---
 
-<BaseLayout>
-  <Header currentPath="/about" />
-
-  <section class="page-header">
+<BaseLayout title="About Us" description="MLIFT is a professional mini excavator manufacturer specialized in construction machinery.">
+  
+  <div class="page-header">
     <div class="container">
       <div class="breadcrumb">
-        <a href="/">Home</a>
-        <span class="separator">›</span>
-        <span>About Us</span>
+        <a href="/">Home</a> &raquo; About Us
       </div>
       <h1>About Us</h1>
-      <p>Professional forklift parts supplier — Based in China, Serving the World</p>
     </div>
-  </section>
+  </div>
 
-  <!-- About Content -->
-  <section class="section" style="padding-top:20px;">
+  <section class="section" style="padding-top:0;">
     <div class="container">
-      <div class="about-grid">
-        <div class="about-image" style="height:auto;min-height:350px;">
-          <div>
-            <div class="brand-name">MLIFT</div>
-            <div class="brand-sub">SINCE 2015</div>
-          </div>
-        </div>
-        <div class="about-content">
-          <h2>MLIFT — Your Trusted Forklift Parts Partner</h2>
-          <p>
-            MLIFT (JSM LIFT) is a specialized trading company focused on supplying forklift parts for
-            major brands worldwide. With over a decade of experience in the forklift parts industry, we have
-            accumulated extensive product knowledge and supply chain resources.
-          </p>
-          <p>
-            We understand that the core of forklift parts procurement lies in quality and lead time.
-            That's why we've established long-term, stable partnerships with OEM-approved suppliers,
-            ensuring all parts we supply meet original factory standards.
-          </p>
-          <p>
-            Whether you need engine parts, transmission systems, hydraulic components, electrical parts,
-            or chassis & undercarriage, MLIFT provides a one-stop procurement solution. We serve
-            customers across 30+ countries in the Middle East, Central Asia, South America, Africa, and beyond.
-          </p>
-        </div>
+      <div class="about-section" style="max-width:800px;margin:0 auto;">
+        <p>MLIFT is a professional manufacturer established in 2017, specialized in researching, developing and manufacturing construction machinery products. The products we manufacture include different models of small hydraulic excavators, excavator attachments and excavator trailers.</p>
+        
+        <p>Our company covers an area of about 150,000 square meters, and has approximately 300 employees in peak season, with annual sales reaching approximately USD20 million.</p>
+        
+        <p>Based on advanced equipment, excellent facilities, strict quality control and standardized management system, our products are sold to most countries and regions across Europe, America, Asia, Oceania and Africa. Most of our products have gained CE certification. We continue developing and improving our brand "MLIFT", and OEM is also welcome.</p>
+        
+        <p>We always follow ISO9001 international quality management system to control product quality, providing you with better products and service. Welcome to visit us for further discussion.</p>
+
+        <h3 class="mt-20">Scientific Production Management</h3>
+        <p>Our manufacturing facility is equipped with state-of-the-art production lines including laser cutting machines, robotic welding systems, CNC machining centers, and automated painting booths. Each excavator undergoes rigorous quality inspection before leaving our factory.</p>
       </div>
     </div>
   </section>
 
-  <!-- Service -->
-  <section class="section" style="background:var(--color-bg-alt);">
+  <!-- Hero image showcase -->
+  <section class="py-40">
     <div class="container">
-      <h2 class="section-title">Our Services</h2>
-      <p class="section-subtitle">More than just parts — we're your supply chain partner</p>
-
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">🔍</div>
-          <h3>Accurate Matching</h3>
-          <p>Provide a part number or photo — we'll find the exact matching part for you</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">📦</div>
-          <h3>Global Logistics</h3>
-          <p>Sea, air & express shipping options with door-to-door delivery worldwide</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">💰</div>
-          <h3>Competitive Pricing</h3>
-          <p>Direct from the source — cutting out middlemen to save you money</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🛡️</div>
-          <h3>Quality Guarantee</h3>
-          <p>Rigorous pre-shipment inspection with up to 12-month warranty</p>
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-radius:8px;overflow:hidden;">
+        <img src="/images/hero/hs-factory.jpg" alt="MLIFT Factory" style="width:100%;height:280px;object-fit:cover;" loading="lazy" />
+        <img src="/images/hero/hs-excavator-line.jpg" alt="MLIFT Excavator Production Line" style="width:100%;height:280px;object-fit:cover;" loading="lazy" />
       </div>
     </div>
   </section>
 
-  <Footer />
 </BaseLayout>

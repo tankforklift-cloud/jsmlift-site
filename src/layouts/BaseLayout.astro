@@ -1,5 +1,12 @@
 ---
-import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+const { title, description } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -7,12 +14,20 @@ import '../styles/global.css';
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="MLIFT (JSM LIFT) — Professional forklift parts supplier. 13 product categories, 70+ parts: engine, transmission, hydraulic, electrical, brake, steering & more. Competitive pricing, worldwide shipping." />
-  <meta name="keywords" content="forklift parts, forklift spares, forklift accessories, China forklift parts, MLIFT, JSM LIFT, engine parts, hydraulic parts, transmission parts" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <title>MLIFT — Forklift Parts | Engine · Hydraulic · Transmission · Electrical</title>
+  <meta name="description" content={description || 'MLIFT — Professional Mini Excavator Manufacturer. High quality hydraulic excavators for construction, agriculture and landscaping.'} />
+  <title>{title} — MLIFT</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href={new URL('../styles/global.css', import.meta.url).pathname} />
 </head>
 <body>
-  <slot />
+  <Header />
+  <main id="content">
+    <slot />
+  </main>
+  <Footer />
 </body>
 </html>

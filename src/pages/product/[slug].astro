@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { excavators } from '../../data/excavators';
+
+export function getStaticPaths() {
+  return excavators.map((exc) => ({
+    params: { slug: exc.slug }
+  }));
+}
+
+const { slug } = Astro.params;
+const excavator = excavators.find((e) => e.slug === slug)!;
+---
+
+<BaseLayout title={excavator.name} description={excavator.description.substring(0, 160)}>
+  
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="/">Home</a> &raquo; <a href="/products">Products</a> &raquo; {excavator.name}
+      </div>
+      <h1>{excavator.name}</h1>
+    </div>
+  </div>
+
+  <section class="section" style="padding-top:0;">
+    <div class="container">
+      <div class="product-detail">
+        <div class="product-gallery">
+          <img src={excavator.images[0]} alt={excavator.name} class="main-img" id="mainImg" />
+          {excavator.images.length > 1 && (
+            <div class="thumbs" id="thumbs">
+              {excavator.images.map((img, i) => (
+                <img src={img} alt={`${excavator.name} ${i + 1}`} class={`thumb-img${i === 0 ? ' active' : ''}`} data-src={img} />
+              ))}
+            </div>
+          )}
+        </div>
+        
+        <div class="product-info">
+          <h1>{excavator.name}</h1>
+          <p class="short-desc">{excavator.description}</p>
+          
+          <table class="specs-table">
+            <tbody>
+              {Object.entries(excavator.specs).map(([key, val]) => (
+                <tr>
+                  <td>{key}</td>
+                  <td>{val}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          
+          <a href="/contact" class="btn btn-primary">Send Inquiry</a>
+          
+          <div class="product-features">
+            <h3>Key Features</h3>
+            <ul>
+              {excavator.features.map((f) => (
+                <li>{f}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callback-section">
+        <div class="callback-inner">
+          <h3>Inquiry</h3>
+          <p>Interested in the {excavator.model}? Fill out the form and we'll get back to you shortly.</p>
+          <form action="https://formspree.io/f/your-form-id" method="POST">
+            <div class="form-group">
+              <label for="inqName">Name</label>
+              <input type="text" id="inqName" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="inqEmail">Email</label>
+              <input type="email" id="inqEmail" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="inqMessage">Message</label>
+              <textarea id="inqMessage" name="message" rows="4" placeholder={`I'm interested in the ${excavator.model}...`}></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%;">Send</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  // Gallery thumbnail switching
+  document.querySelectorAll('.thumb-img').forEach(thumb => {
+    thumb.addEventListener('click', function() {
+      const mainImg = document.getElementById('mainImg') as HTMLImageElement;
+      if (mainImg && this instanceof HTMLImageElement) {
+        mainImg.src = this.dataset.src || this.src;
+        document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
+        this.classList.add('active');
+      }
+    });
+  });
+</script>

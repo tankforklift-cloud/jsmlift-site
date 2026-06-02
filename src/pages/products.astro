@@ -1,120 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import ProductCard from '../components/ProductCard.astro';
-import { categories, products } from '../data/products';
-
-const productsByCategory = categories.map(cat => ({
-  ...cat,
-  items: products.filter(p => p.category === cat.id),
-}));
+import { excavators } from '../data/excavators';
 ---
 
-<BaseLayout>
-  <Header currentPath="/products" />
-
+<BaseLayout title="Products" description="MLIFT Mini Hydraulic Excavators — HS12-6, HS18, HS20, HS45 models for worldwide delivery.">
+  
   <!-- Page Header -->
-  <section class="page-header">
+  <div class="page-header">
     <div class="container">
       <div class="breadcrumb">
-        <a href="/">Home</a>
-        <span class="separator">›</span>
-        <span>Products</span>
+        <a href="/">Home</a> &raquo; Products
       </div>
       <h1>Products</h1>
-      <p>Full range of forklift parts — 70+ products across 13 categories</p>
     </div>
-  </section>
+  </div>
 
-  <!-- Main Content: Sidebar + Product Grid -->
-  <section class="section" style="padding-top:20px;">
+  <!-- Product List -->
+  <section class="section" style="padding-top:0;">
     <div class="container">
-      <div class="products-layout">
-
-        <!-- Sidebar -->
-        <aside class="products-sidebar">
-          <!-- Category Tree -->
-          <div class="sidebar-block">
-            <h4 class="sidebar-title">CATEGORIES</h4>
-            <ul class="category-tree">
-              <li><a href="#all" class="cat-all active">All Products</a></li>
-              {categories.map(cat => (
-                <li>
-                  <a href={`#${cat.id}`} class="cat-item">
-                    <span class="cat-icon">
-                      <img src={cat.image} alt={cat.name} width="28" height="28" loading="lazy" />
-                    </span>
-                    {cat.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+      {excavators.map((exc) => (
+        <div class="product-list-item">
+          <div class="img-wrap">
+            <img src={exc.images[0]} alt={exc.name} loading="lazy" />
+            {exc.badge && <span class="badge">{exc.badge}</span>}
           </div>
-
-          <!-- Brand Filter (decorative, links to categories) -->
-          <div class="sidebar-block">
-            <h4 class="sidebar-title">APPLICABLE BRANDS</h4>
-            <div class="brand-tags">
-              <a href="#heli-hangcha" class="brand-tag active">ALL</a>
-              <a href="#engine" class="brand-tag">Hangcha</a>
-              <a href="#engine" class="brand-tag">Heli</a>
-              <a href="#transmission" class="brand-tag">Toyota</a>
-              <a href="#hydraulic" class="brand-tag">Komatsu</a>
-              <a href="#electrical" class="brand-tag">TCM</a>
-              <a href="#brake" class="brand-tag">Doosan</a>
-              <a href="#mast" class="brand-tag">Clark</a>
-              <a href="#wheel-tire" class="brand-tag">Nissan</a>
-              <a href="#hydraulic" class="brand-tag">Mitsubishi</a>
-              <a href="#other" class="brand-tag">Hyundai</a>
-              <a href="#other" class="brand-tag">Linde</a>
-              <a href="#other" class="brand-tag">Hyster</a>
+          <div class="info">
+            <h3><a href={`/product/${exc.slug}`}>{exc.name}</a></h3>
+            <p class="desc">{exc.description.substring(0, 200)}...</p>
+            <div class="specs-row">
+              <span><strong>Weight:</strong> {exc.weight}</span>
+              <span><strong>Engine:</strong> {exc.engine}</span>
+              <span><strong>Power:</strong> {exc.power}</span>
+              <span><strong>Bucket:</strong> {exc.bucket}</span>
+            </div>
+            <div class="actions">
+              <a href={`/product/${exc.slug}`} class="btn btn-primary btn-sm">View Details</a>
+              <a href="/contact" class="btn btn-outline btn-sm">Send Inquiry</a>
             </div>
           </div>
-
-          <!-- Quick Contact -->
-          <div class="sidebar-block sidebar-contact">
-            <h4 class="sidebar-title">NEED HELP?</h4>
-            <p>Can't find the part you need? Send us an inquiry with your requirements.</p>
-            <a href="/contact" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:12px;">Contact Us</a>
-          </div>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="products-main">
-          <!-- All Products -->
-          <a id="all"></a>
-          <h2 class="section-title" style="font-size:1.5rem;text-align:left;">All Products</h2>
-          <div class="products-grid">
-            {products.map(p => <ProductCard product={p} />)}
-          </div>
-
-          <!-- Products by Category -->
-          {productsByCategory.filter(c => c.items.length > 0).map(cat => (
-            <div style="margin-top:50px;">
-              <a id={cat.id}></a>
-              <h2 class="section-title" style="font-size:1.5rem;text-align:left;display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:2px solid var(--color-primary);margin-bottom:24px;">
-                <img src={cat.image} alt={cat.name} width="36" height="36" style="border-radius:4px;object-fit:cover;" loading="lazy" /> {cat.name}
-              </h2>
-              <div class="products-grid">
-                {cat.items.map(p => <ProductCard product={p} />)}
-              </div>
-            </div>
-          ))}
-        </main>
-
-      </div>
+        </div>
+      ))}
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <h2>Can't Find What You Need?</h2>
-      <p>Contact us with your specific part numbers or requirements — we'll help you find the right parts.</p>
-      <a href="/contact" class="btn btn-white">Contact Us</a>
-    </div>
-  </section>
-
-  <Footer />
 </BaseLayout>
