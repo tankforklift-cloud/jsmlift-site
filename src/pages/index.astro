@@ -1,168 +1,133 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { excavators } from '../data/excavators';
+import { categories } from '../data/products';
 
-// Hero slides
 const heroSlides = [
-  {
-    image: '/images/hero/hs-factory.jpg',
-    title: 'Professional Mini Excavator Manufacturer',
-    subtitle: 'Quality excavators engineered for construction, agriculture and landscaping — ready to ship worldwide.',
-    cta: 'View Products',
-    link: '/products'
-  },
-  {
-    image: '/images/hero/hs-excavator-line.jpg',
-    title: 'Reliable Hydraulic Excavators',
-    subtitle: 'From 1-ton to 5-ton models. Powered by Kubota and Yanmar engines with premium Japanese hydraulics.',
-    cta: 'Get a Quote',
-    link: '/contact'
-  },
-  {
-    image: '/images/hero/hs-excavator-work.jpg',
-    title: 'Built for the Jobsite',
-    subtitle: 'Side swing boom, retractable tracks, zero tail swing — designed for tight spaces and tough conditions.',
-    cta: 'Learn More',
-    link: '/about'
-  }
+  { img: '/images/hero/hs-excavator-work.jpg', tag: 'Mini Excavators', title: 'Compact Power for Your Jobsite', desc: 'MLIFT mini excavators — engineered for reliability, shipped worldwide.' },
+  { img: '/images/hero/hs-excavator-line.jpg', tag: 'Forklift Parts', title: 'OEM Quality Forklift Parts', desc: '13 categories, 70+ products. Hangcha & Heli compatible parts, ready to ship.' },
+  { img: '/images/hero/hs-factory.jpg', tag: 'MLIFT', title: 'Your Trusted Machinery Partner', desc: 'Direct from our China factory. Competitive pricing, fast delivery.' },
 ];
 ---
 
-<BaseLayout title="Home" description="MLIFT Professional Mini Excavator Manufacturer. High quality excavators from 1 to 5 tons for worldwide delivery.">
-  
+<BaseLayout title="Home">
   <!-- Hero Slider -->
   <section class="hero-slider" id="heroSlider">
-    <div class="hero-slider-inner" id="heroSliderInner">
-      {heroSlides.map((slide) => (
-        <div class="hero-slide">
-          <img src={slide.image} alt={slide.title} />
-          <div class="hero-slide-overlay">
-            <div class="container">
-              <div class="hero-slide-content">
-                <h2>{slide.title}</h2>
-                <p>{slide.subtitle}</p>
-                <a href={slide.link} class="btn btn-primary">{slide.cta}</a>
-              </div>
-            </div>
-          </div>
+    {heroSlides.map((slide, i) => (
+      <div class={`hero-slide${i === 0 ? ' active' : ''}`} data-index={i}>
+        <img src={slide.img} alt={slide.tag} />
+        <div class="hero-content">
+          <span class="hero-tag">{slide.tag}</span>
+          <h1>{slide.title}</h1>
+          <p>{slide.desc}</p>
+          <a href={i === 0 ? '/excavators' : i === 1 ? '/forklift-parts' : '/contact'} class="hero-cta">
+            {i === 0 ? 'View Excavators' : i === 1 ? 'Browse Parts' : 'Contact Us'} <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
-      ))}
-    </div>
-    <button class="hero-nav hero-prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
-    <button class="hero-nav hero-next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
-    <div class="hero-dots" id="heroDots">
+      </div>
+    ))}
+    <button class="hero-arrow prev" id="heroPrev"><i class="fas fa-chevron-left"></i></button>
+    <button class="hero-arrow next" id="heroNext"><i class="fas fa-chevron-right"></i></button>
+    <div class="hero-controls" id="heroDots">
       {heroSlides.map((_, i) => (
-        <button class={`hero-dot${i === 0 ? ' active' : ''}`} data-index={i}></button>
+        <button class={`hero-dot${i === 0 ? ' active' : ''}`} data-dot={i}></button>
       ))}
     </div>
   </section>
 
-  <!-- About Section -->
-  <section class="about-section">
+  <!-- Mini Excavators Product Line -->
+  <section class="product-lines-section">
     <div class="container">
-      <h3>About MLIFT</h3>
-      <p>MLIFT is a professional manufacturer specialized in researching, developing and manufacturing construction machinery products. Our product line includes different models of mini hydraulic excavators, excavator attachments &amp; excavator trailers.</p>
-      <p>Our company covers an area of about 150,000 square meters with approximately 300 employees in peak season, and annual sales reaching approximately USD20 million.</p>
-      <p>Based on advanced equipment, excellent facilities, strict quality control and standardized management system, our products are sold to most countries and regions across Europe, America, Asia, Oceania and Africa. Most of our products have gained CE certification.</p>
-      <p>We always follow ISO9001 international quality management system to control product quality, providing you with better products and service. Welcome to visit us for further discussion.</p>
-      <a href="/about" class="btn btn-outline mt-20">Learn More</a>
-    </div>
-  </section>
-
-  <!-- Scientific Production -->
-  <section class="py-40">
-    <div class="container">
-      <h3 class="section-title">Scientific Production Management</h3>
-    </div>
-  </section>
-
-  <!-- Recommended Products -->
-  <section class="section">
-    <div class="container">
-      <h3 class="section-title">Recommended Products</h3>
-      <p class="section-subtitle">Our mini excavator range — from 1 to 5 tons</p>
-      <div class="product-grid">
-        {excavators.map((exc) => (
-          <div class="product-card">
-            <div class="img-wrap">
-              <img src={exc.images[0]} alt={exc.name} loading="lazy" />
-              {exc.badge && <span class="badge">{exc.badge}</span>}
+      <div class="section-header">
+        <h2>Mini Excavators</h2>
+        <p>Compact, powerful, and built to last. Our mini excavators are engineered for performance in tight spaces.</p>
+      </div>
+      <div class="product-line-grid">
+        {excavators.slice(0, 4).map(ex => (
+          <a href={`/product/${ex.slug}`} class="product-line-card">
+            <div class="card-image">
+              <img src={ex.images[0]} alt={ex.name} loading="lazy" />
             </div>
-            <div class="info">
-              <h3><a href={`/product/${exc.slug}`}>{exc.name}</a></h3>
-              <p class="spec-line">{exc.engine} · {exc.power} · {exc.weight}</p>
+            <div class="card-body">
+              {ex.badge && <span class="card-badge">{ex.badge}</span>}
+              <h3>{ex.name}</h3>
+              <p>{ex.description.slice(0, 100)}...</p>
+              <span class="card-link">View Details</span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Request Callback -->
-  <section class="section">
+  <!-- Forklift Parts Section -->
+  <section class="section" style="background: var(--color-white);">
     <div class="container">
-      <div class="callback-section">
-        <div class="callback-inner">
-          <h3>Request a Call Back</h3>
-          <p>Would you like to speak to one of our sales representatives? Just submit your details and we'll be in touch shortly.</p>
-          <form action="https://formspree.io/f/your-form-id" method="POST">
-            <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required />
+      <div class="section-header">
+        <h2>Forklift Parts</h2>
+        <p>OEM-quality replacement parts for Hangcha & Heli forklifts. 13 categories covering all major systems.</p>
+      </div>
+      <div class="product-line-grid">
+        {categories.slice(0, 6).map(cat => (
+          <a href="/forklift-parts" class="product-line-card">
+            <div class="card-image">
+              <img src={cat.image} alt={cat.name} loading="lazy" />
             </div>
-            <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required />
+            <div class="card-body">
+              <h3>{cat.name}</h3>
+              <p>{cat.description}</p>
+              <span class="card-link">Browse {cat.name}</span>
             </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="3"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;">Send</button>
-          </form>
-        </div>
+          </a>
+        ))}
+      </div>
+      <div style="text-align:center; margin-top:32px;">
+        <a href="/forklift-parts" class="hero-cta">View All Forklift Parts <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </section>
 
-  <!-- Certificate -->
-  <section class="cert-section">
+  <!-- Dark CTA -->
+  <section class="cta-dark">
     <div class="container">
-      <h3>Certificate</h3>
-      <img src="/images/excavators/certificate.jpg" alt="MLIFT Certificate" />
+      <h2>Need a Quote?</h2>
+      <p>Whether you're looking for a mini excavator or forklift replacement parts, we're here to help with competitive pricing and fast response.</p>
+      <a href="/contact" class="btn-yellow">Get In Touch <i class="fas fa-envelope"></i></a>
     </div>
   </section>
-
 </BaseLayout>
 
 <script>
-  // Hero slider logic
+  // Hero Slider
   const slides = document.querySelectorAll('.hero-slide');
-  const inner = document.getElementById('heroSliderInner') as HTMLElement;
   const dots = document.querySelectorAll('.hero-dot');
   let currentSlide = 0;
-  const totalSlides = slides.length;
+  let autoPlay: number;
 
   function showSlide(index: number) {
+    slides.forEach(s => s.classList.remove('active'));
+    dots.forEach(d => d.classList.remove('active'));
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
     currentSlide = index;
-    inner.style.transform = `translateX(-${currentSlide * 100}%)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
   }
 
   document.getElementById('heroPrev')?.addEventListener('click', () => {
-    showSlide((currentSlide - 1 + totalSlides) % totalSlides);
+    showSlide((currentSlide - 1 + slides.length) % slides.length);
   });
   document.getElementById('heroNext')?.addEventListener('click', () => {
-    showSlide((currentSlide + 1) % totalSlides);
+    showSlide((currentSlide + 1) % slides.length);
   });
   dots.forEach(dot => {
     dot.addEventListener('click', () => {
-      showSlide(Number((dot as HTMLElement).dataset.index));
+      showSlide(parseInt(dot.dataset.dot || '0'));
     });
   });
 
-  // Auto slide
-  setInterval(() => {
-    showSlide((currentSlide + 1) % totalSlides);
-  }, 5000);
+  function startAutoPlay() {
+    autoPlay = setInterval(() => {
+      showSlide((currentSlide + 1) % slides.length);
+    }, 5000);
+  }
+  startAutoPlay();
 </script>

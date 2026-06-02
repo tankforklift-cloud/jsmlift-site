@@ -6,7 +6,9 @@ export interface Props {
   title: string;
   description?: string;
 }
+
 const { title, description } = Astro.props;
+const metaDesc = description || 'MLIFT — Professional Mini Excavator & Forklift Parts Manufacturer. Buy quality excavators and OEM forklift parts direct from China.';
 ---
 
 <!DOCTYPE html>
@@ -14,18 +16,14 @@ const { title, description } = Astro.props;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={description || 'MLIFT — Professional Mini Excavator Manufacturer. High quality hydraulic excavators for construction, agriculture and landscaping.'} />
+  <meta name="description" content={metaDesc} />
   <title>{title} — MLIFT</title>
-  <link rel="icon" type="image/png" href="/favicon.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <link rel="stylesheet" href={new URL('../styles/global.css', import.meta.url).pathname} />
 </head>
 <body>
-  <Header />
-  <main id="content">
+  <Header currentPath={Astro.url.pathname} />
+  <main>
     <slot />
   </main>
   <Footer />

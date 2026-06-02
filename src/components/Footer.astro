@@ -1,137 +1,43 @@
-<!-- Footer: herestrong-style -->
+---
+import { excavators } from '../data/excavators';
+---
+
 <footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <!-- Company info -->
-      <div class="footer-col">
-        <h4>MLIFT</h4>
-        <div class="footer-contact">
-          <p><i class="fas fa-phone"></i> Tel: +86 156 6679 3337</p>
-          <p><i class="fab fa-whatsapp"></i> WhatsApp/WeChat: +86 156 6679 3337</p>
-          <p><i class="fas fa-envelope"></i> Email: info@jsmlift.com</p>
-          <p><i class="fas fa-map-marker-alt"></i> Add: Jingjiang, Jiangsu, China</p>
-        </div>
-      </div>
-      
-      <!-- Quick links -->
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="/about">About Us</a></li>
-          <li><a href="/products">Products</a></li>
-          <li><a href="/contact">Contact Us</a></li>
-        </ul>
-      </div>
-      
-      <!-- Categories -->
-      <div class="footer-col">
-        <h4>Products</h4>
-        <ul>
-          <li><a href="/product/hs12-6-hydraulic-excavator">HS12-6 Mini Excavator</a></li>
-          <li><a href="/product/hs18-hydraulic-excavator">HS18 Hydraulic Excavator</a></li>
-          <li><a href="/product/hs20-hydraulic-excavator">HS20 Hydraulic Excavator</a></li>
-          <li><a href="/product/hs45-hydraulic-excavator">HS45 Hydraulic Excavator</a></li>
-        </ul>
-      </div>
-      
-      <!-- QR code / contact -->
-      <div class="footer-col">
-        <h4>Get In Touch</h4>
-        <p style="font-size:0.85rem;color:#999;margin-bottom:8px;">Scan or contact us directly</p>
-        <div class="qr-placeholder">
-          <i class="fab fa-whatsapp" style="font-size:2rem;color:#25D366;"></i>
-          <span>+86 156 6679 3337</span>
-        </div>
-      </div>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>MLIFT Machinery</h4>
+      <p>Professional manufacturer of mini excavators and supplier of OEM forklift parts. Quality products, competitive pricing, worldwide shipping.</p>
     </div>
-    
-    <div class="footer-bottom">
-      <p>Copyright &copy; {new Date().getFullYear()} MLIFT. All Rights Reserved.</p>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <ul>
+        {excavators.map(e => (
+          <li><a href={`/product/${e.slug}`}>{e.model} Mini Excavator</a></li>
+        ))}
+        <li><a href="/forklift-parts">Forklift Parts</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/excavators">Mini Excavators</a></li>
+        <li><a href="/forklift-parts">Forklift Parts</a></li>
+        <li><a href="/about">About Us</a></li>
+        <li><a href="/contact">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>
+        <i class="fas fa-phone"></i> +86-159-9605-5825<br/>
+        <i class="fas fa-envelope"></i> tan@jsmlift.com<br/>
+        <i class="fab fa-whatsapp"></i> +86-159-9605-5825<br/>
+        <i class="fab fa-weixin"></i> tanklift
+      </p>
     </div>
   </div>
+  <div class="footer-bottom">
+    <p>&copy; {new Date().getFullYear()} MLIFT. All Rights Reserved. | <a href="/contact">Contact</a></p>
+  </div>
 </footer>
-
-<style>
-.site-footer {
-  background: #1a1a2e;
-  color: #ccc;
-  padding: 48px 0 0;
-  margin-top: 60px;
-}
-.footer-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-}
-.footer-col h4 {
-  color: #fff;
-  font-size: 1rem;
-  margin-bottom: 16px;
-  position: relative;
-  padding-bottom: 10px;
-}
-.footer-col h4::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 30px;
-  height: 2px;
-  background: #f39c12;
-}
-.footer-contact p {
-  font-size: 0.85rem;
-  margin-bottom: 8px;
-  line-height: 1.6;
-}
-.footer-contact i {
-  width: 18px;
-  margin-right: 6px;
-  color: #f39c12;
-}
-.footer-col ul {
-  list-style: none;
-}
-.footer-col ul li {
-  margin-bottom: 8px;
-}
-.footer-col ul a {
-  color: #aaa;
-  text-decoration: none;
-  font-size: 0.85rem;
-  transition: color 0.2s;
-}
-.footer-col ul a:hover {
-  color: #f39c12;
-}
-.qr-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  padding: 16px;
-  background: rgba(255,255,255,0.05);
-  border-radius: 8px;
-  font-size: 0.85rem;
-}
-.footer-bottom {
-  margin-top: 32px;
-  padding: 16px 0;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  text-align: center;
-  font-size: 0.8rem;
-  color: #777;
-}
-
-@media (max-width: 768px) {
-  .footer-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-  }
-}
-@media (max-width: 480px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>

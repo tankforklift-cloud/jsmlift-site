@@ -3,108 +3,85 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { excavators } from '../../data/excavators';
 
 export function getStaticPaths() {
-  return excavators.map((exc) => ({
-    params: { slug: exc.slug }
-  }));
+  return excavators.map(e => ({ params: { slug: e.slug } }));
 }
 
 const { slug } = Astro.params;
-const excavator = excavators.find((e) => e.slug === slug)!;
+const excavator = excavators.find(e => e.slug === slug);
+
+if (!excavator) {
+  return Astro.redirect('/excavators');
+}
 ---
 
-<BaseLayout title={excavator.name} description={excavator.description.substring(0, 160)}>
-  
+<BaseLayout title={excavator.name} description={excavator.description.slice(0, 160)}>
   <div class="page-header">
     <div class="container">
-      <div class="breadcrumb">
-        <a href="/">Home</a> &raquo; <a href="/products">Products</a> &raquo; {excavator.name}
-      </div>
+      <p class="breadcrumb">
+        <a href="/">Home</a> &rsaquo; <a href="/excavators">Mini Excavators</a> &rsaquo; {excavator.name}
+      </p>
       <h1>{excavator.name}</h1>
     </div>
   </div>
 
-  <section class="section" style="padding-top:0;">
+  <section class="product-detail">
     <div class="container">
-      <div class="product-detail">
+      <!-- Gallery + Info -->
+      <div class="product-detail-layout">
         <div class="product-gallery">
-          <img src={excavator.images[0]} alt={excavator.name} class="main-img" id="mainImg" />
+          <div class="main-image">
+            <img id="mainImage" src={excavator.images[0]} alt={excavator.name} />
+          </div>
           {excavator.images.length > 1 && (
-            <div class="thumbs" id="thumbs">
+            <div class="thumb-strip">
               {excavator.images.map((img, i) => (
-                <img src={img} alt={`${excavator.name} ${i + 1}`} class={`thumb-img${i === 0 ? ' active' : ''}`} data-src={img} />
+                <button class={i === 0 ? 'active' : ''} onclick={`document.getElementById('mainImage').src='${img}'`}>
+                  <img src={img} alt={`${excavator.name} view ${i + 1}`} loading="lazy" />
+                </button>
               ))}
             </div>
           )}
         </div>
-        
+
         <div class="product-info">
+          {excavator.badge && <span class={`prod-badge ec-badge ${excavator.badge.toLowerCase()}`}>{excavator.badge}</span>}
           <h1>{excavator.name}</h1>
-          <p class="short-desc">{excavator.description}</p>
-          
+          <p class="prod-model">Model: {excavator.model}</p>
+          <p class="prod-desc">{excavator.description}</p>
+
           <table class="specs-table">
             <tbody>
               {Object.entries(excavator.specs).map(([key, val]) => (
                 <tr>
-                  <td>{key}</td>
+                  <th>{key}</th>
                   <td>{val}</td>
                 </tr>
               ))}
             </tbody>
           </table>
-          
-          <a href="/contact" class="btn btn-primary">Send Inquiry</a>
-          
-          <div class="product-features">
+
+          <div class="features-list">
             <h3>Key Features</h3>
             <ul>
-              {excavator.features.map((f) => (
-                <li>{f}</li>
-              ))}
+              {excavator.features.map(f => <li>{f}</li>)}
             </ul>
           </div>
+
+          <a href="/contact" class="hero-cta" style="display:inline-flex;">
+            Send Inquiry <i class="fas fa-envelope"></i>
+          </a>
         </div>
       </div>
     </div>
   </section>
-
-  <section class="section">
-    <div class="container">
-      <div class="callback-section">
-        <div class="callback-inner">
-          <h3>Inquiry</h3>
-          <p>Interested in the {excavator.model}? Fill out the form and we'll get back to you shortly.</p>
-          <form action="https://formspree.io/f/your-form-id" method="POST">
-            <div class="form-group">
-              <label for="inqName">Name</label>
-              <input type="text" id="inqName" name="name" required />
-            </div>
-            <div class="form-group">
-              <label for="inqEmail">Email</label>
-              <input type="email" id="inqEmail" name="email" required />
-            </div>
-            <div class="form-group">
-              <label for="inqMessage">Message</label>
-              <textarea id="inqMessage" name="message" rows="4" placeholder={`I'm interested in the ${excavator.model}...`}></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;">Send</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
 </BaseLayout>
 
 <script>
   // Gallery thumbnail switching
-  document.querySelectorAll('.thumb-img').forEach(thumb => {
-    thumb.addEventListener('click', function() {
-      const mainImg = document.getElementById('mainImg') as HTMLImageElement;
-      if (mainImg && this instanceof HTMLImageElement) {
-        mainImg.src = this.dataset.src || this.src;
-        document.querySelectorAll('.thumb-img').forEach(t => t.classList.remove('active'));
-        this.classList.add('active');
-      }
+  document.querySelectorAll('.thumb-strip button').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.thumb-strip button').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
     });
   });
 </script>

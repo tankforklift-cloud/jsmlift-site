@@ -2,42 +2,51 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="About Us" description="MLIFT is a professional mini excavator manufacturer specialized in construction machinery.">
-  
+<BaseLayout title="About Us" description="MLIFT — Professional manufacturer of mini excavators and OEM forklift parts supplier based in China.">
   <div class="page-header">
     <div class="container">
-      <div class="breadcrumb">
-        <a href="/">Home</a> &raquo; About Us
-      </div>
-      <h1>About Us</h1>
+      <p class="breadcrumb"><a href="/">Home</a> &rsaquo; About Us</p>
+      <h1>About MLIFT</h1>
     </div>
   </div>
 
-  <section class="section" style="padding-top:0;">
+  <section class="about-intro">
     <div class="container">
-      <div class="about-section" style="max-width:800px;margin:0 auto;">
-        <p>MLIFT is a professional manufacturer established in 2017, specialized in researching, developing and manufacturing construction machinery products. The products we manufacture include different models of small hydraulic excavators, excavator attachments and excavator trailers.</p>
-        
-        <p>Our company covers an area of about 150,000 square meters, and has approximately 300 employees in peak season, with annual sales reaching approximately USD20 million.</p>
-        
-        <p>Based on advanced equipment, excellent facilities, strict quality control and standardized management system, our products are sold to most countries and regions across Europe, America, Asia, Oceania and Africa. Most of our products have gained CE certification. We continue developing and improving our brand "MLIFT", and OEM is also welcome.</p>
-        
-        <p>We always follow ISO9001 international quality management system to control product quality, providing you with better products and service. Welcome to visit us for further discussion.</p>
+      <div class="about-grid">
+        <div>
+          <img src="/images/hero/hs-factory.jpg" alt="MLIFT Factory" loading="lazy" />
+        </div>
+        <div class="about-text">
+          <h2>Your Trusted Machinery Partner</h2>
+          <p>MLIFT is a professional manufacturer and exporter of mini excavators and OEM forklift parts based in China. With years of industry experience, we provide high-quality construction machinery and replacement parts to customers worldwide.</p>
+          <p>Our mini excavator lineup ranges from 1.2-ton to 4.2-ton machines, powered by reliable Kubota and Yanmar engines. All models feature advanced hydraulic systems from industry-leading suppliers like KYB Japan and Eaton.</p>
+          <p>For forklift parts, we stock a comprehensive range of OEM-compatible components covering 13 categories — from engine parts and hydraulic systems to brake assemblies and electrical components.</p>
 
-        <h3 class="mt-20">Scientific Production Management</h3>
-        <p>Our manufacturing facility is equipped with state-of-the-art production lines including laser cutting machines, robotic welding systems, CNC machining centers, and automated painting booths. Each excavator undergoes rigorous quality inspection before leaving our factory.</p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <div class="stat-num">4</div>
+              <div class="stat-label">Excavator Models</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">70+</div>
+              <div class="stat-label">Parts Products</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">13</div>
+              <div class="stat-label">Part Categories</div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Hero image showcase -->
-  <section class="py-40">
+  <!-- CTA -->
+  <section class="cta-dark">
     <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-radius:8px;overflow:hidden;">
-        <img src="/images/hero/hs-factory.jpg" alt="MLIFT Factory" style="width:100%;height:280px;object-fit:cover;" loading="lazy" />
-        <img src="/images/hero/hs-excavator-line.jpg" alt="MLIFT Excavator Production Line" style="width:100%;height:280px;object-fit:cover;" loading="lazy" />
-      </div>
+      <h2>Ready to Work Together?</h2>
+      <p>Contact us today for a quote on our mini excavators, forklift parts, or any custom machinery requirements.</p>
+      <a href="/contact" class="btn-yellow">Contact Us <i class="fas fa-envelope"></i></a>
     </div>
   </section>
-
 </BaseLayout>

@@ -1,0 +1,64 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { categories, products } from '../data/products';
+---
+
+<BaseLayout title="Forklift Parts" description="MLIFT Forklift Parts — OEM quality replacement parts for Hangcha & Heli forklifts. 13 categories, 70+ products. Air filters, brake systems, hydraulic parts & more.">
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="/">Home</a> &rsaquo; Forklift Parts</p>
+      <h1>Forklift Parts</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <div class="parts-layout">
+        <!-- Sidebar -->
+        <aside class="parts-sidebar">
+          <h3>Categories</h3>
+          <nav class="cat-nav">
+            {categories.map(cat => (
+              <a href={`#${cat.id}`}>
+                <span class="cat-thumb"><img src={cat.image} alt={cat.name} loading="lazy" /></span>
+                {cat.name}
+              </a>
+            ))}
+          </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="parts-main">
+          {categories.map(cat => {
+            const catProducts = products.filter(p => p.category === cat.id);
+            return (
+              <div id={cat.id} style="margin-bottom: 48px;">
+                <h2 style="display:flex;align-items:center;gap:10px;">
+                  <img src={cat.image} alt={cat.name} width="32" height="32" style="border-radius:4px;object-fit:cover;" loading="lazy" />
+                  {cat.name}
+                </h2>
+                <div class="parts-grid">
+                  {catProducts.map(prod => (
+                    <div class="part-card">
+                      <div class="part-image">
+                        <img src={prod.image} alt={prod.name} loading="lazy" />
+                      </div>
+                      <div class="part-body">
+                        <h4>{prod.name}</h4>
+                        <p class="part-code">ML#: {prod.id}</p>
+                        <div class="part-specs">
+                          {prod.specs.map(s => <div>{s}</div>)}
+                        </div>
+                        <a href="/contact" class="part-link">Inquire Now <i class="fas fa-arrow-right"></i></a>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

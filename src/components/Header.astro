@@ -1,194 +1,41 @@
-<!-- Header: herestrong-style top bar + nav -->
+---
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+function isActive(path: string) {
+  if (path === '/') return currentPath === '/';
+  return currentPath.startsWith(path);
+}
+---
+
 <header class="site-header">
-  <!-- Top bar -->
-  <div class="header-top">
-    <div class="container">
-      <div class="header-top-inner">
-        <span class="company-tagline">MLIFT — Professional Mini Excavator Manufacturer</span>
-        <div class="header-contact">
-          <a href="tel:+8615666793337"><i class="fas fa-phone"></i> +86 156 6679 3337</a>
-          <a href="https://wa.me/8615666793337"><i class="fab fa-whatsapp"></i></a>
-          <a href="mailto:info@jsmlift.com"><i class="fas fa-envelope"></i></a>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Main nav -->
-  <div class="header-main">
-    <div class="container">
-      <div class="header-main-inner">
-        <a href="/" class="logo">
-          <span class="logo-icon"><i class="fas fa-hard-hat"></i></span>
-          <span class="logo-text">MLIFT</span>
-        </a>
-        
-        <nav class="main-nav" id="mainNav">
-          <ul>
-            <li><a href="/" class={Astro.url.pathname === '/' ? 'active' : ''}>Home</a></li>
-            <li><a href="/about" class={Astro.url.pathname === '/about' ? 'active' : ''}>About Us</a></li>
-            <li><a href="/products" class={Astro.url.pathname.startsWith('/products') ? 'active' : ''}>Products</a></li>
-            <li><a href="/contact" class={Astro.url.pathname === '/contact' ? 'active' : ''}>Contact Us</a></li>
-          </ul>
-        </nav>
-        
-        <button class="mobile-menu-btn" id="menuToggle" aria-label="Menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
+  <div class="header-inner">
+    <a href="/" class="header-logo">
+      <img src="/logo.png" alt="MLIFT" />
+      <span>MLIFT</span>
+    </a>
+
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="/" class={isActive('/') && currentPath.length <= 2 ? 'active' : ''}>Home</a>
+      <a href="/excavators" class={isActive('/excavators') || isActive('/product/') ? 'active' : ''}>Mini Excavators</a>
+      <a href="/forklift-parts" class={isActive('/forklift-parts') ? 'active' : ''}>Forklift Parts</a>
+      <a href="/about" class={isActive('/about') ? 'active' : ''}>About Us</a>
+      <a href="/contact" class={isActive('/contact') ? 'active' : ''}>Contact</a>
+    </nav>
   </div>
 </header>
 
 <script>
-  document.getElementById('menuToggle')?.addEventListener('click', () => {
-    document.getElementById('mainNav')?.classList.toggle('open');
+  const toggle = document.getElementById('mobileToggle');
+  const nav = document.getElementById('mainNav');
+  toggle?.addEventListener('click', () => {
+    nav?.classList.toggle('open');
   });
 </script>
-
-<style>
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: #fff;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
-}
-
-.header-top {
-  background: #1a1a2e;
-  color: #ccc;
-  font-size: 0.8rem;
-  padding: 6px 0;
-}
-.header-top-inner {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.company-tagline {
-  font-weight: 500;
-  color: #ddd;
-}
-.header-contact {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.header-contact a {
-  color: #ccc;
-  text-decoration: none;
-  transition: color 0.2s;
-  white-space: nowrap;
-}
-.header-contact a:hover {
-  color: #f39c12;
-}
-
-.header-main {
-  padding: 10px 0;
-}
-.header-main-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: #1a1a2e;
-}
-.logo-icon {
-  font-size: 1.5rem;
-  color: #f39c12;
-}
-.logo-text {
-  font-size: 1.4rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-.main-nav ul {
-  display: flex;
-  list-style: none;
-  gap: 4px;
-}
-.main-nav a {
-  display: block;
-  padding: 10px 16px;
-  text-decoration: none;
-  color: #333;
-  font-weight: 600;
-  font-size: 0.9rem;
-  border-radius: 4px;
-  transition: all 0.2s;
-}
-.main-nav a:hover,
-.main-nav a.active {
-  color: #1a1a2e;
-  background: #f0f0f0;
-}
-
-.mobile-menu-btn {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-}
-.mobile-menu-btn span {
-  display: block;
-  width: 24px;
-  height: 2.5px;
-  background: #333;
-  border-radius: 2px;
-}
-
-@media (max-width: 768px) {
-  .header-top-inner {
-    justify-content: center;
-    text-align: center;
-  }
-  .company-tagline {
-    font-size: 0.72rem;
-  }
-  .header-contact {
-    font-size: 0.72rem;
-    gap: 10px;
-  }
-  
-  .mobile-menu-btn {
-    display: flex;
-  }
-  .main-nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border-top: 1px solid #eee;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  }
-  .main-nav.open {
-    display: block;
-  }
-  .main-nav ul {
-    flex-direction: column;
-    padding: 8px 0;
-  }
-  .main-nav a {
-    padding: 12px 20px;
-    border-bottom: 1px solid #f5f5f5;
-    border-radius: 0;
-  }
-}
-</style>

@@ -2,59 +2,92 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Contact Us" description="Get in touch with MLIFT — professional mini excavator manufacturer. Request quotes, ask questions.">
-  
+<BaseLayout title="Contact Us" description="Contact MLIFT for mini excavator inquiries and forklift parts orders. Phone, WhatsApp, WeChat, email. Fast response guaranteed.">
   <div class="page-header">
     <div class="container">
-      <div class="breadcrumb">
-        <a href="/">Home</a> &raquo; Contact Us
-      </div>
+      <p class="breadcrumb"><a href="/">Home</a> &rsaquo; Contact Us</p>
       <h1>Contact Us</h1>
     </div>
   </div>
 
-  <section class="section" style="padding-top:0;">
+  <section>
     <div class="container">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
-        
-        <!-- Contact Info -->
-        <div>
-          <h3 style="font-size:1.3rem;margin-bottom:20px;color:var(--color-primary);">Get In Touch</h3>
-          <div style="background:var(--color-bg-alt);padding:24px;border-radius:var(--radius-md);margin-bottom:20px;">
-            <p style="margin-bottom:10px;"><i class="fas fa-phone" style="color:var(--color-secondary);width:20px;margin-right:8px;"></i> <strong>Tel:</strong> +86 156 6679 3337</p>
-            <p style="margin-bottom:10px;"><i class="fas fa-envelope" style="color:var(--color-secondary);width:20px;margin-right:8px;"></i> <strong>Email:</strong> info@jsmlift.com</p>
-            <p style="margin-bottom:10px;"><i class="fab fa-whatsapp" style="color:var(--color-secondary);width:20px;margin-right:8px;"></i> <strong>WhatsApp:</strong> +86 156 6679 3337</p>
-            <p><i class="fab fa-weixin" style="color:var(--color-secondary);width:20px;margin-right:8px;"></i> <strong>WeChat:</strong> +86 156 6679 3337</p>
-          </div>
-          
-          <p style="font-size:0.9rem;color:#777;">
-            <i class="fas fa-map-marker-alt" style="margin-right:6px;"></i> 
-            Jingjiang, Jiangsu Province, China
+      <div class="contact-layout">
+        <div class="contact-info">
+          <h2>Get In Touch</h2>
+          <p style="color: var(--color-text-light); margin-bottom: 32px; line-height: 1.7;">
+            Have a question about our mini excavators or need a quote on forklift parts? 
+            Reach out — we'll get back to you within 24 hours.
           </p>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <strong>Phone</strong>
+              <span>+86-159-9605-5825</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <strong>Email</strong>
+              <span>tan@jsmlift.com</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <strong>WhatsApp</strong>
+              <span>+86-159-9605-5825</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fab fa-weixin"></i></div>
+            <div>
+              <strong>WeChat</strong>
+              <span>tanklift</span>
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div>
+              <strong>Address</strong>
+              <span>Jingjiang, Jiangsu, China</span>
+            </div>
+          </div>
         </div>
-        
-        <!-- Contact Form -->
-        <div>
-          <h3 style="font-size:1.3rem;margin-bottom:20px;color:var(--color-primary);">Send a Message</h3>
-          <form action="https://formspree.io/f/your-form-id" method="POST">
+
+        <div class="contact-form-wrap">
+          <h3>Send Us a Message</h3>
+          <form action="https://formspree.io/f/FORM_ID" method="POST">
             <div class="form-group">
-              <label for="name">Name</label>
-              <input type="text" id="name" name="name" required />
+              <label for="name">Your Name *</label>
+              <input type="text" id="name" name="name" required placeholder="Full name" />
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required />
+              <label for="email">Your Email *</label>
+              <input type="email" id="email" name="email" required placeholder="your@email.com" />
             </div>
             <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" rows="5" placeholder="Tell us about your requirements..."></textarea>
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company" placeholder="Your company name" />
             </div>
-            <button type="submit" class="btn btn-primary" style="width:100%;">Send</button>
+            <div class="form-group">
+              <label for="interest">I'm interested in</label>
+              <select id="interest" name="interest">
+                <option value="">-- Please Select --</option>
+                <option value="excavator">Mini Excavator</option>
+                <option value="forklift-parts">Forklift Parts</option>
+                <option value="other">Other Inquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Your Message *</label>
+              <textarea id="message" name="message" required placeholder="Tell us what you need — product model, quantity, destination..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Send Message <i class="fas fa-paper-plane"></i></button>
           </form>
         </div>
-        
       </div>
     </div>
   </section>
-
 </BaseLayout>

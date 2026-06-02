@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { excavators } from '../data/excavators';
+---
+
+<BaseLayout title="Mini Excavators" description="MLIFT Mini Excavators — HS12-6, HS18, HS20A, HS45. Compact hydraulic excavators with Kubota & Yanmar engines. Worldwide shipping.">
+  <div class="page-header">
+    <div class="container">
+      <p class="breadcrumb"><a href="/">Home</a> &rsaquo; Mini Excavators</p>
+      <h1>Mini Excavators</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      {excavators.map(ex => (
+        <article class="excavator-card">
+          <a href={`/product/${ex.slug}`} class="ec-image">
+            <img src={ex.images[0]} alt={ex.name} loading="lazy" />
+          </a>
+          <div class="ec-body">
+            {ex.badge && <span class={`ec-badge ${ex.badge.toLowerCase()}`}>{ex.badge}</span>}
+            <h3>{ex.name}</h3>
+            <p class="ec-model">Model: {ex.model}</p>
+            <p class="ec-desc">{ex.description.slice(0, 180)}...</p>
+            <div class="ec-specs">
+              <span><i class="fas fa-weight-hanging"></i> {ex.weight}</span>
+              <span><i class="fas fa-cog"></i> {ex.engine}</span>
+              <span><i class="fas fa-bolt"></i> {ex.power}</span>
+              <span><i class="fas fa-cube"></i> {ex.bucket}</span>
+            </div>
+            <a href={`/product/${ex.slug}`} class="btn-yellow-sm">View Details <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
