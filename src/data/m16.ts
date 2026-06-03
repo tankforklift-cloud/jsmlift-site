@@ -149,9 +149,9 @@ export const m16 = {
 
   // Hero 轮播图片
   heroImages: [
-    { src: "/images/m16/m16-main.jpg", alt: "MLIFT M16 — Professional Round Bale Wrapper" },
-    { src: "/images/m16/m16-field-1.jpg", alt: "M16 in field operation" },
-    { src: "/images/m16/m16-field-2.jpg", alt: "M16 stacking wrapped bales" },
+    { src: "/images/m16/m16/m16-main.jpg", alt: "MLIFT M16 — Professional Round Bale Wrapper" },
+    { src: "/images/m16/m16/m16-field-1.jpg", alt: "M16 in field operation" },
+    { src: "/images/m16/m16/m16-field-2.jpg", alt: "M16 stacking wrapped bales" },
   ],
 
   // 规格亮点（首页展示）
