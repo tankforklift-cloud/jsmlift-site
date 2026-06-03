@@ -2,50 +2,96 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="About Us" description="MLIFT — Professional manufacturer of mini excavators and OEM forklift parts supplier based in China.">
-  <div class="page-header">
-    <div class="container">
-      <p class="breadcrumb"><a href="/">Home</a> &rsaquo; About Us</p>
-      <h1>About MLIFT</h1>
-    </div>
+<BaseLayout title="About MLIFT" description="MLIFT is a professional agricultural machinery manufacturer specializing in round bale wrappers. Quality engineering, competitive pricing.">
+
+<!-- ===== PAGE HEADER ===== -->
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href="/">Home</a> / <span>About Us</span></div>
+    <h1>About MLIFT</h1>
   </div>
+</section>
 
-  <section class="section">
-    <div class="container">
-      <div class="about-grid">
-        <div>
-          <img src="/images/hero/hs-factory.jpg" alt="MLIFT Factory" loading="lazy" />
-        </div>
-        <div class="about-text">
-          <h2>Your Trusted Machinery Partner</h2>
-          <p>MLIFT is a professional manufacturer and exporter of mini excavators and OEM forklift parts based in China. With years of industry experience, we provide high-quality construction machinery and replacement parts to customers worldwide.</p>
-          <p>Our mini excavator lineup ranges from 1.2-ton to 4.2-ton machines, powered by reliable Kubota and Yanmar engines. All models feature advanced hydraulic systems from industry-leading suppliers like KYB Japan and Eaton.</p>
-          <p>For forklift parts, we stock a comprehensive range of OEM-compatible components covering 13 categories &mdash; from engine parts and hydraulic systems to brake assemblies and electrical components.</p>
-
-          <div class="stats-row">
-            <div>
-              <div class="stat-num">4</div>
-              <div class="stat-label">Excavator Models</div>
-            </div>
-            <div>
-              <div class="stat-num">70+</div>
-              <div class="stat-label">Parts Products</div>
-            </div>
-            <div>
-              <div class="stat-num">13</div>
-              <div class="stat-label">Part Categories</div>
-            </div>
-          </div>
-        </div>
+<!-- ===== INTRO ===== -->
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <img src="/images/m16/m16-field-1.jpg" alt="MLIFT M16 in field operation" />
+      </div>
+      <div class="about-text">
+        <h2>Engineering That Works</h2>
+        <p>
+          MLIFT is a manufacturer of professional agricultural machinery, focused on delivering
+          robust, reliable equipment at competitive prices. Our flagship product, the <strong>M16
+          Round Bale Wrapper</strong>, embodies our philosophy: take proven engineering principles,
+          build with quality materials, and price it for the working farmer.
+        </p>
+        <p>
+          Based in China with a global outlook, we combine manufacturing efficiency with European
+          design standards. Every MLIFT machine is built to perform in real field conditions —
+          day in, day out.
+        </p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section class="cta-section">
-    <div class="container">
-      <h2>Ready to Work Together?</h2>
-      <p>Contact us today for a quote on our mini excavators, forklift parts, or any custom machinery requirements.</p>
-      <a href="/contact" class="btn btn-yellow btn-lg">Contact Us &rarr;</a>
+<!-- ===== STATS ===== -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="stats-row" style="text-align:center">
+      <div>
+        <div class="stat-num">985 kg</div>
+        <div class="stat-label">Ultra-Compact Design</div>
+      </div>
+      <div>
+        <div class="stat-num">1,200 kg</div>
+        <div class="stat-label">Max Bale Capacity</div>
+      </div>
+      <div>
+        <div class="stat-num">Global</div>
+        <div class="stat-label">Shipping Available</div>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
+
+<!-- ===== VALUES ===== -->
+<section class="section">
+  <div class="container" style="max-width:800px;margin:0 auto">
+    <div class="sec-hdr">
+      <div class="accent-bar"></div>
+      <h2>Why Choose MLIFT</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)">
+      <div>
+        <h3 style="font-size:1.05rem;font-weight:var(--fw-bold);margin-bottom:8px;color:var(--c-brown)">▸ Quality First</h3>
+        <p style="font-size:0.9rem;line-height:1.7;color:var(--c-text-muted)">Every component is selected for durability. Hydraulic motors protected inside rollers. Stainless steel film cutter. Built to last.</p>
+      </div>
+      <div>
+        <h3 style="font-size:1.05rem;font-weight:var(--fw-bold);margin-bottom:8px;color:var(--c-brown)">▸ Competitive Pricing</h3>
+        <p style="font-size:0.9rem;line-height:1.7;color:var(--c-text-muted)">Direct from manufacturer. No middlemen. You get premium engineering without the premium price tag.</p>
+      </div>
+      <div>
+        <h3 style="font-size:1.05rem;font-weight:var(--fw-bold);margin-bottom:8px;color:var(--c-brown)">▸ Global Support</h3>
+        <p style="font-size:0.9rem;line-height:1.7;color:var(--c-text-muted)">We ship worldwide and provide comprehensive after-sales support. English, Spanish, and Russian speaking team ready to help.</p>
+      </div>
+      <div>
+        <h3 style="font-size:1.05rem;font-weight:var(--fw-bold);margin-bottom:8px;color:var(--c-brown)">▸ Proven Design</h3>
+        <p style="font-size:0.9rem;line-height:1.7;color:var(--c-text-muted)">The M16 is based on field-tested engineering principles. Two powered rollers. Load Sensing compatible. Radio remote control.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Let's work together</h2>
+    <p>Whether you're a dealer or a farmer, we'd love to hear from you. Reach out for pricing and availability.</p>
+    <a href="/contact" class="btn btn-gold btn-lg">Contact Us →</a>
+  </div>
+</section>
+
 </BaseLayout>

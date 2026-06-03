@@ -1,127 +1,154 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { excavators } from '../data/excavators';
-import { categories } from '../data/products';
-
-const heroSlides = [
-  { img: '/images/hero/hs-excavator-work.jpg', tag: 'Mini Excavators', title: 'Compact Power for Every Jobsite', desc: 'MLIFT mini excavators &mdash; engineered for reliability, built to perform. 1.2 to 4.2 ton range, worldwide shipping.', cta: 'View Excavators', link: '/excavators' },
-  { img: '/images/hero/hs-factory.jpg', tag: 'Forklift Parts', title: 'OEM Quality Replacement Parts', desc: '13 categories, 70+ products. Air filters, hydraulics, brakes, engine parts &mdash; ready to ship.', cta: 'Browse Parts', link: '/forklift-parts' },
-  { img: '/images/hero/hs-factory.jpg', tag: 'MLIFT', title: 'Your Trusted Machinery Partner', desc: 'Direct from our China factory. Competitive pricing, fast delivery. Let&rsquo;s work together.', cta: 'Contact Us', link: '/contact' },
-];
+import { m16 } from '../data/m16';
 ---
 
-<BaseLayout title="Home">
-  <!-- Hero Slider -->
-  <section class="hero-slider" id="heroSlider">
-    {heroSlides.map((slide, i) => (
-      <div class={`hero-slide${i === 0 ? ' active' : ''}`} data-index={i}>
-        <img src={slide.img} alt={slide.tag} />
+<BaseLayout title="MLIFT M16 — Professional Round Bale Wrapper" description="MLIFT M16 round bale wrapper: transport, wrap, and stack with one machine. Compact, robust design. Bale diameter 0.90–1.60 m. Get a quote today.">
+
+<!-- ===== HERO ===== -->
+<section class="hero-slider" id="hero">
+  {
+    m16.heroImages.map((img, i) => (
+      <div class={`hero-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
+        <img src={img.src} alt={img.alt} />
         <div class="hero-content">
-          <span class="hero-tag">{slide.tag}</span>
-          <h1 set:html={slide.title} />
-          <p set:html={slide.desc} />
-          <a href={slide.link} class="hero-cta">{slide.cta} &rarr;</a>
+          <span class="hero-tag">{i === 0 ? 'New Release' : i === 1 ? 'Field Proven' : 'Built to Last'}</span>
+          <h1>{i === 0 ? 'MLIFT M16' : i === 1 ? 'One Machine. Every Job.' : 'Engineered for Farmers'}</h1>
+          <p>{i === 0 ? 'The round bale wrapper that does it all — transport, wrap, and stack with a single machine. Compact. Robust. Reliable.' : i === 1 ? 'From pickup to wrapped-and-stacked. The M16 handles every step with precision and power, saving you time and fuel.' : 'Built with the same commitment to quality that defines German agricultural engineering. Priced for the working farmer.'}</p>
+          {i === 0 && <a href="#specs" class="hero-cta">Explore Specs →</a>}
+          {i === 1 && <a href="/contact" class="hero-cta">Request a Quote →</a>}
+          {i === 2 && <a href="/about" class="hero-cta">About MLIFT →</a>}
         </div>
       </div>
+    ))
+  }
+  <!-- Controls -->
+  <button class="hero-arrow prev" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</button>
+  <button class="hero-arrow next" onclick="changeSlide(1)" aria-label="Next">&#10095;</button>
+  <div class="hero-dots">
+    {m16.heroImages.map((_, i) => (
+      <button class={`hero-dot ${i === 0 ? 'active' : ''}`} onclick={`goSlide(${i})`} aria-label={`Slide ${i + 1}`}></button>
     ))}
-    <button class="hero-arrow prev" id="heroPrev">&#10094;</button>
-    <button class="hero-arrow next" id="heroNext">&#10095;</button>
-    <div class="hero-dots" id="heroDots">
-      {heroSlides.map((_, i) => (
-        <button class={`hero-dot${i === 0 ? ' active' : ''}`} data-dot={i}></button>
+  </div>
+</section>
+
+<!-- ===== SPEC HIGHLIGHT STRIP ===== -->
+<section class="section" id="specs" style="padding-bottom:0">
+  <div class="container">
+    <div class="spec-strip">
+      {m16.keySpecs.map(s => (
+        <div class="spec-item">
+          <div class="spec-icon">{s.icon}</div>
+          <div class="spec-value">{s.value}</div>
+          <div class="spec-label">{s.label}</div>
+        </div>
       ))}
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Mini Excavators -->
-  <section class="section">
-    <div class="container">
-      <div class="sec-hdr">
-        <h2>Mini Excavators</h2>
-        <p>Compact, powerful, and built to last. Our mini excavators deliver exceptional performance in tight spaces &mdash; from landscaping to construction.</p>
+<!-- ===== PRODUCT OVERVIEW ===== -->
+<section class="section">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="accent-bar"></div>
+      <h2>MLIFT M16 — Round Bale Wrapper</h2>
+      <p>The M16 combines transport, wrapping, and stacking into one compact, robust machine. Two rollers actuated in series ensure even bale rotation for consistent film coverage — every time.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:center;max-width:1000px;margin:0 auto">
+      <div style="aspect-ratio:16/10;overflow:hidden;background:var(--c-gray-100)">
+        <img src="/images/m16/m16-main.jpg" alt="MLIFT M16 Round Bale Wrapper" style="width:100%;height:100%;object-fit:cover" />
       </div>
-      <div class="card-grid">
-        {excavators.slice(0, 4).map(ex => (
-          <a href={`/product/${ex.slug}`} class="card">
-            <div class="card-img">
-              <img src={ex.images[0]} alt={ex.name} loading="lazy" />
-            </div>
-            <div class="card-body">
-              {ex.badge && <span class="card-badge yellow">{ex.badge}</span>}
-              <h3>{ex.name}</h3>
-              <p>{ex.description.slice(0, 90)}&hellip;</p>
-              <span class="card-link">Learn more</span>
-            </div>
-          </a>
-        ))}
-      </div>
-      <div style="text-align:center; margin-top:var(--space-4);">
-        <a href="/excavators" class="btn btn-yellow">View All Excavators &rarr;</a>
+      <div>
+        <h3 style="font-size:1.5rem;font-weight:var(--fw-extrabold);margin-bottom:var(--space-2);letter-spacing:-0.3px">Why the M16?</h3>
+        <p style="font-size:0.93rem;line-height:1.8;color:var(--c-text-muted);margin-bottom:var(--space-2)">
+          Ultra-compact design at just 985 kg, yet handles bales up to 1,200 kg. Cat. II/III hitch fits virtually any tractor. Front or rear mounting gives you total flexibility.
+        </p>
+        <ul style="list-style:none;padding:0;margin:0 0 var(--space-3)">
+          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-gold)">▸</span> 750 mm film roll with 3-patent pre-stretcher</li>
+          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-gold)">▸</span> Load Sensing compatible — works with any tractor</li>
+          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-gold)">▸</span> Radio remote + electronic joystick control</li>
+          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-gold)">▸</span> Standard LED work lights for low-light operation</li>
+        </ul>
+        <a href="/m16" class="btn btn-gold btn-lg">Full Specifications →</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Forklift Parts -->
-  <section class="section section-gray">
-    <div class="container">
-      <div class="sec-hdr">
-        <h2>Forklift Parts</h2>
-        <p>OEM-quality replacement parts across 13 categories. Engine, hydraulic, brake, electrical &mdash; everything your forklift needs.</p>
-      </div>
-      <div class="card-grid">
-        {categories.slice(0, 6).map(cat => (
-          <a href="/forklift-parts" class="card">
-            <div class="card-img">
-              <img src={cat.image} alt={cat.name} loading="lazy" />
-            </div>
-            <div class="card-body">
-              <h3>{cat.name}</h3>
-              <p>{cat.description}</p>
-              <span class="card-link">Browse</span>
-            </div>
-          </a>
-        ))}
-      </div>
-      <div style="text-align:center; margin-top:var(--space-4);">
-        <a href="/forklift-parts" class="btn btn-outline">All Forklift Parts &rarr;</a>
-      </div>
+<!-- ===== KEY FEATURES ===== -->
+<section class="section section-gray">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="accent-bar"></div>
+      <h2>Built for the Job</h2>
+      <p>Every component of the M16 is engineered for reliability in real farming conditions.</p>
     </div>
-  </section>
+    {
+      m16.features.slice(0, 4).map((feat, i) => (
+        <div class="feat-card">
+          <div class="feat-card-img">
+            {feat.image && <img src={`/images/m16/${feat.image}`} alt={feat.title} loading={i > 1 ? 'lazy' : 'eager'} />}
+          </div>
+          <div class="feat-card-text">
+            <h3>{feat.title}</h3>
+            <p>{feat.desc}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
 
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="container">
-      <h2>Need a Quote?</h2>
-      <p>Whether you're looking for a mini excavator or forklift replacement parts, we're here to help with competitive pricing and fast response.</p>
-      <a href="/contact" class="btn btn-yellow btn-lg">Get In Touch &rarr;</a>
+<!-- ===== MORE FEATURES ===== -->
+<section class="section">
+  <div class="container">
+    <div class="sec-hdr">
+      <div class="accent-bar"></div>
+      <h2>Smart Details</h2>
+      <p>Features that make a real difference in daily operation.</p>
     </div>
-  </section>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3)">
+      {
+        m16.features.slice(4).map((feat, i) => (
+          <div class="card" style="padding:var(--space-3);text-align:center">
+            {feat.image && (
+              <div style="aspect-ratio:16/10;overflow:hidden;background:var(--c-gray-100);margin-bottom:var(--space-2)">
+                <img src={`/images/m16/${feat.image}`} alt={feat.title} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
+              </div>
+            )}
+            <h3 style="font-size:0.95rem;font-weight:var(--fw-bold);margin-bottom:6px">{feat.title}</h3>
+            <p style="font-size:0.82rem;color:var(--c-text-muted);line-height:1.6">{feat.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to wrap smarter?</h2>
+    <p>The MLIFT M16 delivers German-engineering quality at a price that makes sense for your operation. Get in touch for a quote.</p>
+    <a href="/contact" class="btn btn-gold btn-lg">Request a Quote →</a>
+  </div>
+</section>
+
 </BaseLayout>
 
-<script>
-  const slides = document.querySelectorAll('.hero-slide');
-  const dots = document.querySelectorAll('.hero-dot');
-  let currentSlide = 0;
-  let autoPlay: number;
-
-  function showSlide(index: number) {
-    slides.forEach(s => s.classList.remove('active'));
-    dots.forEach(d => d.classList.remove('active'));
-    slides[index].classList.add('active');
-    dots[index].classList.add('active');
-    currentSlide = index;
+<script is:inline>
+  let current = 0;
+  const total = {m16.heroImages.length};
+  function showSlide(n: number) {
+    document.querySelectorAll('.hero-slide').forEach((s,i) => s.classList.toggle('active', i===n));
+    document.querySelectorAll('.hero-dot').forEach((d,i) => d.classList.toggle('active', i===n));
+    current = n;
   }
-
-  document.getElementById('heroPrev')?.addEventListener('click', () => {
-    showSlide((currentSlide - 1 + slides.length) % slides.length);
-  });
-  document.getElementById('heroNext')?.addEventListener('click', () => {
-    showSlide((currentSlide + 1) % slides.length);
-  });
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      showSlide(parseInt(dot.dataset.dot || '0'));
-    });
-  });
-  autoPlay = setInterval(() => showSlide((currentSlide + 1) % slides.length), 5000);
+  function changeSlide(dir: number) {
+    showSlide((current + dir + total) % total);
+  }
+  function goSlide(n: number) { showSlide(n); }
+  // auto-advance every 6 seconds
+  setInterval(() => changeSlide(1), 6000);
 </script>

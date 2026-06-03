@@ -9,7 +9,7 @@ export interface Props {
 }
 
 const { title, description } = Astro.props;
-const metaDesc = description || 'MLIFT — Professional Mini Excavator & Forklift Parts Manufacturer. Buy quality excavators and OEM forklift parts direct from China.';
+const metaDesc = description || 'MLIFT M16 — Professional Round Bale Wrapper. Compact, robust design. Bale diameter 0.90–1.60 m. Transport, wrap, and stack with one machine.';
 ---
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ const metaDesc = description || 'MLIFT — Professional Mini Excavator & Forklif
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 </head>
 <body>
-  <Header currentPath={Astro.url.pathname} />
+  <Header />
   <main>
     <slot />
   </main>
