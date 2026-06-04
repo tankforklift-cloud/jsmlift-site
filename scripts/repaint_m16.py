@@ -87,7 +87,13 @@ def remove_logos(img, hsv):
     
     n = 0
     if fm.sum() > 500:
-        img = cv2.inpaint(img, fm, 5, cv2.INPAINT_TELEA)
+        # Use smaller inpainting radius for performance, and subsample large masks
+        if fm.sum() > 50000:
+            # For large masks, reduce area by using only the most prominent regions
+            kernel_d = np.ones((7, 7), np.uint8)
+            fm = cv2.erode(fm, kernel_d, iterations=2)
+            fm = cv2.dilate(fm, kernel_d, iterations=2)
+        img = cv2.inpaint(img, fm, 3, cv2.INPAINT_TELEA)
         n = int(fm.sum() // 255)
     return img, n
 
