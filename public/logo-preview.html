@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MLIFT Logo Preview</title>
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 80px;
+    background: #FCF9F5;
+    font-family: system-ui, -apple-system, sans-serif;
+    padding: 40px;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 48px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  .card h2 {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #A99A80;
+    margin: 0 0 24px;
+  }
+  .logo-full { width: 320px; height: auto; }
+  .logo-icon { width: 64px; height: auto; }
+  .comparison {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .side { text-align: center; }
+  .side img { display: block; margin: 0 auto 12px; }
+  .old-logo { height: 80px; border-radius: 12px; }
+  .label { font-size: 12px; color: #A99A80; text-transform: uppercase; letter-spacing: 0.5px; }
+  .header-mock {
+    background: white;
+    border-bottom: 1px solid #eee;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  .header-mock img { height: 40px; }
+  .hint {
+    font-size: 12px;
+    color: #A99A80;
+    margin-top: 8px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h2>Header 实际效果</h2>
+  <div class="header-mock">
+    <img src="logo.svg" alt="MLIFT" style="height:40px">
+  </div>
+  <p class="hint">Header 显示效果，高度 40px</p>
+</div>
+
+<div class="comparison">
+  <div class="card side">
+    <h2>新 Logo（完整版）</h2>
+    <img src="logo.svg" alt="MLIFT — designed for work" class="logo-full">
+    <p class="label">Weidemann 风格 · 简洁大方</p>
+  </div>
+  <div class="card side">
+    <h2>原 Logo</h2>
+    <img src="logo-old.png" alt="Old MLIFT Logo" class="old-logo">
+    <p class="label">复杂徽章风格 · 元素过多</p>
+  </div>
+</div>
+
+<div class="card side">
+  <h2>Favicon（浏览器标签页图标）</h2>
+  <img src="favicon.svg" alt="MLIFT Favicon" class="logo-icon">
+  <p class="label">圆形 M 图标 · 纯深咖底</p>
+</div>
+
+</body>
+</html>
