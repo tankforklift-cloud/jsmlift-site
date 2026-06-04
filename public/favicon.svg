@@ -1,48 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <defs>
-    <linearGradient id="plateBg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%"   stop-color="#2E1F14"/>
-      <stop offset="50%"  stop-color="#1A0E07"/>
-      <stop offset="100%" stop-color="#120904"/>
-    </linearGradient>
-    <linearGradient id="goldText" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%"   stop-color="#E2C064"/>
-      <stop offset="50%"  stop-color="#C8963E"/>
-      <stop offset="100%" stop-color="#8B5E20"/>
-    </linearGradient>
-    <radialGradient id="rivet" cx="0.35" cy="0.35" r="0.65">
-      <stop offset="0%"   stop-color="#F0D078"/>
-      <stop offset="60%"  stop-color="#C8963E"/>
-      <stop offset="100%" stop-color="#7A4E15"/>
-    </radialGradient>
-    <filter id="deboss">
-      <feOffset dx="0.5" dy="0.5" in="SourceAlpha" result="off"/>
-      <feGaussianBlur in="off" stdDeviation="0.5" result="blur"/>
-      <feFlood flood-color="#000" flood-opacity="0.6" result="dark"/>
-      <feComposite in="dark" in2="blur" operator="in" result="shadow"/>
-      <feOffset dx="-0.3" dy="-0.3" in="SourceAlpha" result="off2"/>
-      <feFlood flood-color="#FFEED0" flood-opacity="0.12" result="light"/>
-      <feComposite in="light" in2="off2" operator="in" result="highlight"/>
-      <feMerge>
-        <feMergeNode in="shadow"/>
-        <feMergeNode in="highlight"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-
-  <!-- 金属板 -->
-  <rect x="1" y="1" width="62" height="62" rx="6" fill="url(#plateBg)" stroke="#3D2515" stroke-width="2"/>
-
-  <!-- 铆钉 -->
-  <circle cx="10" cy="10" r="3" fill="url(#rivet)"/>
-  <circle cx="54" cy="10" r="3" fill="url(#rivet)"/>
-  <circle cx="10" cy="54" r="3" fill="url(#rivet)"/>
-  <circle cx="54" cy="54" r="3" fill="url(#rivet)"/>
-
-  <!-- M 字母（压印） -->
-  <text x="32" y="42" text-anchor="middle"
-        font-family="'Helvetica Neue', 'Arial Black', 'Impact', system-ui, sans-serif"
-        font-weight="900" font-size="36" fill="url(#goldText)"
-        letter-spacing="2" filter="url(#deboss)">M</text>
+  <rect x="0" y="0" width="64" height="64" rx="10" fill="#4A3525"/>
+  <path d="
+    M 15 10
+    L 49 10
+    L 49 54
+    L 41 54
+    L 38 24
+    L 32 36
+    L 26 24
+    L 23 54
+    L 15 54
+    Z
+  " fill="#C8963E"/>
 </svg>
