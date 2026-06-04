@@ -105,7 +105,7 @@ button { cursor:pointer; font-family:inherit; border:none; background:none; }
   letter-spacing: -0.5px;
   text-transform: uppercase;
 }
-.header-logo img { height: 36px; width: auto; }
+.header-logo img { height: 40px; width: auto; }
 
 /* Nav */
 .main-nav { display: flex; align-items: center; gap: 2px; }
