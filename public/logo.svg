@@ -1,25 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 140" width="480" height="140">
-  <!-- M icon: single clean path, 14px wall thickness, V-notch top -->
-  <path d="
-    M 0,104
-    L 0,8
-    L 48,60
-    L 96,8
-    L 96,104
-    L 82,104
-    L 82,22
-    L 48,74
-    L 14,22
-    L 14,104
-    Z
-  " fill="#4A3525" fill-rule="evenodd"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 100" width="400" height="100">
+  <!-- M icon: uniform 12px stroke, geometric, Weidemann-style clean lines -->
+  <g stroke="#4A3525" stroke-width="12" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="4" fill="none">
+    <!-- V-shaped top -->
+    <path d="M 6,16 L 33,58 L 60,16"/>
+    <!-- Left pillar -->
+    <line x1="6" y1="16" x2="6" y2="84"/>
+    <!-- Right pillar -->
+    <line x1="60" y1="16" x2="60" y2="84"/>
+  </g>
 
-  <!-- Gold accent bar below M -->
-  <rect x="0" y="110" width="96" height="4" rx="2" fill="#C8963E"/>
+  <!-- Gold vertical divider -->
+  <rect x="74" y="26" width="3" height="46" rx="1.5" fill="#C8963E"/>
 
-  <!-- MLIFT wordmark -->
-  <text x="116" y="66" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="50" fill="#4A3525" letter-spacing="6">MLIFT</text>
+  <!-- MLIFT wordmark: Weidemann-style bold sans-serif -->
+  <text x="92" y="54" font-family="system-ui, -apple-system, 'Arial Black', 'Helvetica Neue', sans-serif" font-weight="900" font-size="40" fill="#4A3525" letter-spacing="3">MLIFT</text>
 
   <!-- Tagline -->
-  <text x="118" y="94" font-family="system-ui, -apple-system, sans-serif" font-weight="700" font-size="13" fill="#A99A80" letter-spacing="10">TOUGH BY DESIGN</text>
+  <text x="94" y="78" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="10" fill="#A99A80" letter-spacing="9">TOUGH BY DESIGN</text>
 </svg>
