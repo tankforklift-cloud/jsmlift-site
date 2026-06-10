@@ -1,53 +1,66 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { m16 } from '../data/m16';
+import { forkliftCategories } from '../data/forklifts';
 ---
 
-<BaseLayout title="Products" description="MLIFT M16 round bale wrapper — our flagship product. Transport, wrap, and stack round bales with one compact machine.">
+<BaseLayout title="Products — Forklift Range" description="MLIFT complete forklift product line: electric, diesel, LPG, heavy-duty, reach trucks, pallet trucks, stackers, order pickers. 40+ models for every application.">
 
 <section class="page-header">
   <div class="container">
     <div class="breadcrumb"><a href="/">Home</a> / <span>Products</span></div>
     <h1>Our Products</h1>
+    <p style="opacity:0.8;font-size:1.05rem;margin-top:4px">{forkliftCategories.length} product categories — 40+ forklift models for every material handling application</p>
   </div>
 </section>
 
+<!-- ===== PRODUCT CATEGORIES ===== -->
 <section class="section">
   <div class="container">
     <div class="sec-hdr">
-      <span class="sec-tag">Agricultural Machinery</span>
-      <h2>Round Bale Wrapper</h2>
-      <p>The MLIFT M16 — engineered for farmers who demand reliability without the premium price tag.</p>
+      <span class="sec-tag">Complete Range</span>
+      <h2>Find Your Forklift</h2>
+      <p>From compact electric pallet trucks to 25-ton heavy-duty diesel forklifts, MLIFT covers every application.</p>
     </div>
 
-    <div style="max-width:600px;margin:0 auto">
-      <div class="product-card">
-        <div class="pc-img">
-          <img src="/images/m16/m16/m16-main.jpg" alt="MLIFT M16 Round Bale Wrapper" />
-        </div>
-        <div class="pc-body">
-          <h3>MLIFT M16</h3>
-          <div class="pc-model">Round Bale Wrapper</div>
-          <p>{m16.description}</p>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:var(--space-2) 0">
-            {m16.highlights.map(h => (
-              <div style="font-size:0.82rem;color:var(--c-text-muted)">
-                <strong style="color:var(--c-red)">{h.value}</strong> {h.label}
+    {forkliftCategories.map((cat, ci) => (
+      <div id={cat.id} style={`margin-bottom:${ci < forkliftCategories.length - 1 ? 'var(--space-8)' : '0'}`}>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:start;border-bottom:1px solid var(--c-dark-4);padding-bottom:var(--space-5)">
+          <div>
+            <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2)">
+              <span style="font-size:2.2rem">{cat.icon}</span>
+              <div>
+                <h3 style="font-size:1.5rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin:0">{cat.name}</h3>
+                <div style="font-size:0.85rem;color:var(--c-red)">{cat.nameZh}</div>
               </div>
+            </div>
+            <p style="font-size:0.93rem;line-height:1.7;color:var(--c-text-muted)">{cat.description}</p>
+          </div>
+          <div>
+            <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--c-red);font-weight:var(--fw-bold);margin-bottom:var(--space-2)">Available Models</div>
+            {cat.models.map(m => (
+              <a href={`/products/${cat.id}/${m.id}`} style="text-decoration:none;display:block;background:var(--c-dark-3);padding:var(--space-2) var(--space-3);border-radius:6px;margin-bottom:var(--space-1);border:1px solid var(--c-dark-4);transition:all 0.25s">
+                <div style="display:flex;justify-content:space-between;align-items:center">
+                  <div>
+                    <div style="font-weight:var(--fw-bold);color:var(--c-text);font-size:0.95rem">{m.name}</div>
+                    <div style="font-size:0.78rem;color:var(--c-text-muted)">{m.tagline}</div>
+                  </div>
+                  <div style="color:var(--c-red);font-size:0.8rem;font-weight:var(--fw-bold)">{m.capacity}</div>
+                </div>
+              </a>
             ))}
           </div>
-          <a href="/m16" class="pc-btn">View Full Specifications</a>
         </div>
       </div>
-    </div>
+    ))}
   </div>
 </section>
 
+<!-- ===== CTA ===== -->
 <section class="cta-section">
   <div class="container">
-    <h2>Ready to Order?</h2>
-    <p>Get in touch for pricing, availability, and custom configuration options for the MLIFT M16.</p>
-    <a href="/contact" class="hero-cta">Request a Quote</a>
+    <h2>Not Sure Which Model?</h2>
+    <p>Our team can help you select the right forklift for your specific application, capacity requirements, and operating environment.</p>
+    <a href="/contact" class="hero-cta">Request a Consultation</a>
   </div>
 </section>
 

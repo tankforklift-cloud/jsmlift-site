@@ -6,14 +6,14 @@ const isActive = (path: string) => currentPath === path || (path !== '/' && curr
 <header class="site-header">
   <div class="header-inner">
     <a href="/" class="header-logo">
-      <img src="/logo.svg" alt="MLIFT — Tough by design" width="200" height="50" />
+      <img src="/logo.svg" alt="MLIFT — Lifting the Future" width="200" height="50" />
     </a>
 
     <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
 
     <nav class="main-nav" id="mainNav">
       <a href="/about" class:list={[{ active: isActive('/about') }]}>About Us</a>
-      <a href="/products" class:list={[{ active: isActive('/products') || isActive('/m16') }]}>Products</a>
+      <a href="/products" class:list={[{ active: isActive('/products') }]}>Products</a>
       <a href="/support" class:list={[{ active: isActive('/support') }]}>Support</a>
       <a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blog</a>
       <a href="/contact" class:list={[{ active: isActive('/contact') }]}>Contact Us</a>

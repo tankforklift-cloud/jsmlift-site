@@ -1,26 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { m16 } from '../data/m16';
+import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '../data/forklifts';
 ---
 
-<BaseLayout title="MLIFT — Professional Round Bale Wrapper" description="MLIFT M16 round bale wrapper: transport, wrap, and stack with one machine. Compact, robust design engineered for farmers worldwide.">
+<BaseLayout title="MLIFT — Professional Forklift Manufacturer" description="MLIFT delivers world-class forklift solutions — electric, diesel, LPG, heavy-duty, and warehouse equipment. Exporting to 50+ countries with 24/7 support.">
 
 <!-- ===== HERO SLIDER ===== -->
 <section class="hero-slider" id="hero">
-  {m16.heroImages.map((img, i) => (
-    <div class={`hero-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
-      <img src={img.src} alt={img.alt} />
+  {heroSlides.map((slide, i) => (
+    <div class={`hero-slide ${i === 0 ? 'active' : ''}`} data-index={i} style={`background:${slide.gradient}`}>
       <div class="hero-content">
-        <h1>{i === 0 ? 'EMPOWER THE FIELD' : i === 1 ? 'ONE MACHINE. EVERY JOB.' : 'ENGINEERED FOR FARMERS'}</h1>
-        <p>{i === 0 ? 'MLIFT delivers professional round bale wrapping solutions to farms worldwide through precision engineering and relentless quality.' : i === 1 ? 'From pickup to wrapped-and-stacked, the M16 handles every step with precision and power — saving you time, fuel, and labor.' : 'Built with the same commitment to quality that defines world-class agricultural engineering. Priced for the working farmer.'}</p>
-        <a href={i === 0 ? '/products' : i === 1 ? '/contact' : '/about'} class="hero-cta">{i === 0 ? 'Explore Products' : i === 1 ? 'Request a Quote' : 'About MLIFT'}</a>
+        <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:var(--c-red);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">HANDLING &bull; ELECTRIC &bull; LOGISTICS &bull; INTELLIGENT</span>
+        <h1 style="font-size:3.8rem;line-height:1.05">{slide.title}</h1>
+        <p>{slide.subtitle}</p>
+        <a href={slide.link} class="hero-cta">{slide.cta}</a>
       </div>
     </div>
   ))}
   <button class="hero-arrow prev" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</button>
   <button class="hero-arrow next" onclick="changeSlide(1)" aria-label="Next">&#10095;</button>
   <div class="hero-dots">
-    {m16.heroImages.map((_, i) => (
+    {heroSlides.map((_, i) => (
       <button class={`hero-dot ${i === 0 ? 'active' : ''}`} onclick={`goSlide(${i})`} aria-label={`Slide ${i + 1}`}></button>
     ))}
   </div>
@@ -31,19 +31,19 @@ import { m16 } from '../data/m16';
   <div class="container">
     <div class="vp-grid">
       <div class="vp-card">
-        <div class="vp-icon">🚜</div>
-        <h3>Baling Excellence</h3>
-        <p>MLIFT M16 combines transport, wrapping, and stacking in one compact machine — engineered for the modern farm.</p>
+        <div class="vp-icon">🏭</div>
+        <h3>Material Handling Excellence</h3>
+        <p>Experience top-tier material handling solutions tailored to your business needs and backed by decades of industry expertise.</p>
       </div>
       <div class="vp-card">
         <div class="vp-icon">⚡</div>
         <h3>Discover 100% Efficiency</h3>
-        <p>Two powered rollers ensure even bale rotation and consistent film coverage — no wasted wrap, no missed bales.</p>
+        <p>Unlock operational efficiency and reliability with MLIFT, your go-to source for cutting-edge material handling solutions.</p>
       </div>
       <div class="vp-card">
         <div class="vp-icon">🛡️</div>
         <h3>Your Partner in Robust Solutions</h3>
-        <p>Cat. II/III hitch, Load Sensing ready, and a 1,200 kg capacity — built to handle whatever your operation demands.</p>
+        <p>At MLIFT, we bring you unmatched expertise, innovation, and support to enhance your material handling capabilities.</p>
       </div>
     </div>
   </div>
@@ -54,54 +54,50 @@ import { m16 } from '../data/m16';
   <div class="container">
     <div class="about-grid">
       <div>
-        <h2 style="font-size:2rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin-bottom:var(--space-2);letter-spacing:-0.5px">Elevating Excellence in Global Baling Solutions</h2>
+        <h2 style="font-size:2rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin-bottom:var(--space-2);letter-spacing:-0.5px">Your Trusted Partner for Robust Material Handling Solutions</h2>
         <p>
-          JINGJIANG MLIFT MACHINERY CO.,LTD is a professional manufacturer of round bale wrappers based in Jingjiang, Jiangsu, China. Our flagship product, the MLIFT M16, is engineered to match the performance standards of the best European machines — at a price that makes sense for your operation.
+          JINGJIANG MLIFT MACHINERY CO.,LTD is a professional forklift manufacturer based in Jingjiang, Jiangsu, China. 
+          We deliver a complete range of material handling equipment — from compact electric pallet trucks to heavy-duty 25-ton diesel forklifts.
         </p>
         <p style="font-size:0.93rem;line-height:1.8;color:var(--c-text-muted);margin-bottom:var(--space-3)">
-          Every M16 undergoes rigorous factory testing before shipment. From the 3-patent pre-stretcher to the Load Sensing-compatible hydraulic system, every component is selected for long-term durability in real farming conditions.
+          With ISO 9001 and CE certifications, our forklifts meet international quality standards. Every machine undergoes 
+          rigorous factory testing before shipment. We serve 50+ countries with comprehensive after-sales support, spare parts, and technical service.
         </p>
         <a href="/about" class="btn-red">Read More</a>
       </div>
-      <img src="/images/m16/m16/m16-main.jpg" alt="MLIFT M16 Round Bale Wrapper" loading="lazy" />
+      <div style="background:var(--c-dark-2);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:320px;border:1px solid var(--c-dark-4)">
+        <div style="text-align:center;padding:var(--space-5)">
+          <div style="font-size:6rem;margin-bottom:var(--space-2)">🏗️</div>
+          <div style="font-size:1.5rem;font-weight:var(--fw-extrabold);color:var(--c-red);text-transform:uppercase">MLIFT</div>
+          <div style="font-size:0.85rem;color:var(--c-text-muted);margin-top:var(--space-1)">Lifting the Future</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PRODUCTS ===== -->
+<!-- ===== PRODUCT CATEGORIES ===== -->
 <section class="section section-dark">
   <div class="container">
     <div class="sec-hdr">
-      <span class="sec-tag">Our Product</span>
-      <h2>Round Bale Wrapper</h2>
-      <p>The MLIFT M16 — one machine built to transport, wrap, and stack round bales with maximum efficiency.</p>
+      <span class="sec-tag">Our Products</span>
+      <h2>Complete Forklift Range</h2>
+      <p>From electric warehouse trucks to heavy-duty diesel forklifts — MLIFT covers every material handling need.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:center;max-width:1000px;margin:0 auto">
-      <div class="product-card">
-        <div class="pc-img">
-          <img src="/images/m16/m16/m16-main.jpg" alt="MLIFT M16 Round Bale Wrapper" loading="lazy" />
-        </div>
-        <div class="pc-body">
-          <h3>MLIFT M16</h3>
-          <div class="pc-model">Round Bale Wrapper</div>
-          <p>Bale diameter 0.90–1.60 m | Max weight 1,200 kg | 750 mm film | Cat. II/III | Front or rear mount</p>
-          <a href="/m16" class="pc-btn">View Details</a>
-        </div>
-      </div>
-      <div>
-        <h3 style="font-size:1.5rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin-bottom:var(--space-2)">Why the M16?</h3>
-        <p style="font-size:0.93rem;line-height:1.8;color:var(--c-text-muted-light);margin-bottom:var(--space-2)">
-          Ultra-compact design at just 985 kg, yet handles bales up to 1,200 kg. Cat. II/III hitch fits virtually any tractor. Front or rear mounting gives you total flexibility.
-        </p>
-        <ul style="list-style:none;padding:0;margin:0 0 var(--space-3)">
-          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted-light)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-red)">▸</span> 750 mm film roll with 3-patent pre-stretcher</li>
-          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted-light)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-red)">▸</span> Load Sensing compatible — works with any tractor</li>
-          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted-light)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-red)">▸</span> Radio remote + electronic joystick control</li>
-          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted-light)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-red)">▸</span> Standard LED work lights for low-light operation</li>
-        </ul>
-        <a href="/m16" class="btn-red">Full Specifications</a>
-      </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin-top:var(--space-5)">
+      {forkliftCategories.map(cat => (
+        <a href={`/products#${cat.id}`} style="text-decoration:none">
+          <div style="background:var(--c-dark-3);border-radius:var(--radius);padding:var(--space-4);text-align:center;height:100%;border:1px solid var(--c-dark-4);transition:all 0.3s">
+            <div style="font-size:2.8rem;margin-bottom:var(--space-2)">{cat.icon}</div>
+            <h4 style="font-size:0.9rem;font-weight:var(--fw-bold);text-transform:uppercase;color:var(--c-text);margin-bottom:var(--space-1)">{cat.name}</h4>
+            <p style="font-size:0.78rem;color:var(--c-text-muted);line-height:1.5">{cat.nameZh}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div style="text-align:center;margin-top:var(--space-5)">
+      <a href="/products" class="btn-red">View All Products</a>
     </div>
   </div>
 </section>
@@ -110,29 +106,113 @@ import { m16 } from '../data/m16';
 <section class="section">
   <div class="container">
     <div class="sec-hdr">
-      <span class="sec-tag">HANDLING &bull; WRAPPING &bull; INTELLIGENT</span>
+      <span class="sec-tag">HANDLING &bull; ELECTRIC &bull; LOGISTICS &bull; INTELLIGENT</span>
       <h2>Core Services</h2>
-      <p>We support your operation with comprehensive after-sales service, training, and worldwide delivery.</p>
+      <p>Comprehensive support covering the full lifecycle of your forklift fleet.</p>
     </div>
     <div class="svc-grid">
       <div class="svc-card">
         <div class="svc-icon">🎓</div>
         <h3>Safety / Training</h3>
-        <p>Operator training materials and safety guidelines to ensure safe, efficient operation of your M16 wrapper.</p>
+        <p>Operator training programs, safety certification, and on-site instruction to ensure safe, compliant forklift operation.</p>
         <a href="/support" class="svc-link">Read More</a>
       </div>
       <div class="svc-card">
         <div class="svc-icon">🔧</div>
         <h3>Inspection / Maintenance</h3>
-        <p>Preventive maintenance schedules, spare parts availability, and technical support to keep your machine running.</p>
+        <p>Preventive maintenance schedules, thorough inspections, and fleet health monitoring to maximize uptime.</p>
         <a href="/support" class="svc-link">Read More</a>
       </div>
       <div class="svc-card">
         <div class="svc-icon">🌍</div>
         <h3>Sales Network</h3>
-        <p>We ship worldwide. Contact us for dealer inquiries or direct purchase. Competitive pricing and fast delivery.</p>
+        <p>Global distribution network. Spare parts available worldwide. Contact us for dealer inquiries or direct purchase.</p>
         <a href="/support" class="svc-link">Read More</a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">What Clients Say</span>
+      <h2>Trusted Worldwide</h2>
+      <p>MLIFT forklifts power operations across 50+ countries. Here's what our customers say.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-top:var(--space-5);max-width:900px;margin-left:auto;margin-right:auto">
+      {testimonials.map(t => (
+        <div style="background:var(--c-dark-3);padding:var(--space-4);border-radius:var(--radius);border-left:3px solid var(--c-red)">
+          <p style="font-size:0.88rem;line-height:1.7;color:var(--c-text-muted-light);margin-bottom:var(--space-3);font-style:italic">"{t.quote}"</p>
+          <div>
+            <div style="font-weight:var(--fw-bold);color:var(--c-red);font-size:0.85rem">{t.author}</div>
+            <div style="font-size:0.78rem;color:var(--c-text-muted)">{t.company}</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="stats-row">
+      {stats.map(s => (
+        <div class="stat-item">
+          <div class="stat-num">{s.value}</div>
+          <div class="stat-label">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ===== MISSION / VISION / HISTORY ===== -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="sec-hdr">
+      <h2>Who We Are</h2>
+      <p>Driven by innovation, built on quality. MLIFT's commitment to material handling excellence.</p>
+    </div>
+    <div class="tabs-wrap">
+      <div class="tabs-nav" id="tabsNav">
+        <button class="tab-btn active" data-tab="mission">Our Mission</button>
+        <button class="tab-btn" data-tab="vision">Our Vision</button>
+        <button class="tab-btn" data-tab="history">Our History</button>
+      </div>
+      <div class="tab-panel active" id="mission">
+        <h3>Delivering Reliable Material Handling Solutions</h3>
+        <p>Our mission is to provide professional-grade forklift equipment at competitive prices. Every MLIFT forklift is engineered to perform reliably in real-world conditions — from the busy ports of Southeast Asia to the demanding warehouses of the Middle East. We believe every business deserves quality material handling equipment that works as hard as they do.</p>
+      </div>
+      <div class="tab-panel" id="vision">
+        <h3>Global Reach, Local Support</h3>
+        <p>We envision MLIFT as a globally recognized brand in material handling — trusted by businesses on every continent. Through continuous engineering refinement, strategic partnerships, and unwavering customer commitment, we aim to become the preferred choice for forklift solutions worldwide.</p>
+      </div>
+      <div class="tab-panel" id="history">
+        <h3>Rooted in Manufacturing Excellence</h3>
+        <p>JINGJIANG MLIFT MACHINERY CO.,LTD was founded with a clear purpose: to build industrial equipment that meets international quality standards at competitive prices. Our team brings decades of manufacturing experience, and every forklift represents the culmination of rigorous engineering, testing, and customer-driven refinement.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARTNERS ===== -->
+<section class="section">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">Trusted By</span>
+      <h2>Our Partners</h2>
+      <p>MLIFT is proud to work with leading enterprises and distributors worldwide.</p>
+    </div>
+    <div class="partner-grid">
+      <div class="partner-item"><span class="pl-name">LS Cable &amp; System</span></div>
+      <div class="partner-item"><span class="pl-name">Global Logistics Co.</span></div>
+      <div class="partner-item"><span class="pl-name">Middle East Distribution</span></div>
+      <div class="partner-item"><span class="pl-name">Southeast Asia Partners</span></div>
+      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
     </div>
   </div>
 </section>
@@ -143,92 +223,25 @@ import { m16 } from '../data/m16';
     <div class="sec-hdr">
       <span class="sec-tag">Latest Updates</span>
       <h2>What's Going On?</h2>
-      <p>Stay informed about MLIFT product updates, industry news, and agricultural machinery insights.</p>
+      <p>Stay informed about MLIFT product updates, industry insights, and material handling news.</p>
     </div>
     <div class="blog-grid">
-      <div class="blog-card">
-        <div class="bc-img">
-          <img src="/images/m16/m16/m16-field-2.jpg" alt="M16 field operation" loading="lazy" />
+      {blogPosts.map(post => (
+        <div class="blog-card">
+          <div class="bc-img" style="background:linear-gradient(135deg, var(--c-dark-3), var(--c-dark-4));display:flex;align-items:center;justify-content:center;min-height:200px">
+            <span style="font-size:2.5rem">📰</span>
+          </div>
+          <div class="bc-body">
+            <div class="bc-date">{post.date}</div>
+            <h4>{post.title}</h4>
+            <p>{post.excerpt}</p>
+            <a href="/blog" class="bc-link">Read More</a>
+          </div>
         </div>
-        <div class="bc-body">
-          <div class="bc-date">June 2026</div>
-          <h4>MLIFT Wins First International Order — LS Cable System Mexico</h4>
-          <p>MLIFT M16 round bale wrappers selected by LS Cable &amp; System Mexico for their Queretaro facility.</p>
-          <a href="/blog" class="bc-link">Read More</a>
-        </div>
-      </div>
-      <div class="blog-card">
-        <div class="bc-img">
-          <img src="/images/m16/m16/m16-wrapping.jpg" alt="M16 wrapping" loading="lazy" />
-        </div>
-        <div class="bc-body">
-          <div class="bc-date">May 2026</div>
-          <h4>M16 Receives Full Product Certification — Ready for Global Export</h4>
-          <p>Complete documentation package now available for international customers including CE compliance.</p>
-          <a href="/blog" class="bc-link">Read More</a>
-        </div>
-      </div>
-      <div class="blog-card">
-        <div class="bc-img">
-          <img src="/images/m16/m16/m16-arm.jpg" alt="M16 wrapping arm" loading="lazy" />
-        </div>
-        <div class="bc-body">
-          <div class="bc-date">April 2026</div>
-          <h4>How to Choose the Right Round Bale Wrapper for Your Farm</h4>
-          <p>A practical guide to evaluating bale diameter, hydraulic requirements, and film systems.</p>
-          <a href="/blog" class="bc-link">Read More</a>
-        </div>
-      </div>
+      ))}
     </div>
     <div style="text-align:center;margin-top:var(--space-5)">
       <a href="/blog" class="btn-red">View All Articles</a>
-    </div>
-  </div>
-</section>
-
-<!-- ===== MISSION / VISION / HISTORY ===== -->
-<section class="section">
-  <div class="container">
-    <div class="sec-hdr">
-      <h2>Who We Are</h2>
-      <p>Driven by quality, built on experience. Learn about our mission, vision, and history.</p>
-    </div>
-    <div class="tabs-wrap">
-      <div class="tabs-nav" id="tabsNav">
-        <button class="tab-btn active" data-tab="mission">Our Mission</button>
-        <button class="tab-btn" data-tab="vision">Our Vision</button>
-        <button class="tab-btn" data-tab="history">Our History</button>
-      </div>
-      <div class="tab-panel active" id="mission">
-        <h3>Building Reliable Machines</h3>
-        <p>Our mission is to deliver professional-grade agricultural wrapping equipment at accessible prices. Every MLIFT M16 is built to perform reliably in real farming conditions — from the humid fields of Southeast Asia to the dry plains of the Americas. We believe farmers deserve equipment that works as hard as they do.</p>
-      </div>
-      <div class="tab-panel" id="vision">
-        <h3>Global Reach, Local Support</h3>
-        <p>We envision MLIFT as a globally recognized brand in agricultural baling solutions — trusted by farmers on every continent. Through continuous engineering refinement and strong customer partnerships, we aim to become the go-to choice for round bale wrapping worldwide.</p>
-      </div>
-      <div class="tab-panel" id="history">
-        <h3>Rooted in Engineering</h3>
-        <p>JINGJIANG MLIFT MACHINERY CO.,LTD was founded with a clear purpose: to build agricultural machinery that matches European quality standards at competitive prices. Our team brings decades of manufacturing experience, and the M16 represents the culmination of years of research, testing, and farmer feedback.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PARTNERS ===== -->
-<section class="section section-dark">
-  <div class="container">
-    <div class="sec-hdr">
-      <span class="sec-tag">Trusted By</span>
-      <h2>Our Partners</h2>
-      <p>MLIFT is proud to work with agricultural enterprises and distributors worldwide.</p>
-    </div>
-    <div class="partner-grid">
-      <div class="partner-item"><span class="pl-name">LS Cable &amp; System</span></div>
-      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
-      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
-      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
-      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
     </div>
   </div>
 </section>
@@ -237,8 +250,8 @@ import { m16 } from '../data/m16';
 <section class="section">
   <div class="container">
     <div class="dealer-cta">
-      <h3>MLIFT Dealers &amp; Suppliers</h3>
-      <p>Interested in becoming an MLIFT dealer or distributor in your region? We are actively expanding our global sales network.</p>
+      <h3>Become an MLIFT Dealer</h3>
+      <p>Interested in becoming an MLIFT dealer or distributor in your region? We are actively expanding our global sales network and seeking qualified partners.</p>
       <a href="/contact" class="btn-red">Contact Us Today</a>
     </div>
   </div>
@@ -247,9 +260,9 @@ import { m16 } from '../data/m16';
 <!-- ===== FINAL CTA ===== -->
 <section class="cta-section">
   <div class="container">
-    <h2>Ready to wrap smarter?</h2>
-    <p>The MLIFT M16 delivers world-class wrapping performance at a price that makes sense for your operation. Get in touch for a quote today.</p>
-    <a href="/contact" class="hero-cta">Request a Quote</a>
+    <h2>Connect with MLIFT</h2>
+    <p>Tailored material handling solutions for your business. Get in touch for a quote, product demo, or dealer inquiry.</p>
+    <a href="/contact" class="hero-cta">Contact Us</a>
   </div>
 </section>
 
@@ -258,7 +271,7 @@ import { m16 } from '../data/m16';
 <script is:inline>
   // Hero slider
   let current = 0;
-  const total = {m16.heroImages.length};
+  const total = 3;
   function showSlide(n: number) {
     document.querySelectorAll('.hero-slide').forEach((s: any,i: number) => (s as HTMLElement).classList.toggle('active', i===n));
     document.querySelectorAll('.hero-dot').forEach((d: any,i: number) => (d as HTMLElement).classList.toggle('active', i===n));

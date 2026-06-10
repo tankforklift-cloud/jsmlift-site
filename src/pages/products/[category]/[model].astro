@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { forkliftCategories, getModel } from '../../../data/forklifts';
+
+export function getStaticPaths() {
+  const paths: { params: { category: string; model: string } }[] = [];
+  for (const cat of forkliftCategories) {
+    for (const model of cat.models) {
+      paths.push({ params: { category: cat.id, model: model.id } });
+    }
+  }
+  return paths;
+}
+
+const { category, model: modelId } = Astro.params;
+const product = getModel(category!, modelId!);
+
+if (!product) {
+  return Astro.redirect('/products');
+}
+
+const categoryData = forkliftCategories.find(c => c.id === category);
+---
+
+<BaseLayout title={`${product.name} — ${product.tagline}`} description={product.description}>
+
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <a href="/products">Products</a> / <a href={`/products#${category}`}>{categoryData?.name || category}</a> / <span>{product.name}</span>
+    </div>
+    <h1>{product.name}</h1>
+    <p style="opacity:0.8;font-size:1.05rem;margin-top:4px">{product.tagline}</p>
+  </div>
+</section>
+
+<!-- ===== PRODUCT DETAIL ===== -->
+<section class="section">
+  <div class="container">
+    <div class="detail-grid">
+      <div style="background:linear-gradient(135deg, var(--c-dark-2), var(--c-dark-4));border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:420px;border:1px solid var(--c-dark-4)">
+        <div style="text-align:center;padding:var(--space-5)">
+          <div style="font-size:8rem;margin-bottom:var(--space-3)">{categoryData?.icon || '🏗️'}</div>
+          <div style="font-size:2rem;font-weight:var(--fw-extrabold);color:var(--c-red);text-transform:uppercase">{product.name}</div>
+          <div style="font-size:1rem;color:var(--c-text-muted);margin-top:var(--space-1)">{product.powerType}</div>
+        </div>
+      </div>
+      <div class="detail-info">
+        <span class="d-badge">{product.powerType}</span>
+        <h1>{product.name}</h1>
+        <div class="d-model">{product.tagline}</div>
+        <p class="d-desc">{product.description}</p>
+        <div class="d-highlights">
+          {product.highlights.map(h => (
+            <div class="d-highlight">
+              <div class="dh-val">{h.value}</div>
+              <div class="dh-lbl">{h.label}</div>
+            </div>
+          ))}
+        </div>
+        <a href="/contact" class="btn-submit">Request a Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">Key Features</span>
+      <h2>What Makes the {product.name}</h2>
+      <p>Every detail engineered for reliability and performance.</p>
+    </div>
+    {
+      product.features.map((feat, i) => (
+        <div class="feat-card">
+          <div class="feat-card-img">
+            <div style="width:100%;height:100%;background:var(--c-dark-4);display:flex;align-items:center;justify-content:center;color:var(--c-red);font-size:2.5rem;font-weight:700">{(i + 1).toString().padStart(2, '0')}</div>
+          </div>
+          <div class="feat-card-text">
+            <h3>{feat.title}</h3>
+            <p>{feat.desc}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<!-- ===== FULL SPECIFICATIONS ===== -->
+<section class="section">
+  <div class="container" style="max-width:900px">
+    <div class="sec-hdr">
+      <span class="sec-tag">Technical Data</span>
+      <h2>Full Specifications</h2>
+      <p>Complete technical specifications for the {product.name}.</p>
+    </div>
+    {
+      product.specs.map(group => (
+        <div class="specs-group">
+          <h3 class="specs-group-title">{group.group}</h3>
+          <table class="specs-table">
+            <tbody>
+              {group.items.map(item => (
+                <tr>
+                  <th>{item.label}</th>
+                  <td>{item.value}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<!-- ===== OPTIONS ===== -->
+<section class="section section-dark">
+  <div class="container" style="max-width:900px">
+    <div class="sec-hdr">
+      <span class="sec-tag">Customize</span>
+      <h2>Optional Equipment</h2>
+      <p>Configure the {product.name} to match your exact requirements.</p>
+    </div>
+    <ul class="opts-list">
+      {product.options.map(opt => <li>{opt}</li>)}
+    </ul>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Interested in the {product.name}?</h2>
+    <p>Contact us for pricing, availability, and custom configuration options. We ship worldwide.</p>
+    <a href="/contact" class="hero-cta">Get in Touch</a>
+  </div>
+</section>
+
+</BaseLayout>
