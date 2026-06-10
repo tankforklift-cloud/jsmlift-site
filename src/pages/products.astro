@@ -1,18 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { forkliftCategories } from '../data/forklifts';
-
-// Map category id to image
-const catImages = {
-  'electric-forklifts': '/images/products/electric-forklift.jpg',
-  'diesel-forklifts': '/images/products/ic-forklift.jpg',
-  'lpg-forklifts': '/images/products/ic-forklift.jpg',
-  'heavy-forklifts': '/images/products/ic-forklift.jpg',
-  'reach-trucks': '/images/products/warehouse-forklift.jpg',
-  'stackers': '/images/products/warehouse-forklift.jpg',
-  'pallet-trucks': '/images/products/warehouse-forklift.jpg',
-  'order-pickers': '/images/products/warehouse-forklift.jpg',
-};
 ---
 
 <BaseLayout title="Products — Forklift Range" description="MLIFT complete forklift product line: electric, diesel, LPG, heavy-duty, reach trucks, pallet trucks, stackers, order pickers. 40+ models for every application.">
@@ -38,14 +26,8 @@ const catImages = {
       <div id={cat.id} style={`margin-bottom:${ci < forkliftCategories.length - 1 ? 'var(--space-8)' : '0'}`}>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:start">
           <div>
-            <img src={catImages[cat.id] || '/images/products/ic-forklift.jpg'} alt={cat.name} style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);margin-bottom:var(--space-3);aspect-ratio:4/3;object-fit:cover" />
-            <div style="display:flex;align-items:center;gap:var(--space-2);margin-bottom:var(--space-2)">
-              <span style="font-size:2.2rem">{cat.icon}</span>
-              <div>
-                <h3 style="font-size:1.5rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin:0;color:var(--c-text)">{cat.name}</h3>
-                <div style="font-size:0.85rem;color:var(--c-red)">{cat.nameZh}</div>
-              </div>
-            </div>
+            <img src={cat.image} alt={cat.name} style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);margin-bottom:var(--space-3);aspect-ratio:4/3;object-fit:cover" />
+            <h3 style="font-size:1.5rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin:0 0 var(--space-1);color:var(--c-text)">{cat.name}</h3>
             <p style="font-size:0.93rem;line-height:1.7;color:var(--c-text-secondary)">{cat.description}</p>
           </div>
           <div>

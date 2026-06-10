@@ -41,6 +41,7 @@ export interface ForkliftCategory {
   nameZh: string;
   description: string;
   icon: string;
+  image: string;
   models: ForkliftModel[];
 }
 
@@ -51,6 +52,7 @@ export const forkliftCategories: ForkliftCategory[] = [
     nameZh: "电动叉车",
     description: "Lithium-Ion & Lead-Acid powered electric forklifts from 1.5 to 5.0 ton. Zero emission, low noise, ideal for indoor and outdoor material handling operations.",
     icon: "⚡",
+    image: "/images/products/electric-forklift.jpg",
     models: [
       {
         id: "e30",
@@ -168,6 +170,7 @@ export const forkliftCategories: ForkliftCategory[] = [
     nameZh: "柴油叉车",
     description: "Robust diesel-powered forklifts from 2.0 to 10.0 ton for heavy outdoor applications. High torque, durable construction, and excellent fuel efficiency.",
     icon: "⛽",
+    image: "/images/products/ic-forklift.jpg",
     models: [
       {
         id: "d35",
@@ -240,6 +243,7 @@ export const forkliftCategories: ForkliftCategory[] = [
     nameZh: "液化气叉车",
     description: "LPG/gasoline dual-fuel forklifts from 2.0 to 5.0 ton. Clean-burning, versatile power for indoor/outdoor operations with quick cylinder changeover.",
     icon: "🔥",
+    image: "/images/products/heavy-diesel.jpg",
     models: [
       {
         id: "g25",
@@ -291,6 +295,7 @@ export const forkliftCategories: ForkliftCategory[] = [
     nameZh: "前移式叉车",
     description: "High-lift reach trucks for narrow aisle warehousing. Lift heights up to 12 meters, 1.4–2.0 ton capacity. Maximize storage density in high-bay racking.",
     icon: "🏗️",
+    image: "/images/products/warehouse-forklift.jpg",
     models: [
       {
         id: "r20",
@@ -340,6 +345,7 @@ export const forkliftCategories: ForkliftCategory[] = [
     nameZh: "电动搬运车",
     description: "Electric pallet trucks from 1.5 to 3.0 ton. Compact, efficient horizontal transport for warehouse, retail, and logistics operations.",
     icon: "🔌",
+    image: "/images/products/push-pull.jpg",
     models: [
       {
         id: "pt20",
@@ -381,6 +387,7 @@ export const forkliftCategories: ForkliftCategory[] = [
     nameZh: "电动堆垛机",
     description: "Electric stackers from 1.0 to 2.0 ton with lift heights up to 5.5 meters. Cost-effective vertical storage solution for small and medium warehouses.",
     icon: "📦",
+    image: "/images/products/wheel-loader.jpg",
     models: [
       {
         id: "s15",
@@ -422,6 +429,7 @@ export const forkliftCategories: ForkliftCategory[] = [
     nameZh: "拣选车",
     description: "Electric order pickers for efficient case and item-level picking. Operator lifts with the platform for ergonomic access at all rack levels.",
     icon: "📋",
+    image: "/images/products/container-handler.jpg",
     models: [
       {
         id: "op10",
@@ -462,6 +470,7 @@ export const forkliftCategories: ForkliftCategory[] = [
     nameZh: "重型叉车",
     description: "Heavy-duty forklifts from 10 to 25 ton for ports, steel mills, and heavy manufacturing. High-capacity diesel engines with reinforced frames.",
     icon: "🏭",
+    image: "/images/products/reach-stacker.jpg",
     models: [
       {
         id: "h160",

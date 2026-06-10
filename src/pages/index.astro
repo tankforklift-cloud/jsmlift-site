@@ -103,9 +103,8 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
     <div class="cat-grid">
       {forkliftCategories.map(cat => (
         <a href={`/products#${cat.id}`} class="cat-card">
-          <div class="cat-icon">{cat.icon}</div>
+          <img src={cat.image || `/images/products/warehouse-forklift.jpg`} alt={cat.name} class="cat-img" />
           <h4>{cat.name}</h4>
-          <p>{cat.nameZh}</p>
         </a>
       ))}
     </div>
