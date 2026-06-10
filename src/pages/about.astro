@@ -15,25 +15,21 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <section class="section">
   <div class="container">
     <div class="abt-grid">
-      <div style="background:var(--c-dark-2);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:360px;border:1px solid var(--c-dark-4)">
-        <div style="text-align:center;padding:var(--space-5)">
-          <div style="font-size:6rem;margin-bottom:var(--space-2)">🏗️</div>
-          <div style="font-size:1.5rem;font-weight:var(--fw-extrabold);color:var(--c-red);text-transform:uppercase">MLIFT</div>
-          <div style="font-size:0.85rem;color:var(--c-text-muted);margin-top:var(--space-1)">Lifting the Future</div>
-        </div>
+      <div>
+        <img src="/images/about/about-left.png" alt="MLIFT About" style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-md)" />
       </div>
       <div class="abt-text">
         <h2>Engineering That Moves the World</h2>
         <p>
-          JINGJIANG MLIFT MACHINERY CO.,LTD is a professional forklift manufacturer, delivering a complete range 
-          of material handling equipment to businesses worldwide. From compact electric warehouse trucks to 
-          25-ton heavy-duty diesel forklifts, <strong>MLIFT</strong> provides reliable, cost-effective solutions 
+          JINGJIANG MLIFT MACHINERY CO.,LTD is a professional forklift manufacturer, delivering a complete range
+          of material handling equipment to businesses worldwide. From compact electric warehouse trucks to
+          25-ton heavy-duty diesel forklifts, <strong>MLIFT</strong> provides reliable, cost-effective solutions
           for every application.
         </p>
         <p>
-          Based in Jingjiang, Jiangsu, China, our manufacturing facility combines precision engineering with 
-          rigorous quality control. ISO 9001 and CE certified, every forklift undergoes 100+ inspection points 
-          before delivery. We export to 50+ countries with comprehensive spare parts availability, technical 
+          Based in Jingjiang, Jiangsu, China, our manufacturing facility combines precision engineering with
+          rigorous quality control. ISO 9001 and CE certified, every forklift undergoes 100+ inspection points
+          before delivery. We export to 50+ countries with comprehensive spare parts availability, technical
           support, and dealer network coverage.
         </p>
       </div>
@@ -42,7 +38,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </section>
 
 <!-- ===== MISSION / VISION / HISTORY ===== -->
-<section class="section section-dark">
+<section class="section section-alt">
   <div class="container">
     <div class="sec-hdr">
       <h2>Who We Are</h2>
@@ -80,22 +76,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </div>
     <div class="value-grid">
       <div class="value-card">
-        <div class="v-icon">&#x1F527;</div>
+        <div class="v-icon">🔧</div>
         <h4>Engineering Quality</h4>
         <p>Every component is selected and tested for long-term reliability in demanding industrial environments.</p>
       </div>
       <div class="value-card">
-        <div class="v-icon">&#x1F4B0;</div>
+        <div class="v-icon">💰</div>
         <h4>Fair Pricing</h4>
         <p>We eliminate unnecessary overhead to deliver professional-grade forklifts at competitive prices.</p>
       </div>
       <div class="value-card">
-        <div class="v-icon">&#x1F30D;</div>
+        <div class="v-icon">🌍</div>
         <h4>Global Mindset</h4>
         <p>Built to meet international standards. Shipped worldwide with full documentation and local support.</p>
       </div>
       <div class="value-card">
-        <div class="v-icon">&#x1F91D;</div>
+        <div class="v-icon">🤝</div>
         <h4>Customer Partnership</h4>
         <p>We work closely with every customer to ensure the right forklift configuration for their operation.</p>
       </div>
@@ -104,7 +100,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </section>
 
 <!-- ===== STATS ===== -->
-<section class="section section-dark">
+<section class="section section-alt">
   <div class="container">
     <div class="stats-row">
       <div class="stat-item">
@@ -143,11 +139,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   const tabPanels = document.querySelectorAll('.tab-panel');
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const tab = (btn as HTMLElement).dataset.tab;
+      const tab = btn.dataset.tab;
       tabBtns.forEach(b => b.classList.remove('active'));
-      (btn as HTMLElement).classList.add('active');
+      btn.classList.add('active');
       tabPanels.forEach(p => p.classList.remove('active'));
-      document.getElementById(tab!)?.classList.add('active');
+      document.getElementById(tab)?.classList.add('active');
     });
   });
 </script>

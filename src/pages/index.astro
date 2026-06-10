@@ -7,27 +7,46 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
 
 <!-- ===== HERO SLIDER ===== -->
 <section class="hero-slider" id="hero">
-  {heroSlides.map((slide, i) => (
-    <div class={`hero-slide ${i === 0 ? 'active' : ''}`} data-index={i} style={`background:${slide.gradient}`}>
-      <div class="hero-content">
-        <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:var(--c-red);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">HANDLING &bull; ELECTRIC &bull; LOGISTICS &bull; INTELLIGENT</span>
-        <h1 style="font-size:3.8rem;line-height:1.05">{slide.title}</h1>
-        <p>{slide.subtitle}</p>
-        <a href={slide.link} class="hero-cta">{slide.cta}</a>
-      </div>
+  <!-- Slide 1 — 使用下载的 Heli Hero 图 -->
+  <div class="hero-slide active" data-index="0">
+    <img src="/images/hero/hero-1.jpg" alt="MLIFT Forklift" />
+    <div class="hero-content">
+      <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:var(--c-red);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">HANDLING &bull; ELECTRIC &bull; LOGISTICS &bull; INTELLIGENT</span>
+      <h1 style="font-size:3.8rem;line-height:1.05">{heroSlides[0].title}</h1>
+      <p>{heroSlides[0].subtitle}</p>
+      <a href={heroSlides[0].link} class="hero-cta">{heroSlides[0].cta}</a>
     </div>
-  ))}
+  </div>
+  <!-- Slide 2 -->
+  <div class="hero-slide" data-index="1" style="background:#B00000">
+    <div class="hero-content">
+      <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:rgba(255,255,255,0.8);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">RELIABLE &bull; EFFICIENT &bull; GLOBAL</span>
+      <h1 style="font-size:3.8rem;line-height:1.05">{heroSlides[1].title}</h1>
+      <p>{heroSlides[1].subtitle}</p>
+      <a href={heroSlides[1].link} class="hero-cta">{heroSlides[1].cta}</a>
+    </div>
+  </div>
+  <!-- Slide 3 -->
+  <div class="hero-slide" data-index="2" style="background:var(--c-bg-dark)">
+    <div class="hero-content">
+      <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:var(--c-red);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">INNOVATION &bull; QUALITY &bull; SERVICE</span>
+      <h1 style="font-size:3.8rem;line-height:1.05">{heroSlides[2].title}</h1>
+      <p>{heroSlides[2].subtitle}</p>
+      <a href={heroSlides[2].link} class="hero-cta">{heroSlides[2].cta}</a>
+    </div>
+  </div>
+
   <button class="hero-arrow prev" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</button>
   <button class="hero-arrow next" onclick="changeSlide(1)" aria-label="Next">&#10095;</button>
   <div class="hero-dots">
-    {heroSlides.map((_, i) => (
-      <button class={`hero-dot ${i === 0 ? 'active' : ''}`} onclick={`goSlide(${i})`} aria-label={`Slide ${i + 1}`}></button>
-    ))}
+    <button class="hero-dot active" onclick="goSlide(0)" aria-label="Slide 1"></button>
+    <button class="hero-dot" onclick="goSlide(1)" aria-label="Slide 2"></button>
+    <button class="hero-dot" onclick="goSlide(2)" aria-label="Slide 3"></button>
   </div>
 </section>
 
 <!-- ===== VALUE PROPOSITION ===== -->
-<section class="section section-dark">
+<section class="section section-alt">
   <div class="container">
     <div class="vp-grid">
       <div class="vp-card">
@@ -50,34 +69,30 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
 </section>
 
 <!-- ===== ABOUT US ===== -->
-<section class="section" id="about">
+<section class="section">
   <div class="container">
     <div class="about-grid">
       <div>
-        <h2 style="font-size:2rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin-bottom:var(--space-2);letter-spacing:-0.5px">Your Trusted Partner for Robust Material Handling Solutions</h2>
-        <p>
-          JINGJIANG MLIFT MACHINERY CO.,LTD is a professional forklift manufacturer based in Jingjiang, Jiangsu, China. 
+        <img src="/images/about/about-left.png" alt="MLIFT About" style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-md)" />
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center">
+        <h2 style="font-size:2rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin-bottom:var(--space-2);letter-spacing:-0.5px;color:var(--c-text)">Your Trusted Partner for Robust Material Handling Solutions</h2>
+        <p style="font-size:0.95rem;line-height:1.8;color:var(--c-text-secondary);margin-bottom:var(--space-3)">
+          JINGJIANG MLIFT MACHINERY CO.,LTD is a professional forklift manufacturer based in Jingjiang, Jiangsu, China.
           We deliver a complete range of material handling equipment — from compact electric pallet trucks to heavy-duty 25-ton diesel forklifts.
         </p>
-        <p style="font-size:0.93rem;line-height:1.8;color:var(--c-text-muted);margin-bottom:var(--space-3)">
-          With ISO 9001 and CE certifications, our forklifts meet international quality standards. Every machine undergoes 
+        <p style="font-size:0.93rem;line-height:1.8;color:var(--c-text-secondary);margin-bottom:var(--space-3)">
+          With ISO 9001 and CE certifications, our forklifts meet international quality standards. Every machine undergoes
           rigorous factory testing before shipment. We serve 50+ countries with comprehensive after-sales support, spare parts, and technical service.
         </p>
-        <a href="/about" class="btn-red">Read More</a>
-      </div>
-      <div style="background:var(--c-dark-2);border-radius:var(--radius);display:flex;align-items:center;justify-content:center;min-height:320px;border:1px solid var(--c-dark-4)">
-        <div style="text-align:center;padding:var(--space-5)">
-          <div style="font-size:6rem;margin-bottom:var(--space-2)">🏗️</div>
-          <div style="font-size:1.5rem;font-weight:var(--fw-extrabold);color:var(--c-red);text-transform:uppercase">MLIFT</div>
-          <div style="font-size:0.85rem;color:var(--c-text-muted);margin-top:var(--space-1)">Lifting the Future</div>
-        </div>
+        <a href="/about" class="btn-red" style="align-self:flex-start">Read More</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== PRODUCT CATEGORIES ===== -->
-<section class="section section-dark">
+<section class="section section-alt">
   <div class="container">
     <div class="sec-hdr">
       <span class="sec-tag">Our Products</span>
@@ -85,14 +100,12 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
       <p>From electric warehouse trucks to heavy-duty diesel forklifts — MLIFT covers every material handling need.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin-top:var(--space-5)">
+    <div class="cat-grid">
       {forkliftCategories.map(cat => (
-        <a href={`/products#${cat.id}`} style="text-decoration:none">
-          <div style="background:var(--c-dark-3);border-radius:var(--radius);padding:var(--space-4);text-align:center;height:100%;border:1px solid var(--c-dark-4);transition:all 0.3s">
-            <div style="font-size:2.8rem;margin-bottom:var(--space-2)">{cat.icon}</div>
-            <h4 style="font-size:0.9rem;font-weight:var(--fw-bold);text-transform:uppercase;color:var(--c-text);margin-bottom:var(--space-1)">{cat.name}</h4>
-            <p style="font-size:0.78rem;color:var(--c-text-muted);line-height:1.5">{cat.nameZh}</p>
-          </div>
+        <a href={`/products#${cat.id}`} class="cat-card">
+          <div class="cat-icon">{cat.icon}</div>
+          <h4>{cat.name}</h4>
+          <p>{cat.nameZh}</p>
         </a>
       ))}
     </div>
@@ -112,19 +125,19 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
     </div>
     <div class="svc-grid">
       <div class="svc-card">
-        <div class="svc-icon">🎓</div>
+        <img src="/images/services/safety-training.jpg" alt="Safety Training" style="width:100%;border-radius:var(--radius-md);margin-bottom:var(--space-3);aspect-ratio:16/10;object-fit:cover" />
         <h3>Safety / Training</h3>
         <p>Operator training programs, safety certification, and on-site instruction to ensure safe, compliant forklift operation.</p>
         <a href="/support" class="svc-link">Read More</a>
       </div>
       <div class="svc-card">
-        <div class="svc-icon">🔧</div>
+        <img src="/images/services/inspection-maintenance.jpg" alt="Inspection Maintenance" style="width:100%;border-radius:var(--radius-md);margin-bottom:var(--space-3);aspect-ratio:16/10;object-fit:cover" />
         <h3>Inspection / Maintenance</h3>
         <p>Preventive maintenance schedules, thorough inspections, and fleet health monitoring to maximize uptime.</p>
         <a href="/support" class="svc-link">Read More</a>
       </div>
       <div class="svc-card">
-        <div class="svc-icon">🌍</div>
+        <img src="/images/services/sales-network.jpg" alt="Sales Network" style="width:100%;border-radius:var(--radius-md);margin-bottom:var(--space-3);aspect-ratio:16/10;object-fit:cover" />
         <h3>Sales Network</h3>
         <p>Global distribution network. Spare parts available worldwide. Contact us for dealer inquiries or direct purchase.</p>
         <a href="/support" class="svc-link">Read More</a>
@@ -134,7 +147,7 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
 </section>
 
 <!-- ===== TESTIMONIALS ===== -->
-<section class="section section-dark">
+<section class="section section-alt">
   <div class="container">
     <div class="sec-hdr">
       <span class="sec-tag">What Clients Say</span>
@@ -142,13 +155,16 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
       <p>MLIFT forklifts power operations across 50+ countries. Here's what our customers say.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4);margin-top:var(--space-5);max-width:900px;margin-left:auto;margin-right:auto">
+    <div class="testimonial-grid">
       {testimonials.map(t => (
-        <div style="background:var(--c-dark-3);padding:var(--space-4);border-radius:var(--radius);border-left:3px solid var(--c-red)">
-          <p style="font-size:0.88rem;line-height:1.7;color:var(--c-text-muted-light);margin-bottom:var(--space-3);font-style:italic">"{t.quote}"</p>
-          <div>
-            <div style="font-weight:var(--fw-bold);color:var(--c-red);font-size:0.85rem">{t.author}</div>
-            <div style="font-size:0.78rem;color:var(--c-text-muted)">{t.company}</div>
+        <div class="testimonial-card">
+          <p>"{t.quote}"</p>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:var(--space-2)">
+            <img src="/images/testimonial/avatar.webp" alt={t.author} style="width:48px;height:48px;border-radius:50%;object-fit:cover" />
+            <div>
+              <div class="tc-author">{t.author}</div>
+              <div class="tc-role">{t.company}</div>
+            </div>
           </div>
         </div>
       ))}
@@ -171,7 +187,7 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
 </section>
 
 <!-- ===== MISSION / VISION / HISTORY ===== -->
-<section class="section section-dark">
+<section class="section section-alt">
   <div class="container">
     <div class="sec-hdr">
       <h2>Who We Are</h2>
@@ -208,17 +224,17 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
       <p>MLIFT is proud to work with leading enterprises and distributors worldwide.</p>
     </div>
     <div class="partner-grid">
-      <div class="partner-item"><span class="pl-name">LS Cable &amp; System</span></div>
-      <div class="partner-item"><span class="pl-name">Global Logistics Co.</span></div>
-      <div class="partner-item"><span class="pl-name">Middle East Distribution</span></div>
-      <div class="partner-item"><span class="pl-name">Southeast Asia Partners</span></div>
-      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
+      <div class="partner-item"><img src="/images/clients/client-1.png" alt="Partner 1" style="max-width:120px;filter:none" /></div>
+      <div class="partner-item"><img src="/images/clients/client-2.png" alt="Partner 2" style="max-width:120px;filter:none" /></div>
+      <div class="partner-item"><img src="/images/clients/client-3.png" alt="Partner 3" style="max-width:120px;filter:none" /></div>
+      <div class="partner-item"><img src="/images/clients/client-4.png" alt="Partner 4" style="max-width:120px;filter:none" /></div>
+      <div class="partner-item"><img src="/images/clients/client-5.png" alt="Partner 5" style="max-width:120px;filter:none" /></div>
     </div>
   </div>
 </section>
 
 <!-- ===== BLOG ===== -->
-<section class="section section-dark">
+<section class="section section-alt">
   <div class="container">
     <div class="sec-hdr">
       <span class="sec-tag">Latest Updates</span>
@@ -228,7 +244,7 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
     <div class="blog-grid">
       {blogPosts.map(post => (
         <div class="blog-card">
-          <div class="bc-img" style="background:linear-gradient(135deg, var(--c-dark-3), var(--c-dark-4));display:flex;align-items:center;justify-content:center;min-height:200px">
+          <div class="bc-img" style="background:var(--c-bg-alt);display:flex;align-items:center;justify-content:center">
             <span style="font-size:2.5rem">📰</span>
           </div>
           <div class="bc-body">
@@ -272,15 +288,15 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
   // Hero slider
   let current = 0;
   const total = 3;
-  function showSlide(n: number) {
-    document.querySelectorAll('.hero-slide').forEach((s: any,i: number) => (s as HTMLElement).classList.toggle('active', i===n));
-    document.querySelectorAll('.hero-dot').forEach((d: any,i: number) => (d as HTMLElement).classList.toggle('active', i===n));
+  function showSlide(n) {
+    document.querySelectorAll('.hero-slide').forEach((s,i) => s.classList.toggle('active', i===n));
+    document.querySelectorAll('.hero-dot').forEach((d,i) => d.classList.toggle('active', i===n));
     current = n;
   }
-  function changeSlide(dir: number) {
+  function changeSlide(dir) {
     showSlide((current + dir + total) % total);
   }
-  function goSlide(n: number) { showSlide(n); }
+  function goSlide(n) { showSlide(n); }
   setInterval(() => changeSlide(1), 6000);
 
   // Mission/Vision/History tabs
@@ -288,11 +304,11 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
   const tabPanels = document.querySelectorAll('.tab-panel');
   tabBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      const tab = (btn as HTMLElement).dataset.tab;
+      const tab = btn.dataset.tab;
       tabBtns.forEach(b => b.classList.remove('active'));
-      (btn as HTMLElement).classList.add('active');
+      btn.classList.add('active');
       tabPanels.forEach(p => p.classList.remove('active'));
-      document.getElementById(tab!)?.classList.add('active');
+      document.getElementById(tab)?.classList.add('active');
     });
   });
 </script>
