@@ -12,10 +12,11 @@ const isActive = (path: string) => currentPath === path || (path !== '/' && curr
     <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
 
     <nav class="main-nav" id="mainNav">
-      <a href="/" class:list={['', { active: isActive('/') && currentPath === '/' }]}>Home</a>
-      <a href="/m16" class:list={['', { active: isActive('/m16') }]}>M16</a>
-      <a href="/about" class:list={['', { active: isActive('/about') }]}>About</a>
-      <a href="/contact" class:list={['', { active: isActive('/contact') }]}>Contact</a>
+      <a href="/about" class:list={[{ active: isActive('/about') }]}>About Us</a>
+      <a href="/products" class:list={[{ active: isActive('/products') || isActive('/m16') }]}>Products</a>
+      <a href="/support" class:list={[{ active: isActive('/support') }]}>Support</a>
+      <a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blog</a>
+      <a href="/contact" class:list={[{ active: isActive('/contact') }]}>Contact Us</a>
     </nav>
   </div>
 </header>

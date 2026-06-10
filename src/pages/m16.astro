@@ -5,24 +5,22 @@ import { m16 } from '../data/m16';
 
 <BaseLayout title="MLIFT M16 — Full Specifications" description="Complete technical specifications for the MLIFT M16 round bale wrapper. Dimensions, hydraulics, wrapping system, options, and more.">
 
-<!-- ===== PAGE HEADER ===== -->
 <section class="page-header">
   <div class="container">
     <div class="breadcrumb">
-      <a href="/">Home</a> / <span>MLIFT M16</span>
+      <a href="/">Home</a> / <span>{m16.name}</span>
     </div>
     <h1>{m16.name}</h1>
     <p style="opacity:0.8;font-size:1.05rem;margin-top:4px">{m16.tagline}</p>
   </div>
 </section>
 
-<!-- ===== PRODUCT HERO ===== -->
+<!-- ===== PRODUCT DETAIL ===== -->
 <section class="section">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:start">
-      <!-- Gallery -->
+    <div class="detail-grid">
       <div>
-        <div class="gallery-main" id="galleryMain">
+        <div class="gallery-main">
           <img src={`/images/m16/m16/${m16.gallery[0].src}`} alt={m16.gallery[0].alt} id="mainImg" />
         </div>
         <div class="gallery-thumbs">
@@ -33,42 +31,38 @@ import { m16 } from '../data/m16';
           ))}
         </div>
       </div>
-      <!-- Info -->
-      <div>
+      <div class="detail-info">
         <span class="d-badge">NEW</span>
-        <h1 style="font-size:2rem;font-weight:var(--fw-extrabold);margin-bottom:4px;letter-spacing:-0.3px">{m16.name}</h1>
-        <p style="font-size:0.95rem;color:var(--c-text-muted);margin-bottom:var(--space-2)">{m16.tagline}</p>
-        <p style="font-size:0.92rem;line-height:1.8;color:var(--c-text-muted);margin-bottom:var(--space-3)">{m16.description}</p>
-
-        <!-- Quick Specs -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-1);margin-bottom:var(--space-3)">
+        <h1>{m16.name}</h1>
+        <div class="d-model">{m16.tagline}</div>
+        <p class="d-desc">{m16.description}</p>
+        <div class="d-highlights">
           {m16.highlights.map(h => (
-            <div style="padding:10px 14px;background:var(--c-gray-100)">
-              <div style="font-size:0.7rem;font-weight:var(--fw-bold);text-transform:uppercase;letter-spacing:0.5px;color:var(--c-brown);margin-bottom:2px">{h.label}</div>
-              <div style="font-size:0.95rem;font-weight:var(--fw-bold)">{h.value}</div>
+            <div class="d-highlight">
+              <div class="dh-val">{h.value}</div>
+              <div class="dh-lbl">{h.label}</div>
             </div>
           ))}
         </div>
-
-        <a href="/contact" class="btn btn-gold btn-lg">Request a Quote →</a>
+        <a href="/contact" class="btn-submit">Request a Quote</a>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ===== FEATURES ===== -->
-<section class="section section-gray">
+<section class="section section-dark">
   <div class="container">
     <div class="sec-hdr">
-      <div class="accent-bar"></div>
-      <h2>Key Features</h2>
-      <p>What makes the M16 the right choice for your operation.</p>
+      <span class="sec-tag">Key Features</span>
+      <h2>What Makes the M16</h2>
+      <p>Every detail engineered for reliability and performance.</p>
     </div>
     {
       m16.features.map((feat, i) => (
         <div class="feat-card">
           <div class="feat-card-img">
-            {feat.image ? <img src={`/images/m16/m16/${feat.image}`} alt={feat.title} loading={i > 1 ? 'lazy' : 'eager'} /> : <div style="width:100%;height:100%;background:var(--c-brown);display:flex;align-items:center;justify-content:center;color:white;font-size:1.2rem;font-weight:700">{feat.title.charAt(0)}</div>}
+            {feat.image ? <img src={`/images/m16/m16/${feat.image}`} alt={feat.title} loading={i > 1 ? 'lazy' : 'eager'} /> : <div style="width:100%;height:100%;background:var(--c-dark-4);display:flex;align-items:center;justify-content:center;color:var(--c-red);font-size:2rem;font-weight:700">{feat.title.charAt(0)}</div>}
           </div>
           <div class="feat-card-text">
             <h3>{feat.title}</h3>
@@ -81,12 +75,12 @@ import { m16 } from '../data/m16';
 </section>
 
 <!-- ===== FULL SPECIFICATIONS ===== -->
-<section class="section" id="full-specs">
+<section class="section">
   <div class="container" style="max-width:900px">
     <div class="sec-hdr">
-      <div class="accent-bar"></div>
-      <h2>Technical Specifications</h2>
-      <p>Complete specifications for the MLIFT M16 round bale wrapper.</p>
+      <span class="sec-tag">Technical Data</span>
+      <h2>Full Specifications</h2>
+      <p>Complete technical specifications for the MLIFT M16 round bale wrapper.</p>
     </div>
     {
       m16.specs.map(group => (
@@ -109,10 +103,10 @@ import { m16 } from '../data/m16';
 </section>
 
 <!-- ===== OPTIONS ===== -->
-<section class="section section-gray">
+<section class="section section-dark">
   <div class="container" style="max-width:900px">
     <div class="sec-hdr">
-      <div class="accent-bar"></div>
+      <span class="sec-tag">Customize</span>
       <h2>Optional Equipment</h2>
       <p>Configure the M16 to match your exact workflow.</p>
     </div>
@@ -127,7 +121,7 @@ import { m16 } from '../data/m16';
   <div class="container">
     <h2>Interested in the M16?</h2>
     <p>Contact us for pricing, availability, and custom configuration options. We ship worldwide.</p>
-    <a href="/contact" class="btn btn-gold btn-lg">Get in Touch →</a>
+    <a href="/contact" class="hero-cta">Get in Touch</a>
   </div>
 </section>
 

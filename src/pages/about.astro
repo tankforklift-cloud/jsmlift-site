@@ -4,7 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="About MLIFT" description="MLIFT is a professional agricultural machinery manufacturer specializing in round bale wrappers. Quality engineering, competitive pricing.">
 
-<!-- ===== PAGE HEADER ===== -->
 <section class="page-header">
   <div class="container">
     <div class="breadcrumb"><a href="/">Home</a> / <span>About Us</span></div>
@@ -12,14 +11,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 </section>
 
-<!-- ===== INTRO ===== -->
+<!-- ===== ABOUT INTRO ===== -->
 <section class="section">
   <div class="container">
-    <div class="about-grid">
-      <div>
-        <img src="/images/m16/m16/m16-field-1.jpg" alt="MLIFT M16 in field operation" />
-      </div>
-      <div class="about-text">
+    <div class="abt-grid">
+      <img src="/images/m16/m16/m16-field-1.jpg" alt="MLIFT M16 in field operation" />
+      <div class="abt-text">
         <h2>Engineering That Works</h2>
         <p>
           MLIFT is a manufacturer of professional agricultural machinery, focused on delivering
@@ -28,58 +25,97 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           build with quality materials, and price it for the working farmer.
         </p>
         <p>
-          Based in China with a global outlook, we combine manufacturing efficiency with European
-          design standards. Every MLIFT machine is built to perform in real field conditions —
-          day in, day out.
+          Based in Jingjiang, Jiangsu, China, we combine manufacturing efficiency with European
+          design standards. Every MLIFT machine is built to perform in real field conditions &mdash;
+          day in, day out. From the 3-patent pre-stretcher to the Load Sensing-compatible hydraulic
+          system, every component is selected for long-term durability.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== STATS ===== -->
-<section class="section section-gray">
+<!-- ===== MISSION / VISION / HISTORY ===== -->
+<section class="section section-dark">
   <div class="container">
-    <div class="stats-row" style="text-align:center">
-      <div>
-        <div class="stat-num">985 kg</div>
-        <div class="stat-label">Ultra-Compact Design</div>
+    <div class="sec-hdr">
+      <h2>Who We Are</h2>
+      <p>Driven by quality, built on experience. Learn about our mission, vision, and history.</p>
+    </div>
+    <div class="tabs-wrap">
+      <div class="tabs-nav" id="tabsNav">
+        <button class="tab-btn active" data-tab="mission">Our Mission</button>
+        <button class="tab-btn" data-tab="vision">Our Vision</button>
+        <button class="tab-btn" data-tab="history">Our History</button>
       </div>
-      <div>
-        <div class="stat-num">1,200 kg</div>
-        <div class="stat-label">Max Bale Capacity</div>
+      <div class="tab-panel active" id="mission">
+        <h3>Building Reliable Machines</h3>
+        <p>Our mission is to deliver professional-grade agricultural wrapping equipment at accessible prices. Every MLIFT M16 is built to perform reliably in real farming conditions &mdash; from the humid fields of Southeast Asia to the dry plains of the Americas. We believe farmers deserve equipment that works as hard as they do.</p>
       </div>
-      <div>
-        <div class="stat-num">Global</div>
-        <div class="stat-label">Shipping Available</div>
+      <div class="tab-panel" id="vision">
+        <h3>Global Reach, Local Support</h3>
+        <p>We envision MLIFT as a globally recognized brand in agricultural baling solutions &mdash; trusted by farmers on every continent. Through continuous engineering refinement and strong customer partnerships, we aim to become the go-to choice for round bale wrapping worldwide.</p>
+      </div>
+      <div class="tab-panel" id="history">
+        <h3>Rooted in Engineering</h3>
+        <p>JINGJIANG MLIFT MACHINERY CO.,LTD was founded with a clear purpose: to build agricultural machinery that matches European quality standards at competitive prices. Our team brings decades of manufacturing experience, and the M16 represents the culmination of years of research, testing, and farmer feedback.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== VALUES ===== -->
+<!-- ===== CORE VALUES ===== -->
 <section class="section">
-  <div class="container" style="max-width:800px;margin:0 auto">
+  <div class="container">
     <div class="sec-hdr">
-      <div class="accent-bar"></div>
-      <h2>Why Choose MLIFT</h2>
+      <span class="sec-tag">What We Stand For</span>
+      <h2>Our Core Values</h2>
+      <p>The principles that guide every MLIFT machine we build.</p>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)">
-      <div>
-        <h3 style="font-size:1.05rem;font-weight:var(--fw-bold);margin-bottom:8px;color:var(--c-brown)">▸ Quality First</h3>
-        <p style="font-size:0.9rem;line-height:1.7;color:var(--c-text-muted)">Every component is selected for durability. Hydraulic motors protected inside rollers. Stainless steel film cutter. Built to last.</p>
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="v-icon">&#x1F527;</div>
+        <h4>Quality First</h4>
+        <p>Every component is selected and tested for long-term reliability in real field conditions.</p>
       </div>
-      <div>
-        <h3 style="font-size:1.05rem;font-weight:var(--fw-bold);margin-bottom:8px;color:var(--c-brown)">▸ Competitive Pricing</h3>
-        <p style="font-size:0.9rem;line-height:1.7;color:var(--c-text-muted)">Direct from manufacturer. No middlemen. You get premium engineering without the premium price tag.</p>
+      <div class="value-card">
+        <div class="v-icon">&#x1F4B0;</div>
+        <h4>Fair Pricing</h4>
+        <p>We eliminate unnecessary overhead to deliver professional-grade machines at competitive prices.</p>
       </div>
-      <div>
-        <h3 style="font-size:1.05rem;font-weight:var(--fw-bold);margin-bottom:8px;color:var(--c-brown)">▸ Global Support</h3>
-        <p style="font-size:0.9rem;line-height:1.7;color:var(--c-text-muted)">We ship worldwide and provide comprehensive after-sales support. English, Spanish, and Russian speaking team ready to help.</p>
+      <div class="value-card">
+        <div class="v-icon">&#x1F30D;</div>
+        <h4>Global Mindset</h4>
+        <p>Built to meet international standards. Shipped worldwide with full documentation and support.</p>
       </div>
-      <div>
-        <h3 style="font-size:1.05rem;font-weight:var(--fw-bold);margin-bottom:8px;color:var(--c-brown)">▸ Proven Design</h3>
-        <p style="font-size:0.9rem;line-height:1.7;color:var(--c-text-muted)">The M16 is based on field-tested engineering principles. Two powered rollers. Load Sensing compatible. Radio remote control.</p>
+      <div class="value-card">
+        <div class="v-icon">&#x1F91D;</div>
+        <h4>Customer Partnership</h4>
+        <p>We work closely with every customer to ensure the right configuration for their operation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS ===== -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Countries Served</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Factory Tested</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">After-Sales Support</div>
       </div>
     </div>
   </div>
@@ -88,10 +124,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <!-- ===== CTA ===== -->
 <section class="cta-section">
   <div class="container">
-    <h2>Let's work together</h2>
-    <p>Whether you're a dealer or a farmer, we'd love to hear from you. Reach out for pricing and availability.</p>
-    <a href="/contact" class="btn btn-gold btn-lg">Contact Us →</a>
+    <h2>Work With MLIFT</h2>
+    <p>Whether you're a farmer, distributor, or dealer &mdash; we'd love to hear from you. Get in touch to discuss how the M16 can serve your operation.</p>
+    <a href="/contact" class="hero-cta">Contact Us</a>
   </div>
 </section>
 
 </BaseLayout>
+
+<script is:inline>
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = (btn as HTMLElement).dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      (btn as HTMLElement).classList.add('active');
+      tabPanels.forEach(p => p.classList.remove('active'));
+      document.getElementById(tab!)?.classList.add('active');
+    });
+  });
+</script>

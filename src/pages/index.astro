@@ -3,26 +3,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { m16 } from '../data/m16';
 ---
 
-<BaseLayout title="MLIFT M16 — Professional Round Bale Wrapper" description="MLIFT M16 round bale wrapper: transport, wrap, and stack with one machine. Compact, robust design. Bale diameter 0.90–1.60 m. Get a quote today.">
+<BaseLayout title="MLIFT — Professional Round Bale Wrapper" description="MLIFT M16 round bale wrapper: transport, wrap, and stack with one machine. Compact, robust design engineered for farmers worldwide.">
 
-<!-- ===== HERO ===== -->
+<!-- ===== HERO SLIDER ===== -->
 <section class="hero-slider" id="hero">
-  {
-    m16.heroImages.map((img, i) => (
-      <div class={`hero-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
-        <img src={img.src} alt={img.alt} />
-        <div class="hero-content">
-          <span class="hero-tag">{i === 0 ? 'New Release' : i === 1 ? 'Field Proven' : 'Built to Last'}</span>
-          <h1>{i === 0 ? 'MLIFT M16' : i === 1 ? 'One Machine. Every Job.' : 'Engineered for Farmers'}</h1>
-          <p>{i === 0 ? 'The round bale wrapper that does it all — transport, wrap, and stack with a single machine. Compact. Robust. Reliable.' : i === 1 ? 'From pickup to wrapped-and-stacked. The M16 handles every step with precision and power, saving you time and fuel.' : 'Built with the same commitment to quality that defines German agricultural engineering. Priced for the working farmer.'}</p>
-          {i === 0 && <a href="#specs" class="hero-cta">Explore Specs →</a>}
-          {i === 1 && <a href="/contact" class="hero-cta">Request a Quote →</a>}
-          {i === 2 && <a href="/about" class="hero-cta">About MLIFT →</a>}
-        </div>
+  {m16.heroImages.map((img, i) => (
+    <div class={`hero-slide ${i === 0 ? 'active' : ''}`} data-index={i}>
+      <img src={img.src} alt={img.alt} />
+      <div class="hero-content">
+        <h1>{i === 0 ? 'EMPOWER THE FIELD' : i === 1 ? 'ONE MACHINE. EVERY JOB.' : 'ENGINEERED FOR FARMERS'}</h1>
+        <p>{i === 0 ? 'MLIFT delivers professional round bale wrapping solutions to farms worldwide through precision engineering and relentless quality.' : i === 1 ? 'From pickup to wrapped-and-stacked, the M16 handles every step with precision and power — saving you time, fuel, and labor.' : 'Built with the same commitment to quality that defines world-class agricultural engineering. Priced for the working farmer.'}</p>
+        <a href={i === 0 ? '/products' : i === 1 ? '/contact' : '/about'} class="hero-cta">{i === 0 ? 'Explore Products' : i === 1 ? 'Request a Quote' : 'About MLIFT'}</a>
       </div>
-    ))
-  }
-  <!-- Controls -->
+    </div>
+  ))}
   <button class="hero-arrow prev" onclick="changeSlide(-1)" aria-label="Previous">&#10094;</button>
   <button class="hero-arrow next" onclick="changeSlide(1)" aria-label="Next">&#10095;</button>
   <div class="hero-dots">
@@ -32,123 +26,260 @@ import { m16 } from '../data/m16';
   </div>
 </section>
 
-<!-- ===== SPEC HIGHLIGHT STRIP ===== -->
-<section class="section" id="specs" style="padding-bottom:0">
+<!-- ===== VALUE PROPOSITION ===== -->
+<section class="section section-dark">
   <div class="container">
-    <div class="spec-strip">
-      {m16.keySpecs.map(s => (
-        <div class="spec-item">
-          <div class="spec-icon">{s.icon}</div>
-          <div class="spec-value">{s.value}</div>
-          <div class="spec-label">{s.label}</div>
-        </div>
-      ))}
+    <div class="vp-grid">
+      <div class="vp-card">
+        <div class="vp-icon">🚜</div>
+        <h3>Baling Excellence</h3>
+        <p>MLIFT M16 combines transport, wrapping, and stacking in one compact machine — engineered for the modern farm.</p>
+      </div>
+      <div class="vp-card">
+        <div class="vp-icon">⚡</div>
+        <h3>Discover 100% Efficiency</h3>
+        <p>Two powered rollers ensure even bale rotation and consistent film coverage — no wasted wrap, no missed bales.</p>
+      </div>
+      <div class="vp-card">
+        <div class="vp-icon">🛡️</div>
+        <h3>Your Partner in Robust Solutions</h3>
+        <p>Cat. II/III hitch, Load Sensing ready, and a 1,200 kg capacity — built to handle whatever your operation demands.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== PRODUCT OVERVIEW ===== -->
-<section class="section">
+<!-- ===== ABOUT US ===== -->
+<section class="section" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <h2 style="font-size:2rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin-bottom:var(--space-2);letter-spacing:-0.5px">Elevating Excellence in Global Baling Solutions</h2>
+        <p>
+          JINGJIANG MLIFT MACHINERY CO.,LTD is a professional manufacturer of round bale wrappers based in Jingjiang, Jiangsu, China. Our flagship product, the MLIFT M16, is engineered to match the performance standards of the best European machines — at a price that makes sense for your operation.
+        </p>
+        <p style="font-size:0.93rem;line-height:1.8;color:var(--c-text-muted);margin-bottom:var(--space-3)">
+          Every M16 undergoes rigorous factory testing before shipment. From the 3-patent pre-stretcher to the Load Sensing-compatible hydraulic system, every component is selected for long-term durability in real farming conditions.
+        </p>
+        <a href="/about" class="btn-red">Read More</a>
+      </div>
+      <img src="/images/m16/m16/m16-main.jpg" alt="MLIFT M16 Round Bale Wrapper" loading="lazy" />
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="section section-dark">
   <div class="container">
     <div class="sec-hdr">
-      <div class="accent-bar"></div>
-      <h2>MLIFT M16 — Round Bale Wrapper</h2>
-      <p>The M16 combines transport, wrapping, and stacking into one compact, robust machine. Two rollers actuated in series ensure even bale rotation for consistent film coverage — every time.</p>
+      <span class="sec-tag">Our Product</span>
+      <h2>Round Bale Wrapper</h2>
+      <p>The MLIFT M16 — one machine built to transport, wrap, and stack round bales with maximum efficiency.</p>
     </div>
+
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:center;max-width:1000px;margin:0 auto">
-      <div style="aspect-ratio:16/10;overflow:hidden;background:var(--c-gray-100)">
-        <img src="/images/m16/m16/m16-main.jpg" alt="MLIFT M16 Round Bale Wrapper" style="width:100%;height:100%;object-fit:cover" />
+      <div class="product-card">
+        <div class="pc-img">
+          <img src="/images/m16/m16/m16-main.jpg" alt="MLIFT M16 Round Bale Wrapper" loading="lazy" />
+        </div>
+        <div class="pc-body">
+          <h3>MLIFT M16</h3>
+          <div class="pc-model">Round Bale Wrapper</div>
+          <p>Bale diameter 0.90–1.60 m | Max weight 1,200 kg | 750 mm film | Cat. II/III | Front or rear mount</p>
+          <a href="/m16" class="pc-btn">View Details</a>
+        </div>
       </div>
       <div>
-        <h3 style="font-size:1.5rem;font-weight:var(--fw-extrabold);margin-bottom:var(--space-2);letter-spacing:-0.3px">Why the M16?</h3>
-        <p style="font-size:0.93rem;line-height:1.8;color:var(--c-text-muted);margin-bottom:var(--space-2)">
+        <h3 style="font-size:1.5rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin-bottom:var(--space-2)">Why the M16?</h3>
+        <p style="font-size:0.93rem;line-height:1.8;color:var(--c-text-muted-light);margin-bottom:var(--space-2)">
           Ultra-compact design at just 985 kg, yet handles bales up to 1,200 kg. Cat. II/III hitch fits virtually any tractor. Front or rear mounting gives you total flexibility.
         </p>
         <ul style="list-style:none;padding:0;margin:0 0 var(--space-3)">
-          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-gold)">▸</span> 750 mm film roll with 3-patent pre-stretcher</li>
-          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-gold)">▸</span> Load Sensing compatible — works with any tractor</li>
-          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-gold)">▸</span> Radio remote + electronic joystick control</li>
-          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-gold)">▸</span> Standard LED work lights for low-light operation</li>
+          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted-light)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-red)">▸</span> 750 mm film roll with 3-patent pre-stretcher</li>
+          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted-light)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-red)">▸</span> Load Sensing compatible — works with any tractor</li>
+          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted-light)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-red)">▸</span> Radio remote + electronic joystick control</li>
+          <li style="padding:6px 0;padding-left:22px;position:relative;font-size:0.9rem;color:var(--c-text-muted-light)"><span style="position:absolute;left:0;top:6px;font-weight:bold;color:var(--c-red)">▸</span> Standard LED work lights for low-light operation</li>
         </ul>
-        <a href="/m16" class="btn btn-gold btn-lg">Full Specifications →</a>
+        <a href="/m16" class="btn-red">Full Specifications</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== KEY FEATURES ===== -->
-<section class="section section-gray">
-  <div class="container">
-    <div class="sec-hdr">
-      <div class="accent-bar"></div>
-      <h2>Built for the Job</h2>
-      <p>Every component of the M16 is engineered for reliability in real farming conditions.</p>
-    </div>
-    {
-      m16.features.slice(0, 4).map((feat, i) => (
-        <div class="feat-card">
-          <div class="feat-card-img">
-            {feat.image && <img src={`/images/m16/m16/${feat.image}`} alt={feat.title} loading={i > 1 ? 'lazy' : 'eager'} />}
-          </div>
-          <div class="feat-card-text">
-            <h3>{feat.title}</h3>
-            <p>{feat.desc}</p>
-          </div>
-        </div>
-      ))
-    }
-  </div>
-</section>
-
-<!-- ===== MORE FEATURES ===== -->
+<!-- ===== CORE SERVICES ===== -->
 <section class="section">
   <div class="container">
     <div class="sec-hdr">
-      <div class="accent-bar"></div>
-      <h2>Smart Details</h2>
-      <p>Features that make a real difference in daily operation.</p>
+      <span class="sec-tag">HANDLING &bull; WRAPPING &bull; INTELLIGENT</span>
+      <h2>Core Services</h2>
+      <p>We support your operation with comprehensive after-sales service, training, and worldwide delivery.</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3)">
-      {
-        m16.features.slice(4).map((feat, i) => (
-          <div class="card" style="padding:var(--space-3);text-align:center">
-            {feat.image && (
-              <div style="aspect-ratio:16/10;overflow:hidden;background:var(--c-gray-100);margin-bottom:var(--space-2)">
-                <img src={`/images/m16/m16/${feat.image}`} alt={feat.title} loading="lazy" style="width:100%;height:100%;object-fit:cover" />
-              </div>
-            )}
-            <h3 style="font-size:0.95rem;font-weight:var(--fw-bold);margin-bottom:6px">{feat.title}</h3>
-            <p style="font-size:0.82rem;color:var(--c-text-muted);line-height:1.6">{feat.desc}</p>
-          </div>
-        ))
-      }
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-icon">🎓</div>
+        <h3>Safety / Training</h3>
+        <p>Operator training materials and safety guidelines to ensure safe, efficient operation of your M16 wrapper.</p>
+        <a href="/support" class="svc-link">Read More</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🔧</div>
+        <h3>Inspection / Maintenance</h3>
+        <p>Preventive maintenance schedules, spare parts availability, and technical support to keep your machine running.</p>
+        <a href="/support" class="svc-link">Read More</a>
+      </div>
+      <div class="svc-card">
+        <div class="svc-icon">🌍</div>
+        <h3>Sales Network</h3>
+        <p>We ship worldwide. Contact us for dealer inquiries or direct purchase. Competitive pricing and fast delivery.</p>
+        <a href="/support" class="svc-link">Read More</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ===== CTA ===== -->
+<!-- ===== BLOG ===== -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">Latest Updates</span>
+      <h2>What's Going On?</h2>
+      <p>Stay informed about MLIFT product updates, industry news, and agricultural machinery insights.</p>
+    </div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="bc-img">
+          <img src="/images/m16/m16/m16-field-2.jpg" alt="M16 field operation" loading="lazy" />
+        </div>
+        <div class="bc-body">
+          <div class="bc-date">June 2026</div>
+          <h4>MLIFT Wins First International Order — LS Cable System Mexico</h4>
+          <p>MLIFT M16 round bale wrappers selected by LS Cable &amp; System Mexico for their Queretaro facility.</p>
+          <a href="/blog" class="bc-link">Read More</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="bc-img">
+          <img src="/images/m16/m16/m16-wrapping.jpg" alt="M16 wrapping" loading="lazy" />
+        </div>
+        <div class="bc-body">
+          <div class="bc-date">May 2026</div>
+          <h4>M16 Receives Full Product Certification — Ready for Global Export</h4>
+          <p>Complete documentation package now available for international customers including CE compliance.</p>
+          <a href="/blog" class="bc-link">Read More</a>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="bc-img">
+          <img src="/images/m16/m16/m16-arm.jpg" alt="M16 wrapping arm" loading="lazy" />
+        </div>
+        <div class="bc-body">
+          <div class="bc-date">April 2026</div>
+          <h4>How to Choose the Right Round Bale Wrapper for Your Farm</h4>
+          <p>A practical guide to evaluating bale diameter, hydraulic requirements, and film systems.</p>
+          <a href="/blog" class="bc-link">Read More</a>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:var(--space-5)">
+      <a href="/blog" class="btn-red">View All Articles</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MISSION / VISION / HISTORY ===== -->
+<section class="section">
+  <div class="container">
+    <div class="sec-hdr">
+      <h2>Who We Are</h2>
+      <p>Driven by quality, built on experience. Learn about our mission, vision, and history.</p>
+    </div>
+    <div class="tabs-wrap">
+      <div class="tabs-nav" id="tabsNav">
+        <button class="tab-btn active" data-tab="mission">Our Mission</button>
+        <button class="tab-btn" data-tab="vision">Our Vision</button>
+        <button class="tab-btn" data-tab="history">Our History</button>
+      </div>
+      <div class="tab-panel active" id="mission">
+        <h3>Building Reliable Machines</h3>
+        <p>Our mission is to deliver professional-grade agricultural wrapping equipment at accessible prices. Every MLIFT M16 is built to perform reliably in real farming conditions — from the humid fields of Southeast Asia to the dry plains of the Americas. We believe farmers deserve equipment that works as hard as they do.</p>
+      </div>
+      <div class="tab-panel" id="vision">
+        <h3>Global Reach, Local Support</h3>
+        <p>We envision MLIFT as a globally recognized brand in agricultural baling solutions — trusted by farmers on every continent. Through continuous engineering refinement and strong customer partnerships, we aim to become the go-to choice for round bale wrapping worldwide.</p>
+      </div>
+      <div class="tab-panel" id="history">
+        <h3>Rooted in Engineering</h3>
+        <p>JINGJIANG MLIFT MACHINERY CO.,LTD was founded with a clear purpose: to build agricultural machinery that matches European quality standards at competitive prices. Our team brings decades of manufacturing experience, and the M16 represents the culmination of years of research, testing, and farmer feedback.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PARTNERS ===== -->
+<section class="section section-dark">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">Trusted By</span>
+      <h2>Our Partners</h2>
+      <p>MLIFT is proud to work with agricultural enterprises and distributors worldwide.</p>
+    </div>
+    <div class="partner-grid">
+      <div class="partner-item"><span class="pl-name">LS Cable &amp; System</span></div>
+      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
+      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
+      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
+      <div class="partner-item"><span class="pl-name">Coming Soon</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEALER CTA ===== -->
+<section class="section">
+  <div class="container">
+    <div class="dealer-cta">
+      <h3>MLIFT Dealers &amp; Suppliers</h3>
+      <p>Interested in becoming an MLIFT dealer or distributor in your region? We are actively expanding our global sales network.</p>
+      <a href="/contact" class="btn-red">Contact Us Today</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
 <section class="cta-section">
   <div class="container">
     <h2>Ready to wrap smarter?</h2>
-    <p>The MLIFT M16 delivers German-engineering quality at a price that makes sense for your operation. Get in touch for a quote.</p>
-    <a href="/contact" class="btn btn-gold btn-lg">Request a Quote →</a>
+    <p>The MLIFT M16 delivers world-class wrapping performance at a price that makes sense for your operation. Get in touch for a quote today.</p>
+    <a href="/contact" class="hero-cta">Request a Quote</a>
   </div>
 </section>
 
 </BaseLayout>
 
 <script is:inline>
+  // Hero slider
   let current = 0;
   const total = {m16.heroImages.length};
   function showSlide(n: number) {
-    document.querySelectorAll('.hero-slide').forEach((s,i) => s.classList.toggle('active', i===n));
-    document.querySelectorAll('.hero-dot').forEach((d,i) => d.classList.toggle('active', i===n));
+    document.querySelectorAll('.hero-slide').forEach((s: any,i: number) => (s as HTMLElement).classList.toggle('active', i===n));
+    document.querySelectorAll('.hero-dot').forEach((d: any,i: number) => (d as HTMLElement).classList.toggle('active', i===n));
     current = n;
   }
   function changeSlide(dir: number) {
     showSlide((current + dir + total) % total);
   }
   function goSlide(n: number) { showSlide(n); }
-  // auto-advance every 6 seconds
   setInterval(() => changeSlide(1), 6000);
+
+  // Mission/Vision/History tabs
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = (btn as HTMLElement).dataset.tab;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      (btn as HTMLElement).classList.add('active');
+      tabPanels.forEach(p => p.classList.remove('active'));
+      document.getElementById(tab!)?.classList.add('active');
+    });
+  });
 </script>
