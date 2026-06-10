@@ -3,60 +3,118 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { forkliftCategories } from '../data/forklifts';
 ---
 
-<BaseLayout title="Products — Forklift Range" description="MLIFT complete forklift product line: electric, diesel, LPG, heavy-duty, reach trucks, pallet trucks, stackers, order pickers. 40+ models for every application.">
-
-<section class="page-header">
-  <div class="container">
-    <div class="breadcrumb"><a href="/">Home</a> / <span>Products</span></div>
-    <h1>Our Products</h1>
-    <p style="opacity:0.8;font-size:1.05rem;margin-top:4px">{forkliftCategories.length} product categories — 40+ forklift models for every material handling application</p>
-  </div>
-</section>
-
-<!-- ===== PRODUCT CATEGORIES ===== -->
-<section class="section">
-  <div class="container">
-    <div class="sec-hdr">
-      <span class="sec-tag">Complete Range</span>
-      <h2>Find Your Forklift</h2>
-      <p>From compact electric pallet trucks to 25-ton heavy-duty diesel forklifts, MLIFT covers every application.</p>
+<BaseLayout title="Products — MLIFT Forklifts & Material Handling Equipment" description="Explore MLIFT's complete range of forklifts: Electric Lithium-Ion, IC Forklifts, Lead-Acid, Warehouse Equipment, Heavy Forklifts, Tractors, Wheel Loaders, Special Equipment, Parts & Attachments.">
+  <section class="page-hero" style="padding:160px 0 80px">
+    <div class="container">
+      <div class="sec-tag">OUR PRODUCTS</div>
+      <h1 style="font-size:clamp(2.4rem,5vw,3.6rem);font-weight:var(--fw-extrabold);text-transform:uppercase;margin-bottom:var(--space-3);color:var(--c-text)">Forklifts & Material Handling Equipment</h1>
+      <p style="font-size:1.1rem;color:var(--c-text-secondary);max-width:640px;line-height:1.7">
+        From compact warehouse stackers to heavy-duty container handlers, MLIFT delivers reliable material handling solutions engineered for performance and durability.
+      </p>
     </div>
+  </section>
 
-    {forkliftCategories.map((cat, ci) => (
-      <div id={cat.id} style={`margin-bottom:${ci < forkliftCategories.length - 1 ? 'var(--space-8)' : '0'}`}>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:start">
+  <!-- Category grid (home-page style) -->
+  <section class="section-alt" style="padding:var(--space-6) 0">
+    <div class="container">
+      <div class="sec-tag">PRODUCT CATEGORIES</div>
+      <h2 class="sec-hdr" style="margin-bottom:var(--space-5)">Explore Our Range</h2>
+      <div class="cat-grid">
+        {forkliftCategories.map(cat => (
+          <a href={`#${cat.id}`} class="cat-card">
+            <img src={cat.image} alt={cat.name} class="cat-img" loading="lazy" />
+            <h4>{cat.name}</h4>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Product listings by category -->
+  {forkliftCategories.map(cat => (
+    <section id={cat.id} class="prod-cat-section" style="padding:var(--space-6) 0">
+      <div class="container">
+        <div style="display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-5)">
+          <div style="width:4px;height:40px;background:var(--c-red);border-radius:2px"></div>
           <div>
-            <img src={cat.image} alt={cat.name} style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-sm);margin-bottom:var(--space-3);aspect-ratio:4/3;object-fit:cover" />
-            <h3 style="font-size:1.5rem;font-weight:var(--fw-extrabold);text-transform:uppercase;margin:0 0 var(--space-1);color:var(--c-text)">{cat.name}</h3>
-            <p style="font-size:0.93rem;line-height:1.7;color:var(--c-text-secondary)">{cat.description}</p>
-          </div>
-          <div>
-            <div style="font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--c-red);font-weight:var(--fw-bold);margin-bottom:var(--space-2)">Available Models</div>
-            {cat.models.map(m => (
-              <a href={`/products/${cat.id}/${m.id}`} style="text-decoration:none;display:block;background:var(--c-bg-alt);padding:var(--space-2) var(--space-3);border-radius:6px;margin-bottom:var(--space-1);border:1px solid var(--c-border);transition:all 0.25s;color:var(--c-text)">
-                <div style="display:flex;justify-content:space-between;align-items:center">
-                  <div>
-                    <div style="font-weight:var(--fw-bold);font-size:0.95rem">{m.name}</div>
-                    <div style="font-size:0.78rem;color:var(--c-text-muted)">{m.tagline}</div>
-                  </div>
-                  <div style="color:var(--c-red);font-size:0.8rem;font-weight:var(--fw-bold)">{m.capacity}</div>
-                </div>
-              </a>
-            ))}
+            <h2 style="font-size:clamp(1.6rem,3vw,2rem);font-weight:var(--fw-extrabold);text-transform:uppercase;margin:0;color:var(--c-text)">{cat.name}</h2>
+            <p style="margin:4px 0 0;font-size:0.95rem;color:var(--c-text-secondary);max-width:600px">{cat.description}</p>
           </div>
         </div>
+
+        <div class="product-grid">
+          {cat.models.map(model => (
+            <a href={`/products/${cat.id}/${model.id}`} class="product-card">
+              <div class="product-img-wrap">
+                <img src={model.image} alt={model.name} loading="lazy" />
+              </div>
+              <div class="product-info">
+                <h4>{model.name}</h4>
+                {model.capacity && <span class="product-cap">Capacity: {model.capacity}</span>}
+              </div>
+            </a>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</section>
-
-<!-- ===== CTA ===== -->
-<section class="cta-section">
-  <div class="container">
-    <h2>Not Sure Which Model?</h2>
-    <p>Our team can help you select the right forklift for your specific application, capacity requirements, and operating environment.</p>
-    <a href="/contact" class="hero-cta">Request a Consultation</a>
-  </div>
-</section>
-
+    </section>
+  ))}
 </BaseLayout>
+
+<style>
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+  .product-card {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--c-red);
+  }
+  .product-img-wrap {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--c-bg-alt);
+  }
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .product-card:hover .product-img-wrap img {
+    transform: scale(1.05);
+  }
+  .product-info {
+    padding: var(--space-3);
+  }
+  .product-info h4 {
+    font-size: 0.95rem;
+    font-weight: var(--fw-bold);
+    color: var(--c-text);
+    margin: 0 0 var(--space-1);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .product-cap {
+    font-size: 0.8rem;
+    color: var(--c-red);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .prod-cat-section:nth-child(even) {
+    background: var(--c-bg-alt);
+  }
+</style>

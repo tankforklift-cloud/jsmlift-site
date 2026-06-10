@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { forkliftCategories, getModel } from '../../../data/forklifts';
+import { forkliftCategories, getModelById } from '../../../data/forklifts';
 
 export function getStaticPaths() {
   const paths: { params: { category: string; model: string } }[] = [];
@@ -13,16 +13,17 @@ export function getStaticPaths() {
 }
 
 const { category, model: modelId } = Astro.params;
-const product = getModel(category!, modelId!);
+const product = getModelById(category!, modelId!);
 
 if (!product) {
   return Astro.redirect('/products');
 }
 
 const categoryData = forkliftCategories.find(c => c.id === category);
+const relatedModels = categoryData?.models.filter(m => m.id !== product.id) || [];
 ---
 
-<BaseLayout title={`${product.name} — ${product.tagline}`} description={product.description}>
+<BaseLayout title={`${product.name} — MLIFT ${categoryData?.name || ''}`} description={`${product.name} — ${categoryData?.description || ''}`}>
 
 <section class="page-header">
   <div class="container">
@@ -30,7 +31,7 @@ const categoryData = forkliftCategories.find(c => c.id === category);
       <a href="/">Home</a> / <a href="/products">Products</a> / <a href={`/products#${category}`}>{categoryData?.name || category}</a> / <span>{product.name}</span>
     </div>
     <h1>{product.name}</h1>
-    <p style="opacity:0.8;font-size:1.05rem;margin-top:4px">{product.tagline}</p>
+    <p style="opacity:0.8;font-size:1.05rem;margin-top:4px">{categoryData?.name}</p>
   </div>
 </section>
 
@@ -39,20 +40,30 @@ const categoryData = forkliftCategories.find(c => c.id === category);
   <div class="container">
     <div class="detail-grid">
       <div style="background:var(--c-bg-alt);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;min-height:420px;border:1px solid var(--c-border);overflow:hidden">
-        <img src={categoryData?.image || '/images/products/warehouse-forklift.jpg'} alt={product.name} style="width:100%;height:100%;object-fit:cover" />
+        <img src={product.image} alt={product.name} style="width:100%;height:100%;object-fit:cover" />
       </div>
       <div class="detail-info">
-        <span class="d-badge">{product.powerType}</span>
+        <span class="d-badge">{categoryData?.name}</span>
         <h1>{product.name}</h1>
-        <div class="d-model">{product.tagline}</div>
-        <p class="d-desc">{product.description}</p>
+        {product.capacity && <div class="d-model">Capacity: {product.capacity}</div>}
+        <p class="d-desc">{categoryData?.description}</p>
         <div class="d-highlights">
-          {product.highlights.map(h => (
-            <div class="d-highlight">
-              <div class="dh-val">{h.value}</div>
-              <div class="dh-lbl">{h.label}</div>
-            </div>
-          ))}
+          <div class="d-highlight">
+            <div class="dh-val">{product.capacity || 'N/A'}</div>
+            <div class="dh-lbl">Load Capacity</div>
+          </div>
+          <div class="d-highlight">
+            <div class="dh-val">ISO 9001</div>
+            <div class="dh-lbl">Certified</div>
+          </div>
+          <div class="d-highlight">
+            <div class="dh-val">CE</div>
+            <div class="dh-lbl">Marked</div>
+          </div>
+          <div class="d-highlight">
+            <div class="dh-val">24/7</div>
+            <div class="dh-lbl">Support</div>
+          </div>
         </div>
         <a href="/contact" class="btn-submit">Request a Quote</a>
       </div>
@@ -60,71 +71,30 @@ const categoryData = forkliftCategories.find(c => c.id === category);
   </div>
 </section>
 
-<!-- ===== FEATURES ===== -->
-<section class="section section-dark">
-  <div class="container">
-    <div class="sec-hdr">
-      <span class="sec-tag">Key Features</span>
-      <h2>What Makes the {product.name}</h2>
-      <p>Every detail engineered for reliability and performance.</p>
+<!-- ===== RELATED PRODUCTS ===== -->
+{relatedModels.length > 0 && (
+  <section class="section section-alt">
+    <div class="container">
+      <div class="sec-hdr">
+        <span class="sec-tag">Related Products</span>
+        <h2>More from {categoryData?.name}</h2>
+      </div>
+      <div class="product-grid">
+        {relatedModels.map(m => (
+          <a href={`/products/${category}/${m.id}`} class="product-card">
+            <div class="product-img-wrap">
+              <img src={m.image} alt={m.name} loading="lazy" />
+            </div>
+            <div class="product-info">
+              <h4>{m.name}</h4>
+              {m.capacity && <span class="product-cap">Capacity: {m.capacity}</span>}
+            </div>
+          </a>
+        ))}
+      </div>
     </div>
-    {
-      product.features.map((feat, i) => (
-        <div class="feat-card">
-          <div class="feat-card-img">
-            <div style="width:100%;height:100%;background:var(--c-red-light);display:flex;align-items:center;justify-content:center;color:var(--c-red);font-size:2.5rem;font-weight:700">{(i + 1).toString().padStart(2, '0')}</div>
-          </div>
-          <div class="feat-card-text">
-            <h3>{feat.title}</h3>
-            <p>{feat.desc}</p>
-          </div>
-        </div>
-      ))
-    }
-  </div>
-</section>
-
-<!-- ===== FULL SPECIFICATIONS ===== -->
-<section class="section">
-  <div class="container" style="max-width:900px">
-    <div class="sec-hdr">
-      <span class="sec-tag">Technical Data</span>
-      <h2>Full Specifications</h2>
-      <p>Complete technical specifications for the {product.name}.</p>
-    </div>
-    {
-      product.specs.map(group => (
-        <div class="specs-group">
-          <h3 class="specs-group-title">{group.group}</h3>
-          <table class="specs-table">
-            <tbody>
-              {group.items.map(item => (
-                <tr>
-                  <th>{item.label}</th>
-                  <td>{item.value}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      ))
-    }
-  </div>
-</section>
-
-<!-- ===== OPTIONS ===== -->
-<section class="section section-dark">
-  <div class="container" style="max-width:900px">
-    <div class="sec-hdr">
-      <span class="sec-tag">Customize</span>
-      <h2>Optional Equipment</h2>
-      <p>Configure the {product.name} to match your exact requirements.</p>
-    </div>
-    <ul class="opts-list">
-      {product.options.map(opt => <li>{opt}</li>)}
-    </ul>
-  </div>
-</section>
+  </section>
+)}
 
 <!-- ===== CTA ===== -->
 <section class="cta-section">
@@ -136,3 +106,59 @@ const categoryData = forkliftCategories.find(c => c.id === category);
 </section>
 
 </BaseLayout>
+
+<style>
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-4);
+  }
+  .product-card {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--c-red);
+  }
+  .product-img-wrap {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--c-bg-alt);
+  }
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .product-card:hover .product-img-wrap img {
+    transform: scale(1.05);
+  }
+  .product-info {
+    padding: var(--space-3);
+  }
+  .product-info h4 {
+    font-size: 0.9rem;
+    font-weight: var(--fw-bold);
+    color: var(--c-text);
+    margin: 0 0 var(--space-1);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .product-cap {
+    font-size: 0.78rem;
+    color: var(--c-red);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+</style>
