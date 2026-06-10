@@ -50,17 +50,17 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
   <div class="container">
     <div class="vp-grid">
       <div class="vp-card">
-        <div class="vp-icon">🏭</div>
+        <img src="/images/about/about-slide.jpg" alt="Material Handling Excellence" class="vp-img" />
         <h3>Material Handling Excellence</h3>
         <p>Experience top-tier material handling solutions tailored to your business needs and backed by decades of industry expertise.</p>
       </div>
       <div class="vp-card">
-        <div class="vp-icon">⚡</div>
+        <img src="/images/products/g3-15-35t-lithium.jpg" alt="Discover 100% Efficiency" class="vp-img" />
         <h3>Discover 100% Efficiency</h3>
         <p>Unlock operational efficiency and reliability with MLIFT, your go-to source for cutting-edge material handling solutions.</p>
       </div>
       <div class="vp-card">
-        <div class="vp-icon">🛡️</div>
+        <img src="/images/products/28-32t-ic-heavy.jpg" alt="Your Partner in Robust Solutions" class="vp-img" />
         <h3>Your Partner in Robust Solutions</h3>
         <p>At MLIFT, we bring you unmatched expertise, innovation, and support to enhance your material handling capabilities.</p>
       </div>
@@ -241,10 +241,16 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
       <p>Stay informed about MLIFT product updates, industry insights, and material handling news.</p>
     </div>
     <div class="blog-grid">
-      {blogPosts.map(post => (
+      {blogPosts.map((post, i) => {
+          const blogImages = [
+            '/images/products/g3-15-35t-lithium.jpg',
+            '/images/products/18ton-container-handler.jpg',
+            '/images/products/g2-16-2t-warehouse.jpg',
+          ];
+          return (
         <div class="blog-card">
-          <div class="bc-img" style="background:var(--c-bg-alt);display:flex;align-items:center;justify-content:center">
-            <span style="font-size:2.5rem">📰</span>
+          <div class="bc-img">
+            <img src={blogImages[i]} alt={post.title} />
           </div>
           <div class="bc-body">
             <div class="bc-date">{post.date}</div>
@@ -253,7 +259,8 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
             <a href="/blog" class="bc-link">Read More</a>
           </div>
         </div>
-      ))}
+          );
+        })}
     </div>
     <div style="text-align:center;margin-top:var(--space-5)">
       <a href="/blog" class="btn-red">View All Articles</a>
