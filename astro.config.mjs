@@ -1,11 +1,14 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from "@astrojs/cloudflare";
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://jsmlift.com',
   output: 'static',
   integrations: [sitemap()],
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en', 'es', 'fr', 'ar', 'ru', 'pt'],
@@ -13,4 +16,6 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+
+  adapter: cloudflare()
 });
