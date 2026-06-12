@@ -1,28 +1,185 @@
 ---
-const currentPath = Astro.url?.pathname || '/';
-const isActive = (path: string) => currentPath === path || (path !== '/' && currentPath.startsWith(path));
+import { locales, localeLabels, defaultLocale } from '../i18n/index';
+
+interface Props {
+  locale?: string;
+  pathname?: string;
+}
+
+const { locale = defaultLocale, pathname = '/' } = Astro.props;
+
+const currentPath = Astro.url?.pathname || pathname;
+
+function isActive(path: string) {
+  // Remove locale prefix for comparison
+  let cleanCurrent = currentPath;
+  for (const l of locales) {
+    if (l !== defaultLocale && cleanCurrent.startsWith(`/${l}/`)) {
+      cleanCurrent = cleanCurrent.slice(`/${l}`.length);
+      break;
+    }
+  }
+  return cleanCurrent === path || (path !== '/' && cleanCurrent.startsWith(path));
+}
+
+function localePath(targetLocale: string): string {
+  // Remove existing locale prefix
+  let clean = currentPath;
+  for (const l of locales) {
+    if (l !== defaultLocale && clean.startsWith(`/${l}/`)) {
+      clean = clean.slice(`/${l}`.length);
+      break;
+    }
+    if (l !== defaultLocale && clean === `/${l}`) {
+      clean = '/';
+      break;
+    }
+  }
+  if (targetLocale === defaultLocale) return clean || '/';
+  return clean === '/' ? `/${targetLocale}/` : `/${targetLocale}${clean}`;
+}
 ---
 
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="header-logo">
+    <a href={locale === defaultLocale ? '/' : `/${locale}/`} class="header-logo">
       <img src="/logo.svg" alt="MLIFT — Lifting the Future" width="200" height="50" />
     </a>
 
-    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
+    <div class="header-right">
+      <nav class="main-nav" id="mainNav">
+        <a href={locale === defaultLocale ? '/about' : `/${locale}/about`} class:list={[{ active: isActive('/about') }]}>About Us</a>
+        <a href={locale === defaultLocale ? '/products' : `/${locale}/products`} class:list={[{ active: isActive('/products') }]}>Products</a>
+        <a href={locale === defaultLocale ? '/support' : `/${locale}/support`} class:list={[{ active: isActive('/support') }]}>Support</a>
+        <a href={locale === defaultLocale ? '/blog' : `/${locale}/blog`} class:list={[{ active: isActive('/blog') }]}>Blog</a>
+        <a href={locale === defaultLocale ? '/contact' : `/${locale}/contact`} class:list={[{ active: isActive('/contact') }]}>Contact Us</a>
+      </nav>
 
-    <nav class="main-nav" id="mainNav">
-      <a href="/about" class:list={[{ active: isActive('/about') }]}>About Us</a>
-      <a href="/products" class:list={[{ active: isActive('/products') }]}>Products</a>
-      <a href="/support" class:list={[{ active: isActive('/support') }]}>Support</a>
-      <a href="/blog" class:list={[{ active: isActive('/blog') }]}>Blog</a>
-      <a href="/contact" class:list={[{ active: isActive('/contact') }]}>Contact Us</a>
-    </nav>
+      <!-- Language Switcher -->
+      <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-current" id="langToggle" aria-label="Switch language">
+          <span class="lang-code">{locale.toUpperCase()}</span>
+          <span class="lang-arrow">▾</span>
+        </button>
+        <ul class="lang-dropdown" id="langDropdown">
+          {locales.map(l => (
+            <li>
+              <a
+                href={localePath(l)}
+                class:list={[{ 'lang-active': l === locale }]}
+                hreflang={l}
+                lang={l}
+              >
+                {localeLabels[l]}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">☰</button>
   </div>
 </header>
 
-<script>
-  const toggle = document.getElementById('mobileToggle');
-  const nav = document.getElementById('mainNav');
-  toggle?.addEventListener('click', () => nav?.classList.toggle('open'));
+<script is:inline>
+  (function() {
+    var toggle = document.getElementById('mobileToggle');
+    var nav = document.getElementById('mainNav');
+    toggle && toggle.addEventListener('click', function() {
+      nav && nav.classList.toggle('open');
+    });
+
+    var langToggle = document.getElementById('langToggle');
+    var langDropdown = document.getElementById('langDropdown');
+    langToggle && langToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      langDropdown && langDropdown.classList.toggle('open');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      var sw = document.getElementById('langSwitcher');
+      if (sw && !sw.contains(e.target)) {
+        langDropdown && langDropdown.classList.remove('open');
+      }
+    });
+  })();
 </script>
+
+<style>
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  /* Language Switcher */
+  .lang-switcher {
+    position: relative;
+    z-index: 100;
+  }
+  .lang-current {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: transparent;
+    border: 1px solid var(--c-border, #e0e0e0);
+    border-radius: var(--radius-sm, 6px);
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 0.78rem;
+    font-weight: var(--fw-semi, 600);
+    color: var(--c-text, #1A1A1A);
+    transition: border-color 0.2s;
+    white-space: nowrap;
+  }
+  .lang-current:hover {
+    border-color: var(--c-red, #D40000);
+  }
+  .lang-code {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .lang-arrow {
+    font-size: 0.65rem;
+    opacity: 0.5;
+    transition: transform 0.2s;
+  }
+  .lang-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 0;
+    background: var(--c-bg, #fff);
+    border: 1px solid var(--c-border, #e0e0e0);
+    border-radius: var(--radius-sm, 6px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    list-style: none;
+    padding: 4px 0;
+    margin: 0;
+    min-width: 140px;
+    z-index: 200;
+  }
+  .lang-dropdown.open {
+    display: block;
+  }
+  .lang-dropdown li a {
+    display: block;
+    padding: 8px 16px;
+    font-size: 0.82rem;
+    color: var(--c-text, #1A1A1A);
+    text-decoration: none;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .lang-dropdown li a:hover {
+    background: var(--c-red-light, #FFF0F0);
+    color: var(--c-red, #D40000);
+  }
+  .lang-dropdown li a.lang-active {
+    font-weight: var(--fw-bold, 700);
+    color: var(--c-red, #D40000);
+    background: var(--c-red-light, #FFF0F0);
+  }
+</style>

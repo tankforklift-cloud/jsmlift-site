@@ -1,11 +1,73 @@
+---
+import { defaultLocale } from '../i18n/index';
+
+interface Props {
+  locale?: string;
+}
+
+const { locale = defaultLocale } = Astro.props;
+
+/** Simple inline translations for footer (avoids async import in footer component) */
+const t: Record<string, Record<string, string>> = {
+  en: {
+    about: 'Professional forklift manufacturer. Electric, diesel, LPG, and heavy-duty forklifts &mdash; 1.5 to 25 tons. Based in Jingjiang, Jiangsu, China.',
+    aboutUs: 'About Us',
+    aboutUsText: 'JINGJIANG MLIFT MACHINERY CO.,LTD is committed to delivering high-performance material handling equipment to businesses worldwide. ISO 9001 &amp; CE certified.',
+    companyInfo: 'Company Info',
+    quickContact: 'Quick Contact',
+    copyright: 'All rights reserved.',
+  },
+  es: {
+    about: 'Fabricante profesional de montacargas. Montacargas el&eacute;ctricos, di&eacute;sel, GLP y pesados &mdash; 1.5 a 25 toneladas. Con sede en Jingjiang, Jiangsu, China.',
+    aboutUs: 'Sobre Nosotros',
+    aboutUsText: 'JINGJIANG MLIFT MACHINERY CO.,LTD se compromete a ofrecer equipos de manipulaci&oacute;n de materiales de alto rendimiento a empresas de todo el mundo. Certificados ISO 9001 y CE.',
+    companyInfo: 'Informaci&oacute;n',
+    quickContact: 'Contacto R&aacute;pido',
+    copyright: 'Todos los derechos reservados.',
+  },
+  fr: {
+    about: 'Fabricant professionnel de chariots &eacute;l&eacute;vateurs. Chariots &eacute;lectriques, diesel, GPL et lourds &mdash; 1.5 &agrave; 25 tonnes. Bas&eacute; &agrave; Jingjiang, Jiangsu, Chine.',
+    aboutUs: '&Agrave; propos',
+    aboutUsText: 'JINGJIANG MLIFT MACHINERY CO.,LTD s&rsquo;engage &agrave; fournir des &eacute;quipements de manutention de haute performance aux entreprises du monde entier. Certifi&eacute; ISO 9001 et CE.',
+    companyInfo: 'Infos Soci&eacute;t&eacute;',
+    quickContact: 'Contact Rapide',
+    copyright: 'Tous droits r&eacute;serv&eacute;s.',
+  },
+  ar: {
+    about: 'شركة تصنيع رافعات شوكية محترفة. رافعات شوكية كهربائية وديزل وغاز وثقيلة &mdash; 1.5 إلى 25 طنًا. مقرها في جينغجيانغ، جيانغسو، الصين.',
+    aboutUs: 'من نحن',
+    aboutUsText: 'تلتزم JINGJIANG MLIFT MACHINERY CO.,LTD بتقديم معدات مناولة مواد عالية الأداء للشركات في جميع أنحاء العالم. معتمدة ISO 9001 و CE.',
+    companyInfo: 'معلومات الشركة',
+    quickContact: 'اتصال سريع',
+    copyright: 'جميع الحقوق محفوظة.',
+  },
+  ru: {
+    about: 'Профессиональный производитель погрузчиков. Электрические, дизельные, газовые и тяжелые погрузчики &mdash; 1.5 до 25 тонн. Базируется в Цзинцзяне, Цзянсу, Китай.',
+    aboutUs: 'О нас',
+    aboutUsText: 'JINGJIANG MLIFT MACHINERY CO.,LTD стремится поставлять высокопроизводительное оборудование для обработки материалов предприятиям по всему миру. Сертифицировано ISO 9001 и CE.',
+    companyInfo: 'О компании',
+    quickContact: 'Быстрая связь',
+    copyright: 'Все права защищены.',
+  },
+  pt: {
+    about: 'Fabricante profissional de empilhadeiras. Empilhadeiras el&eacute;tricas, diesel, GLP e pesadas &mdash; 1.5 a 25 toneladas. Sediada em Jingjiang, Jiangsu, China.',
+    aboutUs: 'Sobre N&oacute;s',
+    aboutUsText: 'JINGJIANG MLIFT MACHINERY CO.,LTD est&aacute; comprometida em fornecer equipamentos de manuseio de materiais de alto desempenho para empresas em todo o mundo. Certificado ISO 9001 e CE.',
+    companyInfo: 'Info Empresa',
+    quickContact: 'Contato R&aacute;pido',
+    copyright: 'Todos os direitos reservados.',
+  },
+};
+
+const d = t[locale] || t.en;
+const prefix = locale === defaultLocale ? '' : `/${locale}`;
+---
+
 <footer class="site-footer">
   <div class="footer-grid">
     <div>
       <h4>MLIFT</h4>
-      <p>
-        Professional forklift manufacturer. Electric, diesel, LPG, and heavy-duty 
-        forklifts &mdash; 1.5 to 25 tons. Based in Jingjiang, Jiangsu, China.
-      </p>
+      <p>{d.about}</p>
       <div class="footer-social">
         <a href="#" aria-label="Facebook">f</a>
         <a href="#" aria-label="Instagram">in</a>
@@ -13,24 +75,21 @@
       </div>
     </div>
     <div>
-      <h4>About Us</h4>
-      <p>
-        JINGJIANG MLIFT MACHINERY CO.,LTD is committed to delivering high-performance
-        material handling equipment to businesses worldwide. ISO 9001 &amp; CE certified.
-      </p>
+      <h4>{d.aboutUs}</h4>
+      <p>{d.aboutUsText}</p>
     </div>
     <div>
-      <h4>Company Info</h4>
+      <h4>{d.companyInfo}</h4>
       <ul>
-        <li><a href="/about">About Us</a></li>
-        <li><a href="/products">Products</a></li>
-        <li><a href="/support">Support</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/contact">Contact Us</a></li>
+        <li><a href={`${prefix}/about`}>About Us</a></li>
+        <li><a href={`${prefix}/products`}>Products</a></li>
+        <li><a href={`${prefix}/support`}>Support</a></li>
+        <li><a href={`${prefix}/blog`}>Blog</a></li>
+        <li><a href={`${prefix}/contact`}>Contact Us</a></li>
       </ul>
     </div>
     <div>
-      <h4>Quick Contact</h4>
+      <h4>{d.quickContact}</h4>
       <p>
         Phone: +86 152 9523 7612<br />
         Email: tan@jsmlift.com<br />
@@ -39,6 +98,6 @@
     </div>
   </div>
   <div class="footer-bottom">
-    &copy; {new Date().getFullYear()} MLIFT. All rights reserved. | JINGJIANG MLIFT MACHINERY CO.,LTD
+    &copy; {new Date().getFullYear()} MLIFT. {d.copyright} | JINGJIANG MLIFT MACHINERY CO.,LTD
   </div>
 </footer>

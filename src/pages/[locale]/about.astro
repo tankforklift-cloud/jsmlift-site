@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { defaultLocale } from '../../i18n/index';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: 'es' } },
+    { params: { locale: 'fr' } },
+    { params: { locale: 'ar' } },
+    { params: { locale: 'ru' } },
+    { params: { locale: 'pt' } },
+  ];
+}
+
+const { locale } = Astro.params;
+const loc = (locale || defaultLocale) as string;
+const localeData = await import(`../../i18n/ui/${loc}.json`);
+const t = localeData.default;
+const prefix = `/${loc}`;
+---
+
+<BaseLayout title={t.about.title + ' — MLIFT'} description={t.about.desc} pageType="Organization">
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href={`${prefix}/`}>{t.nav.home}</a> / <span>{t.about.breadcrumb}</span></div>
+    <h1>{t.about.title}</h1>
+    <p>{t.about.desc}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:center">
+      <div>
+        <img src="/images/about/about-left.png" alt="MLIFT Factory" style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-lg)" />
+      </div>
+      <div>
+        <h2 style="font-size:1.6rem;margin-bottom:var(--space-3)">{t.home.aboutTitle}</h2>
+        <p style="color:var(--c-muted);line-height:1.8;margin-bottom:var(--space-3)">{t.home.aboutP1}</p>
+        <p style="color:var(--c-muted);line-height:1.8">{t.home.aboutP2}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">{t.home.whoWeAreTitle}</span>
+      <h2>{t.home.whoWeAreDesc}</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-4)">
+      <div style="background:var(--c-bg);padding:var(--space-4);border-radius:var(--radius-md);border:1px solid var(--c-border)">
+        <h3 style="color:var(--c-red);margin-bottom:var(--space-2)">{t.home.missionTitle}</h3>
+        <p style="color:var(--c-muted);line-height:1.7;font-size:0.9rem">{t.home.missionP}</p>
+      </div>
+      <div style="background:var(--c-bg);padding:var(--space-4);border-radius:var(--radius-md);border:1px solid var(--c-border)">
+        <h3 style="color:var(--c-red);margin-bottom:var(--space-2)">{t.home.visionTitle}</h3>
+        <p style="color:var(--c-muted);line-height:1.7;font-size:0.9rem">{t.home.visionP}</p>
+      </div>
+      <div style="background:var(--c-bg);padding:var(--space-4);border-radius:var(--radius-md);border:1px solid var(--c-border)">
+        <h3 style="color:var(--c-red);margin-bottom:var(--space-2)">{t.home.historyTitle}</h3>
+        <p style="color:var(--c-muted);line-height:1.7;font-size:0.9rem">{t.home.historyP}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:var(--space-4);text-align:center">
+    <div><div style="font-size:2.5rem;font-weight:900;color:var(--c-red)">50+</div><p style="color:var(--c-muted)">{t.home.statsCountries}</p></div>
+    <div><div style="font-size:2.5rem;font-weight:900;color:var(--c-red)">10</div><p style="color:var(--c-muted)">{t.home.statsCategories}</p></div>
+    <div><div style="font-size:2.5rem;font-weight:900;color:var(--c-red)">24/7</div><p style="color:var(--c-muted)">{t.home.statsSupport}</p></div>
+    <div><div style="font-size:2.5rem;font-weight:900;color:var(--c-red)">100%</div><p style="color:var(--c-muted)">{t.home.statsTested}</p></div>
+  </div>
+</section>
+</BaseLayout>
+
+<style>
+  .breadcrumb { font-size: 0.82rem; color: var(--c-muted); margin-bottom: var(--space-2); }
+  .breadcrumb a { color: var(--c-red); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+</style>

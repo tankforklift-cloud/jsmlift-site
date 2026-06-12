@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { defaultLocale } from '../../i18n/index';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: 'es' } },
+    { params: { locale: 'fr' } },
+    { params: { locale: 'ar' } },
+    { params: { locale: 'ru' } },
+    { params: { locale: 'pt' } },
+  ];
+}
+
+const { locale } = Astro.params;
+const loc = (locale || defaultLocale) as string;
+const localeData = await import(`../../i18n/ui/${loc}.json`);
+const t = localeData.default;
+const prefix = `/${loc}`;
+---
+
+<BaseLayout title={t.support.title + ' — MLIFT'} description={t.support.desc} pageType="WebPage">
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href={`${prefix}/`}>{t.nav.home}</a> / <span>{t.support.breadcrumb}</span></div>
+    <h1>{t.support.title}</h1>
+    <p>{t.support.desc}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:var(--space-4)">
+    <div style="background:var(--c-bg);padding:var(--space-4);border-radius:var(--radius-md);border:1px solid var(--c-border);border-top:4px solid var(--c-red)">
+      <h3 style="font-size:1.1rem;margin-bottom:var(--space-2)">{t.home.service1}</h3>
+      <p style="color:var(--c-muted);line-height:1.7;font-size:0.9rem">{t.home.service1Desc}</p>
+    </div>
+    <div style="background:var(--c-bg);padding:var(--space-4);border-radius:var(--radius-md);border:1px solid var(--c-border);border-top:4px solid var(--c-red)">
+      <h3 style="font-size:1.1rem;margin-bottom:var(--space-2)">{t.home.service2}</h3>
+      <p style="color:var(--c-muted);line-height:1.7;font-size:0.9rem">{t.home.service2Desc}</p>
+    </div>
+    <div style="background:var(--c-bg);padding:var(--space-4);border-radius:var(--radius-md);border:1px solid var(--c-border);border-top:4px solid var(--c-red)">
+      <h3 style="font-size:1.1rem;margin-bottom:var(--space-2)">{t.home.service3}</h3>
+      <p style="color:var(--c-muted);line-height:1.7;font-size:0.9rem">{t.home.service3Desc}</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container" style="text-align:center">
+    <h2>{t.home.dealerTitle}</h2>
+    <p style="max-width:600px;margin:0 auto var(--space-4);color:var(--c-muted)">{t.home.dealerP}</p>
+    <a href={`${prefix}/contact`} class="hero-cta" style="font-size:0.9rem;padding:12px 32px">{t.home.dealerCta}</a>
+  </div>
+</section>
+</BaseLayout>
+
+<style>
+  .breadcrumb { font-size: 0.82rem; color: var(--c-muted); margin-bottom: var(--space-2); }
+  .breadcrumb a { color: var(--c-red); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+</style>

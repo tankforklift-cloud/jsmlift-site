@@ -1,0 +1,133 @@
+<!--
+  Locale-aware Home Page.
+  Generates: /es/, /ko/, /ar/
+-->
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { forkliftCategories } from '../../data/forklifts';
+import { defaultLocale } from '../../i18n/index';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: 'es' } },
+    { params: { locale: 'fr' } },
+    { params: { locale: 'ar' } },
+    { params: { locale: 'ru' } },
+    { params: { locale: 'pt' } },
+  ];
+}
+
+const { locale } = Astro.params;
+const loc = (locale || defaultLocale) as string;
+
+// Load locale-specific strings from UI data
+import type { Locale } from '../../../i18n/index';
+const localeData = await import(`../../i18n/ui/${loc}.json`);
+const t = localeData.default;
+const prefix = `/${loc}`;
+---
+
+<BaseLayout title={t.nav.home + ' — MLIFT'} description={t.site.description} pageType="WebSite">
+<slot name="hero">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-slider">
+      <div class="hero-slide active" style="background: linear-gradient(135deg, #B00000 0%, #D40000 50%, #E83838 100%)">
+        <div class="container hero-flex">
+          <div class="hero-text">
+            <span class="hero-tag">{t.home.heroTag1}</span>
+            <h1>{t.home.heroTitle1}</h1>
+            <p>{t.home.heroSub1}</p>
+            <div class="hero-btns">
+              <a href={`${prefix}/products`} class="hero-cta">{t.home.heroCta1}</a>
+            </div>
+          </div>
+          <div class="hero-img">
+            <img src="/images/hero/hero-1.jpg" alt="MLIFT Forklift" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</slot>
+
+<!-- VP Intro -->
+<section class="section" style="background:var(--c-bg-alt)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-4)">
+      <div style="text-align:center;padding:var(--space-4)">
+        <div style="font-size:2.5rem;color:var(--c-red);margin-bottom:var(--space-2)">✓</div>
+        <h3>{t.home.vpTitle1}</h3>
+        <p style="font-size:0.9rem;color:var(--c-muted)">{t.home.vpDesc1}</p>
+      </div>
+      <div style="text-align:center;padding:var(--space-4)">
+        <div style="font-size:2.5rem;color:var(--c-red);margin-bottom:var(--space-2)">⚡</div>
+        <h3>{t.home.vpTitle2}</h3>
+        <p style="font-size:0.9rem;color:var(--c-muted)">{t.home.vpDesc2}</p>
+      </div>
+      <div style="text-align:center;padding:var(--space-4)">
+        <div style="font-size:2.5rem;color:var(--c-red);margin-bottom:var(--space-2)">🤝</div>
+        <h3>{t.home.vpTitle3}</h3>
+        <p style="font-size:0.9rem;color:var(--c-muted)">{t.home.vpDesc3}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Preview -->
+<section class="section">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5);align-items:center">
+    <div>
+      <span class="sec-tag">{t.home.aboutTitle}</span>
+      <h2 style="font-size:1.6rem;margin:var(--space-2) 0">{t.home.aboutTitle}</h2>
+      <p style="color:var(--c-muted);line-height:1.7;margin-bottom:var(--space-3)">{t.home.aboutP1}</p>
+      <a href={`${prefix}/about`} class="btn-submit">{t.home.aboutReadMore}</a>
+    </div>
+    <div>
+      <img src="/images/about/about-left.png" alt="About MLIFT" style="width:100%;border-radius:var(--radius-md);box-shadow:var(--shadow-lg)" />
+    </div>
+  </div>
+</section>
+
+<!-- Products Preview -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="sec-hdr">
+      <span class="sec-tag">{t.home.productsTag}</span>
+      <h2>{t.home.productsTitle}</h2>
+      <p>{t.home.productsDesc}</p>
+    </div>
+    <div class="product-grid">
+      {forkliftCategories.slice(0, 6).map(cat => (
+        <a href={`${prefix}/products#${cat.id}`} class="product-card">
+          <div class="product-img-wrap"><img src={cat.image} alt={cat.name} loading="lazy" /></div>
+          <div class="product-info"><h4>{cat.name}</h4><p style="font-size:0.8rem;color:var(--c-muted)">{cat.description.slice(0,80)}...</p></div>
+        </a>
+      ))}
+    </div>
+    <div style="text-align:center;margin-top:var(--space-4)">
+      <a href={`${prefix}/products`} class="hero-cta" style="font-size:0.9rem;padding:12px 32px">{t.home.viewAllProducts}</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>{t.home.ctaTitle}</h2>
+    <p>{t.home.ctaP}</p>
+    <a href={`${prefix}/contact`} class="hero-cta">{t.home.ctaBtn}</a>
+  </div>
+</section>
+</BaseLayout>
+
+<style>
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
+  .product-card { background: var(--c-bg); border: 1px solid var(--c-border); border-radius: var(--radius-md); overflow: hidden; text-decoration: none; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+  .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--c-red); }
+  .product-img-wrap { aspect-ratio: 4 / 3; overflow: hidden; background: var(--c-bg-alt); }
+  .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .product-card:hover .product-img-wrap img { transform: scale(1.05); }
+  .product-info { padding: var(--space-3); }
+  .product-info h4 { font-size: 0.9rem; font-weight: var(--fw-bold); color: var(--c-text); margin: 0 0 var(--space-1); line-height: 1.4; }
+</style>

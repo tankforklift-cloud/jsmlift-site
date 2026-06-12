@@ -1,31 +1,188 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import TrackingScripts from '../components/TrackingScripts.astro';
+import CookieConsent from '../components/CookieConsent.astro';
+import { defaultLocale, locales, localeDirections } from '../i18n/index';
 import '../styles/global.css';
 
 export interface Props {
   title: string;
   description?: string;
+  /** Open Graph image URL (absolute). Defaults to /images/og-default.jpg */
+  ogImage?: string;
+  /** Page type for JSON-LD structured data */
+  pageType?: 'WebSite' | 'Organization' | 'Product' | 'WebPage';
+  /** Product structured data (only needed for product pages) */
+  productSchema?: {
+    name: string;
+    description: string;
+    image: string;
+    category?: string;
+    capacity?: string;
+  };
+  /** Canonical URL override */
+  canonical?: string;
 }
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  ogImage = '/images/og-default.jpg',
+  pageType = 'WebPage',
+  productSchema,
+  canonical,
+} = Astro.props;
+
+const locale = (Astro.currentLocale || defaultLocale) as string;
+const dir = localeDirections[locale as keyof typeof localeDirections] || 'ltr';
 const metaDesc = description || 'MLIFT — Professional Forklift Manufacturer. Electric, diesel, LPG, and heavy-duty forklifts from 1.5 to 25 tons. ISO 9001 & CE certified. Exporting to 50+ countries.';
+
+// Full URL helpers
+const siteUrl = Astro.site?.origin || 'https://jsmlift.com';
+const currentUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+
+// --- hreflang alternates ---
+const pathName = Astro.url.pathname;
+function hreflangPath(targetLocale: string): string {
+  if (targetLocale === defaultLocale) {
+    // Remove any existing locale prefix
+    let clean = pathName;
+    for (const l of locales) {
+      if (l !== defaultLocale) {
+        if (clean.startsWith(`/${l}/`)) { clean = clean.slice(`/${l}`.length); break; }
+        if (clean === `/${l}`) { clean = '/'; break; }
+      }
+    }
+    return clean || '/';
+  }
+  // Add locale prefix
+  let clean = pathName;
+  for (const l of locales) {
+    if (l !== defaultLocale) {
+      if (clean.startsWith(`/${l}/`)) { clean = clean.slice(`/${l}`.length); break; }
+      if (clean === `/${l}`) { clean = '/'; break; }
+    }
+  }
+  return clean === '/' ? `/${targetLocale}/` : `/${targetLocale}${clean}`;
+}
+
+// --- JSON-LD Structured Data ---
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'JINGJIANG MLIFT MACHINERY CO.,LTD',
+  alternateName: 'MLIFT',
+  url: siteUrl,
+  logo: `${siteUrl}/logo.svg`,
+  description: 'Professional forklift manufacturer. Electric, diesel, LPG, and heavy-duty forklifts. ISO 9001 & CE certified.',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Jingjiang',
+    addressRegion: 'Jiangsu',
+    addressCountry: 'CN',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: '+86-152-9523-7612',
+    email: 'tan@jsmlift.com',
+    contactType: 'sales',
+  },
+  sameAs: [],
+};
+
+const pageSchema = pageType === 'Organization'
+  ? orgSchema
+  : pageType === 'Product' && productSchema
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: productSchema.name,
+        description: productSchema.description,
+        image: productSchema.image.startsWith('http') ? productSchema.image : `${siteUrl}${productSchema.image}`,
+        category: productSchema.category || '',
+        brand: { '@type': 'Brand', name: 'MLIFT' },
+        manufacturer: { '@type': 'Organization', name: 'JINGJIANG MLIFT MACHINERY CO.,LTD' },
+        offers: {
+          '@type': 'Offer',
+          availability: 'https://schema.org/InStock',
+          itemCondition: 'https://schema.org/NewCondition',
+        },
+      }
+    : {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: title,
+        description: metaDesc,
+        url: currentUrl,
+        publisher: { '@type': 'Organization', name: 'MLIFT', url: siteUrl },
+        inLanguage: locale,
+      };
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={locale} dir={dir}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content={metaDesc} />
   <title>{title} | MLIFT</title>
+  <meta name="description" content={metaDesc} />
+
+  <!-- Canonical & hreflang -->
+  <link rel="canonical" href={currentUrl} />
+  {locales.map(l => (
+    <link rel="alternate" hreflang={l} href={`${siteUrl}${hreflangPath(l)}`} />
+  ))}
+  <link rel="alternate" hreflang="x-default" href={`${siteUrl}${hreflangPath(defaultLocale)}`} />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content={pageType === 'Product' ? 'product' : 'website'} />
+  <meta property="og:title" content={`${title} | MLIFT`} />
+  <meta property="og:description" content={metaDesc} />
+  <meta property="og:url" content={currentUrl} />
+  <meta property="og:site_name" content="MLIFT" />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={locale === 'en' ? 'en_US' : locale === 'es' ? 'es_ES' : locale === 'fr' ? 'fr_FR' : locale === 'ar' ? 'ar_SA' : locale === 'ru' ? 'ru_RU' : 'pt_BR'} />
+  {/* Alternate locale OG tags */}
+  {locales.filter(l => l !== locale).slice(0, 2).map(l => (
+    <meta property="og:locale:alternate" content={l === 'en' ? 'en_US' : l === 'es' ? 'es_ES' : l === 'fr' ? 'fr_FR' : l === 'ar' ? 'ar_SA' : l === 'ru' ? 'ru_RU' : 'pt_BR'} />
+  ))}
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={`${title} | MLIFT`} />
+  <meta name="twitter:description" content={metaDesc} />
+  <meta name="twitter:image" content={ogImageUrl} />
+  <meta name="twitter:site" content="@MLIFT_global" />
+
+  <!-- Mobile & PWA -->
+  <meta name="theme-color" content="#D40000" />
+  <meta name="apple-mobile-web-app-title" content="MLIFT" />
+
+  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.svg" />
+
+  <!-- Verification tags (placeholder — replace with your actual codes) -->
+  <!-- <meta name="google-site-verification" content="YOUR_CODE" /> -->
+  <!-- <meta name="facebook-domain-verification" content="YOUR_CODE" /> -->
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(pageSchema)}></script>
+  <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} is:inline></script>
+
+  <!-- Analytics & Tracking (loads after page renders) -->
+  <TrackingScripts />
 </head>
 <body>
-  <Header />
+  <CookieConsent />
+  <Header locale={locale} pathname={Astro.url.pathname} />
   <main>
     <slot />
   </main>
-  <Footer />
+  <Footer locale={locale} />
 </body>
 </html>

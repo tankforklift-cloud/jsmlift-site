@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { defaultLocale } from '../../i18n/index';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: 'es' } },
+    { params: { locale: 'fr' } },
+    { params: { locale: 'ar' } },
+    { params: { locale: 'ru' } },
+    { params: { locale: 'pt' } },
+  ];
+}
+
+const { locale } = Astro.params;
+const loc = (locale || defaultLocale) as string;
+const localeData = await import(`../../i18n/ui/${loc}.json`);
+const t = localeData.default;
+const prefix = `/${loc}`;
+---
+
+<BaseLayout title={t.blog.title + ' — MLIFT'} description={t.blog.desc} pageType="WebPage">
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href={`${prefix}/`}>{t.nav.home}</a> / <span>{t.blog.breadcrumb}</span></div>
+    <h1>{t.blog.title}</h1>
+    <p>{t.blog.desc}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p style="text-align:center;color:var(--c-muted);padding:var(--space-6) 0;font-size:1.1rem">
+      {t.home.blogTag} — {t.blog.desc}
+    </p>
+    <div style="text-align:center;margin-top:var(--space-4)">
+      <a href={`${prefix}/contact`} class="hero-cta" style="font-size:0.9rem;padding:12px 32px">{t.home.ctaBtn}</a>
+    </div>
+  </div>
+</section>
+</BaseLayout>
+
+<style>
+  .breadcrumb { font-size: 0.82rem; color: var(--c-muted); margin-bottom: var(--space-2); }
+  .breadcrumb a { color: var(--c-red); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+</style>

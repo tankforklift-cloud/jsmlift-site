@@ -1,0 +1,263 @@
+<!--
+  Locale-aware product detail page.
+  Generates: /es/products/..., /fr/products/..., /ar/products/..., /ru/products/..., /pt/products/...
+-->
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { forkliftCategories, getModelById } from '../../../../data/forklifts';
+import { getSpecByModelId } from '../../../../data/productSpecs';
+import { defaultLocale } from '../../../../i18n/index';
+
+export function getStaticPaths() {
+  const paths: { params: { locale: string; category: string; model: string } }[] = [];
+  const locales = ['es', 'fr', 'ar', 'ru', 'pt'];
+  for (const loc of locales) {
+    for (const cat of forkliftCategories) {
+      for (const model of cat.models) {
+        paths.push({ params: { locale: loc, category: cat.id, model: model.id } });
+      }
+    }
+  }
+  return paths;
+}
+
+const { locale, category, model: modelId } = Astro.params;
+const product = getModelById(category!, modelId!);
+
+if (!product) {
+  return Astro.redirect('/products');
+}
+
+const categoryData = forkliftCategories.find(c => c.id === category);
+const relatedModels = categoryData?.models.filter(m => m.id !== product.id) || [];
+const spec = getSpecByModelId(modelId!);
+const loc = (locale || defaultLocale) as string;
+
+const labels: Record<string, Record<string, string>> = {
+  en: {
+    home: 'Home', products: 'Products', capacity: 'Load Capacity', certified: 'Certified', marked: 'Marked',
+    support: 'Support', requestQuote: 'Request a Quote', mainParam: 'Main Parameter',
+    powerUnits: 'Available Power Units', batteryConfigs: 'Available Battery Configurations',
+    keyImprovements: 'Key Performance Improvements', productHighlights: 'Product Highlights',
+    relatedProducts: 'Related Products', moreFrom: 'More from',
+    interested: 'Interested in the', pricing: 'Contact us for pricing, availability, and custom configuration options. We ship worldwide.',
+    getInTouch: 'Get in Touch',
+  },
+  es: {
+    home: 'Inicio', products: 'Productos', capacity: 'Capacidad', certified: 'Certificado', marked: 'Marcado',
+    support: 'Soporte', requestQuote: 'Solicitar Cotización', mainParam: 'Parámetro Principal',
+    powerUnits: 'Unidades de Potencia', batteryConfigs: 'Configuraciones de Batería',
+    keyImprovements: 'Mejoras Clave', productHighlights: 'Destacados del Producto',
+    relatedProducts: 'Productos Relacionados', moreFrom: 'Más de',
+    interested: '¿Interesado en', pricing: 'Contáctenos para precios y disponibilidad. Enviamos a todo el mundo.',
+    getInTouch: 'Contáctenos',
+  },
+  fr: {
+    home: 'Accueil', products: 'Produits', capacity: 'Charge', certified: 'Certifié', marked: 'Marqué',
+    support: 'Support', requestQuote: 'Demander un Devis', mainParam: 'Paramètre Principal',
+    powerUnits: 'Unités de Puissance', batteryConfigs: 'Configurations Batterie',
+    keyImprovements: 'Améliorations Clés', productHighlights: 'Points Forts',
+    relatedProducts: 'Produits Associés', moreFrom: 'Plus de',
+    interested: 'Intéressé par le', pricing: 'Contactez-nous pour les prix. Nous expédions mondialement.',
+    getInTouch: 'Nous Contacter',
+  },
+  ar: {
+    home: 'الرئيسية', products: 'المنتجات', capacity: 'الحمولة', certified: 'معتمد', marked: 'موسوم',
+    support: 'دعم', requestQuote: 'طلب عرض سعر', mainParam: 'المعامل الرئيسي',
+    powerUnits: 'وحدات الطاقة', batteryConfigs: 'تكوينات البطارية',
+    keyImprovements: 'تحسينات الأداء', productHighlights: 'أبرز ميزات المنتج',
+    relatedProducts: 'منتجات ذات صلة', moreFrom: 'المزيد من',
+    interested: 'مهتم بـ', pricing: 'اتصل بنا للحصول على الأسعار. نشحن إلى جميع أنحاء العالم.',
+    getInTouch: 'تواصل معنا',
+  },
+  ru: {
+    home: 'Главная', products: 'Продукция', capacity: 'Грузоподъемность', certified: 'Сертифицировано', marked: 'Маркировано',
+    support: 'Поддержка', requestQuote: 'Запросить', mainParam: 'Основной Параметр',
+    powerUnits: 'Силовые Установки', batteryConfigs: 'Конфигурации Батарей',
+    keyImprovements: 'Улучшения', productHighlights: 'Особенности',
+    relatedProducts: 'Связанные', moreFrom: 'Еще из',
+    interested: 'Заинтересованы', pricing: 'Свяжитесь для цен. Отправляем по всему миру.',
+    getInTouch: 'Связаться',
+  },
+  pt: {
+    home: 'Início', products: 'Produtos', capacity: 'Capacidade', certified: 'Certificado', marked: 'Marcado',
+    support: 'Suporte', requestQuote: 'Solicitar Cotação', mainParam: 'Parâmetro Principal',
+    powerUnits: 'Unid. Potência', batteryConfigs: 'Config. Bateria',
+    keyImprovements: 'Melhorias', productHighlights: 'Destaques',
+    relatedProducts: 'Relacionados', moreFrom: 'Mais de',
+    interested: 'Interessado no', pricing: 'Contate-nos para preços. Enviamos mundialmente.',
+    getInTouch: 'Contate-nos',
+  },
+};
+
+const t = labels[loc] || labels.en;
+const prefix = `/${loc}`;
+---
+
+<BaseLayout
+  title={`${product.name} — ${categoryData?.name || ''}`}
+  description={spec?.overview || categoryData?.description || ''}
+  pageType="Product"
+  productSchema={product ? {
+    name: product.name,
+    description: spec?.overview || categoryData?.description || '',
+    image: product.image,
+    category: categoryData?.name,
+    capacity: product.capacity,
+  } : undefined}
+  ogImage={product.image}
+>
+
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href={`${prefix}/`}>{t.home}</a> / <a href={`${prefix}/products`}>{t.products}</a> / <a href={`${prefix}/products#${category}`}>{categoryData?.name || category}</a> / <span>{product.name}</span>
+    </div>
+    <h1>{product.name}</h1>
+    <p style="opacity:0.8;font-size:1.05rem;margin-top:4px">{categoryData?.name}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="detail-grid">
+      <div style="background:var(--c-bg-alt);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;min-height:420px;border:1px solid var(--c-border);overflow:hidden">
+        <img src={product.image} alt={product.name} style="width:100%;height:100%;object-fit:cover" />
+      </div>
+      <div class="detail-info">
+        <span class="d-badge">{categoryData?.name}</span>
+        <h1>{product.name}</h1>
+        {product.capacity && <div class="d-model">{t.capacity}: {product.capacity}</div>}
+        <p class="d-desc">{spec?.overview || categoryData?.description}</p>
+        <div class="d-highlights">
+          <div class="d-highlight"><div class="dh-val">{product.capacity || 'N/A'}</div><div class="dh-lbl">{t.capacity}</div></div>
+          <div class="d-highlight"><div class="dh-val">ISO 9001</div><div class="dh-lbl">{t.certified}</div></div>
+          <div class="d-highlight"><div class="dh-val">CE</div><div class="dh-lbl">{t.marked}</div></div>
+          <div class="d-highlight"><div class="dh-val">24/7</div><div class="dh-lbl">{t.support}</div></div>
+        </div>
+        <a href={`${prefix}/contact`} class="btn-submit">{t.requestQuote}</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{spec && spec.subModels.length > 0 && (
+  <section class="section">
+    <div class="container">
+      <div class="sec-hdr"><span class="sec-tag">Specifications</span><h2>{t.mainParam}</h2></div>
+      <div class="spec-table-wrap">
+        <table class="spec-table">
+          <thead><tr><th>Parameter</th>{spec.paramColumns.map(col => <th>{col}</th>)}</tr></thead>
+          <tbody>
+            {spec.paramHeaders.map(h => (
+              <tr><td class="spec-label">{h.label}{h.unit && <span class="spec-unit">({h.unit})</span>}</td>{spec.subModels.map(sm => <td>{sm.params[h.key] || '—'}</td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+)}
+
+{spec?.engineOptions && spec.engineOptions.length > 0 && (
+  <section class="section section-alt">
+    <div class="container">
+      <div class="sec-hdr"><span class="sec-tag">Engine Options</span><h2>{t.powerUnits}</h2></div>
+      <div class="spec-table-wrap">
+        <table class="spec-table">
+          <thead><tr><th>Engine Model</th><th>Power</th><th>Torque</th><th>Displacement</th><th>Cylinders</th><th>Emission</th></tr></thead>
+          <tbody>{spec.engineOptions.map(eng => <tr><td class="spec-label">{eng.model}</td><td>{eng.power}</td><td>{eng.torque}</td><td>{eng.displacement}</td><td>{eng.cylinders}</td><td>{eng.emission}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+)}
+
+{spec?.batteryOptions && spec.batteryOptions.length > 0 && (
+  <section class="section section-alt">
+    <div class="container">
+      <div class="sec-hdr"><span class="sec-tag">Battery</span><h2>{t.batteryConfigs}</h2></div>
+      <div class="spec-table-wrap">
+        <table class="spec-table">
+          <thead><tr><th>Voltage</th><th>Capacity</th><th>Runtime</th><th>Charge Time</th></tr></thead>
+          <tbody>{spec.batteryOptions.map(bat => <tr><td class="spec-label">{bat.voltage}</td><td>{bat.capacity}</td><td>{bat.runtime}</td><td>{bat.chargeTime}</td></tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+)}
+
+{spec && spec.features.length > 0 && (
+  <section class="section">
+    <div class="container">
+      <div class="sec-hdr"><span class="sec-tag">Features</span><h2>{t.keyImprovements}</h2></div>
+      <div class="features-grid">{spec.features.map(f => <div class="feature-card"><div class="feature-value">{f.value}</div><div class="feature-label">{f.label}</div></div>)}</div>
+    </div>
+  </section>
+)}
+
+{spec && spec.highlights.length > 0 && (
+  <section class="section section-alt">
+    <div class="container">
+      <div class="sec-hdr"><span class="sec-tag">Highlights</span><h2>{t.productHighlights}</h2></div>
+      <ul class="highlight-list">{spec.highlights.map(h => <li>{h}</li>)}</ul>
+    </div>
+  </section>
+)}
+
+{relatedModels.length > 0 && (
+  <section class="section section-alt">
+    <div class="container">
+      <div class="sec-hdr"><span class="sec-tag">{t.relatedProducts}</span><h2>{t.moreFrom} {categoryData?.name}</h2></div>
+      <div class="product-grid">
+        {relatedModels.map(m => (
+          <a href={`${prefix}/products/${category}/${m.id}`} class="product-card">
+            <div class="product-img-wrap"><img src={m.image} alt={m.name} loading="lazy" /></div>
+            <div class="product-info"><h4>{m.name}</h4>{m.capacity && <span class="product-cap">{t.capacity}: {m.capacity}</span>}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<section class="cta-section">
+  <div class="container">
+    <h2>{t.interested} {product.name}?</h2>
+    <p>{t.pricing}</p>
+    <a href={`${prefix}/contact`} class="hero-cta">{t.getInTouch}</a>
+  </div>
+</section>
+</BaseLayout>
+
+<style>
+  .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
+  .product-card { background: var(--c-bg); border: 1px solid var(--c-border); border-radius: var(--radius-md); overflow: hidden; text-decoration: none; transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease; }
+  .product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--c-red); }
+  .product-img-wrap { aspect-ratio: 4 / 3; overflow: hidden; background: var(--c-bg-alt); }
+  .product-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+  .product-card:hover .product-img-wrap img { transform: scale(1.05); }
+  .product-info { padding: var(--space-3); }
+  .product-info h4 { font-size: 0.9rem; font-weight: var(--fw-bold); color: var(--c-text); margin: 0 0 var(--space-1); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .product-cap { font-size: 0.78rem; color: var(--c-red); font-weight: var(--fw-bold); text-transform: uppercase; letter-spacing: 0.5px; }
+  .spec-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--c-border); border-radius: var(--radius-md); }
+  .spec-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; min-width: 700px; }
+  .spec-table thead { background: var(--c-red); color: #fff; }
+  .spec-table thead th { padding: 12px 10px; text-align: center; font-weight: var(--fw-bold); font-size: 0.8rem; white-space: nowrap; letter-spacing: 0.3px; }
+  .spec-table thead th:first-child { text-align: left; padding-left: 14px; }
+  .spec-table tbody td { padding: 10px; text-align: center; border-bottom: 1px solid var(--c-border); color: var(--c-text); white-space: nowrap; }
+  .spec-table tbody td:first-child { text-align: left; padding-left: 14px; }
+  .spec-table tbody tr:nth-child(even) { background: var(--c-bg-alt); }
+  .spec-table tbody tr:hover { background: var(--c-red-light); }
+  .spec-label { font-weight: var(--fw-semi); color: var(--c-text); }
+  .spec-unit { font-weight: var(--fw-normal); color: var(--c-muted); font-size: 0.75rem; }
+  .features-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-3); }
+  .feature-card { background: var(--c-bg); border: 1px solid var(--c-border); border-radius: var(--radius-md); padding: var(--space-4); text-align: center; transition: border-color 0.2s ease, transform 0.2s ease; }
+  .feature-card:hover { border-color: var(--c-red); transform: translateY(-2px); }
+  .feature-value { font-size: 1.15rem; font-weight: var(--fw-bold); color: var(--c-red); margin-bottom: var(--space-1); }
+  .feature-label { font-size: 0.8rem; color: var(--c-muted); font-weight: var(--fw-semi); }
+  .highlight-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--space-2); list-style: none; padding: 0; }
+  .highlight-list li { position: relative; padding: 10px 10px 10px 28px; font-size: 0.9rem; color: var(--c-text); line-height: 1.5; }
+  .highlight-list li::before { content: '✓'; position: absolute; left: 0; top: 10px; color: var(--c-red); font-weight: var(--fw-bold); font-size: 1rem; }
+  @media (max-width: 768px) { .features-grid { grid-template-columns: repeat(2, 1fr); } .highlight-list { grid-template-columns: 1fr; } }
+</style>

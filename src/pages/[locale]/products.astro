@@ -1,0 +1,107 @@
+<!--
+  Locale-aware Products Listing Page.
+  Generates: /es/products/, /ko/products/, /ar/products/
+-->
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { forkliftCategories } from '../../data/forklifts';
+import { defaultLocale } from '../../i18n/index';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: 'es' } },
+    { params: { locale: 'fr' } },
+    { params: { locale: 'ar' } },
+    { params: { locale: 'ru' } },
+    { params: { locale: 'pt' } },
+  ];
+}
+
+const { locale } = Astro.params;
+const loc = (locale || defaultLocale) as string;
+import type { Locale } from '../../../i18n/index';
+const localeData = await import(`../../i18n/ui/${loc}.json`);
+const t = localeData.default;
+const prefix = `/${loc}`;
+---
+
+<BaseLayout title={t.products.title + ' — MLIFT'} description={t.products.desc} pageType="WebPage">
+<section class="page-header">
+  <div class="container">
+    <h1>{t.products.title}</h1>
+    <p>{t.products.desc}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="product-grid">
+      {forkliftCategories.map(cat => (
+        <a href={`${prefix}/products/${cat.id}`} class="product-card">
+          <div class="product-img-wrap">
+            <img src={cat.image} alt={cat.name} loading="lazy" />
+          </div>
+          <div class="product-info">
+            <h3>{cat.name}</h3>
+            <p style="font-size:0.82rem;color:var(--c-muted);line-height:1.5;margin-top:8px">{cat.description.slice(0,100)}...</p>
+            <span class="product-count">{cat.models.length} Models</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+</BaseLayout>
+
+<style>
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-4);
+  }
+  .product-card {
+    background: var(--c-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--c-red);
+  }
+  .product-img-wrap {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--c-bg-alt);
+  }
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .product-card:hover .product-img-wrap img {
+    transform: scale(1.05);
+  }
+  .product-info {
+    padding: var(--space-3);
+  }
+  .product-info h3 {
+    font-size: 1rem;
+    font-weight: var(--fw-bold);
+    color: var(--c-text);
+    margin: 0 0 4px;
+  }
+  .product-count {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: var(--c-red);
+    font-weight: var(--fw-bold);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+</style>

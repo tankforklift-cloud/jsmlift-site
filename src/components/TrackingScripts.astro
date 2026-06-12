@@ -1,0 +1,75 @@
+<!--
+  TrackingScripts — Google Analytics 4, Facebook Pixel, Google Ads Remarketing.
+  Scripts only load AFTER user grants cookie consent.
+  Replace placeholder IDs with your actual tracking IDs before going live.
+
+  Configuration (set in .env or replace below):
+    GA_ID        — Google Analytics 4 Measurement ID (e.g. G-XXXXXXXXXX)
+    FB_PIXEL_ID  — Facebook Pixel ID (e.g. 123456789012345)
+    GADS_ID      — Google Ads Conversion ID (e.g. AW-123456789)
+    GADS_LABEL   — Google Ads Remarketing Label (optional)
+-->
+<script is:inline>
+  (function() {
+    var GA_ID = 'G-XXXXXXXXXX';
+    var FB_PIXEL_ID = '000000000000000';
+    var GADS_ID = 'AW-XXXXXXXXXX';
+
+    function loadTracking() {
+      // -- Google Analytics 4 + Google Ads --
+      (function(w,d,s,l,i){
+        w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;
+        j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','G-XXXXXXXXXX');
+
+      var gaScript = document.createElement('script');
+      gaScript.async = true;
+      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+      document.head.appendChild(gaScript);
+
+      gaScript.onload = function() {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+        // Google Ads Remarketing
+        gtag('config', GADS_ID);
+        // Google Ads Conversion (event-based — fires on contact form submission, etc.)
+        gtag('event', 'conversion', {
+          'send_to': GADS_ID + '/XXXXXXXXXXX',
+          'value': 0.0,
+          'currency': 'USD'
+        });
+      };
+
+      // -- Facebook Pixel --
+      !function(f,b,e,v,n,t,s){
+        if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s);
+      }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', FB_PIXEL_ID);
+      fbq('track', 'PageView');
+
+      // Facebook Pixel noscript fallback
+      var noscript = document.createElement('noscript');
+      noscript.innerHTML = '<img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=' + FB_PIXEL_ID + '&ev=PageView&noscript=1" />';
+      document.body.appendChild(noscript);
+    }
+
+    // Only load tracking if consent was previously granted
+    var choice = localStorage.getItem('cookie-consent');
+    if (choice === 'accepted') {
+      loadTracking();
+    } else {
+      // Wait for user to accept cookies
+      window.addEventListener('cookie-consent-granted', loadTracking, { once: true });
+    }
+  })();
+</script>

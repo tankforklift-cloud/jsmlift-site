@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { defaultLocale } from '../../i18n/index';
+
+export function getStaticPaths() {
+  return [
+    { params: { locale: 'es' } },
+    { params: { locale: 'fr' } },
+    { params: { locale: 'ar' } },
+    { params: { locale: 'ru' } },
+    { params: { locale: 'pt' } },
+  ];
+}
+
+const { locale } = Astro.params;
+const loc = (locale || defaultLocale) as string;
+const localeData = await import(`../../i18n/ui/${loc}.json`);
+const t = localeData.default;
+const prefix = `/${loc}`;
+---
+
+<BaseLayout title={t.contact.title + ' — MLIFT'} description={t.contact.desc} pageType="WebPage">
+<section class="page-header">
+  <div class="container">
+    <div class="breadcrumb"><a href={`${prefix}/`}>{t.nav.home}</a> / <span>{t.contact.breadcrumb}</span></div>
+    <h1>{t.contact.title}</h1>
+    <p>{t.contact.desc}</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:var(--space-5)">
+    <div>
+      <h2 style="font-size:1.3rem;margin-bottom:var(--space-3)">{t.contact.title}</h2>
+      <form action="https://formspree.io/f/FORM_ID" method="POST" style="display:flex;flex-direction:column;gap:var(--space-3)">
+        <input type="text" name="name" placeholder="Name *" required style="padding:12px;border:1px solid var(--c-border);border-radius:var(--radius-sm);font-size:0.9rem" />
+        <input type="email" name="email" placeholder="Email *" required style="padding:12px;border:1px solid var(--c-border);border-radius:var(--radius-sm);font-size:0.9rem" />
+        <input type="text" name="company" placeholder="Company" style="padding:12px;border:1px solid var(--c-border);border-radius:var(--radius-sm);font-size:0.9rem" />
+        <textarea name="message" placeholder="Message *" required rows="5" style="padding:12px;border:1px solid var(--c-border);border-radius:var(--radius-sm);font-size:0.9rem;resize:vertical"></textarea>
+        <button type="submit" class="hero-cta" style="font-size:0.9rem;padding:12px 32px;align-self:flex-start;border:none;cursor:pointer">{t.products.getInTouch}</button>
+      </form>
+    </div>
+    <div style="padding:var(--space-4)">
+      <h3 style="margin-bottom:var(--space-3)">{t.footer.companyInfo}</h3>
+      <div style="margin-bottom:var(--space-3)">
+        <p style="font-weight:600;margin-bottom:4px">JINGJIANG MLIFT MACHINERY CO.,LTD</p>
+        <p style="color:var(--c-muted);font-size:0.9rem">Jingjiang, Jiangsu, China</p>
+      </div>
+      <div style="margin-bottom:var(--space-3)">
+        <p style="font-weight:600;margin-bottom:4px">Email</p>
+        <p style="color:var(--c-muted);font-size:0.9rem">tan@jsmlift.com</p>
+      </div>
+      <div style="margin-bottom:var(--space-3)">
+        <p style="font-weight:600;margin-bottom:4px">WhatsApp / Phone</p>
+        <p style="color:var(--c-muted);font-size:0.9rem">+86-152-9523-7612</p>
+      </div>
+    </div>
+  </div>
+</section>
+</BaseLayout>
+
+<style>
+  .breadcrumb { font-size: 0.82rem; color: var(--c-muted); margin-bottom: var(--space-2); }
+  .breadcrumb a { color: var(--c-red); text-decoration: none; }
+  .breadcrumb a:hover { text-decoration: underline; }
+  input:focus, textarea:focus { outline: none; border-color: var(--c-red); box-shadow: 0 0 0 3px rgba(212,0,0,0.1); }
+  @media (max-width: 768px) {
+    .container { grid-template-columns: 1fr !important; }
+  }
+</style>
