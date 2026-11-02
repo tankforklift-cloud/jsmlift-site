@@ -7,18 +7,19 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
 
 <!-- ===== HERO SLIDER ===== -->
 <section class="hero-slider" id="hero">
-  <!-- Slide 1 — 使用下载的 Heli Hero 图 -->
+  <!-- Slide 1 — 仓库电动叉车实景 -->
   <div class="hero-slide active" data-index="0">
-    <img src="/images/hero/hero-1.jpg" alt="MLIFT Forklift" />
+    <img src="/images/hero/hero-1.jpg" alt="MLIFT electric forklift handling pallets in a modern warehouse" fetchpriority="high" />
     <div class="hero-content">
-      <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:var(--c-red);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">HANDLING &bull; ELECTRIC &bull; LOGISTICS &bull; INTELLIGENT</span>
+      <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:rgba(255,255,255,0.85);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">HANDLING &bull; ELECTRIC &bull; LOGISTICS &bull; INTELLIGENT</span>
       <h1 style="font-size:3.8rem;line-height:1.05">{heroSlides[0].title}</h1>
       <p>{heroSlides[0].subtitle}</p>
       <a href={heroSlides[0].link} class="hero-cta">{heroSlides[0].cta}</a>
     </div>
   </div>
-  <!-- Slide 2 -->
-  <div class="hero-slide" data-index="1" style="background:#B00000">
+  <!-- Slide 2 — 港口集装箱正面吊（原纯红底替换为实景图） -->
+  <div class="hero-slide" data-index="1">
+    <img src="/images/hero/hero-2.jpg" alt="MLIFT container reach stacker handling a 40ft container at a port terminal" loading="lazy" />
     <div class="hero-content">
       <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:rgba(255,255,255,0.8);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">RELIABLE &bull; EFFICIENT &bull; GLOBAL</span>
       <h1 style="font-size:3.8rem;line-height:1.05">{heroSlides[1].title}</h1>
@@ -29,7 +30,7 @@ import { forkliftCategories, heroSlides, stats, testimonials, blogPosts } from '
   <!-- Slide 3 -->
   <div class="hero-slide" data-index="2" style="background:var(--c-bg-dark)">
     <div class="hero-content">
-      <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:var(--c-red);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">INNOVATION &bull; QUALITY &bull; SERVICE</span>
+      <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:rgba(255,255,255,0.85);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">INNOVATION &bull; QUALITY &bull; SERVICE</span>
       <h1 style="font-size:3.8rem;line-height:1.05">{heroSlides[2].title}</h1>
       <p>{heroSlides[2].subtitle}</p>
       <a href={heroSlides[2].link} class="hero-cta">{heroSlides[2].cta}</a>
