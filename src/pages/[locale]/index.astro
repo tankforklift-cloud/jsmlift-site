@@ -29,24 +29,42 @@ const prefix = `/${loc}`;
 
 <BaseLayout title={t.nav.home + ' — MLIFT'} description={t.site.description} pageType="WebSite">
 <slot name="hero">
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-slider">
-      <div class="hero-slide active" style="background: linear-gradient(135deg, #B00000 0%, #D40000 50%, #E83838 100%)">
-        <div class="container hero-flex">
-          <div class="hero-text">
-            <span class="hero-tag">{t.home.heroTag1}</span>
-            <h1>{t.home.heroTitle1}</h1>
-            <p>{t.home.heroSub1}</p>
-            <div class="hero-btns">
-              <a href={`${prefix}/products`} class="hero-cta">{t.home.heroCta1}</a>
-            </div>
-          </div>
-          <div class="hero-img">
-            <img src="/images/hero/hero-1.jpg" alt="MLIFT Forklift" />
-          </div>
-        </div>
+  <!-- Hero Slider — 三屏整屏轮播（与主站同结构） -->
+  <section class="hero-slider" id="hero">
+    <div class="hero-slide active" data-index="0">
+      <img src="/images/hero/hero-1.jpg" alt="MLIFT electric forklift handling pallets in a modern warehouse" fetchpriority="high" />
+      <div class="hero-content">
+        <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:rgba(255,255,255,0.85);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">{t.home.heroTag1}</span>
+        <h1 style="line-height:1.1">{t.home.heroTitle1}</h1>
+        <p>{t.home.heroSub1}</p>
+        <a href={`${prefix}/products`} class="hero-cta">{t.home.heroCta1}</a>
       </div>
+    </div>
+    <div class="hero-slide" data-index="1">
+      <img src="/images/hero/hero-2.jpg" alt="MLIFT container reach stacker handling a 40ft container at a port terminal" loading="lazy" />
+      <div class="hero-content">
+        <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:rgba(255,255,255,0.85);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">{t.home.heroTag2}</span>
+        <h1 style="line-height:1.1">{t.home.heroTitle2}</h1>
+        <p>{t.home.heroSub2}</p>
+        <a href={`${prefix}/products`} class="hero-cta">{t.home.heroCta2}</a>
+      </div>
+    </div>
+    <div class="hero-slide" data-index="2">
+      <img src="/images/hero/hero-3.jpg" alt="MLIFT electric forklift lithium-ion battery pack on the assembly line" loading="lazy" />
+      <div class="hero-content">
+        <span class="sec-tag" style="display:inline-block;margin-bottom:var(--space-2);color:rgba(255,255,255,0.85);font-weight:var(--fw-bold);font-size:0.75rem;letter-spacing:5px">{t.home.heroTag3}</span>
+        <h1 style="line-height:1.1">{t.home.heroTitle3}</h1>
+        <p>{t.home.heroSub3}</p>
+        <a href={`${prefix}/contact`} class="hero-cta">{t.home.heroCta3}</a>
+      </div>
+    </div>
+
+    <button class="hero-arrow prev" onclick="changeLocaleSlide(-1)" aria-label="Previous">&#10094;</button>
+    <button class="hero-arrow next" onclick="changeLocaleSlide(1)" aria-label="Next">&#10095;</button>
+    <div class="hero-dots">
+      <button class="hero-dot active" onclick="goLocaleSlide(0)" aria-label="Slide 1"></button>
+      <button class="hero-dot" onclick="goLocaleSlide(1)" aria-label="Slide 2"></button>
+      <button class="hero-dot" onclick="goLocaleSlide(2)" aria-label="Slide 3"></button>
     </div>
   </section>
 </slot>
@@ -120,6 +138,29 @@ const prefix = `/${loc}`;
   </div>
 </section>
 </BaseLayout>
+
+<script is:inline>
+  // Hero slider（多语言版）
+  (function () {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    if (!slides.length) return;
+    let cur = 0;
+    let timer;
+    function show(n) {
+      cur = (n + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === cur));
+      dots.forEach((d, i) => d.classList.toggle('active', i === cur));
+    }
+    function restart() {
+      clearInterval(timer);
+      timer = setInterval(() => show(cur + 1), 6000);
+    }
+    window.changeLocaleSlide = function (dir) { show(cur + dir); restart(); };
+    window.goLocaleSlide = function (n) { show(n); restart(); };
+    restart();
+  })();
+</script>
 
 <style>
   .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: var(--space-4); }
